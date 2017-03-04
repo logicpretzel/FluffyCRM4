@@ -1,0 +1,53 @@
+﻿.color-p-2 { background-color: #23469F; color: white }	/* Main Primary color */
+.color-p-0 { background-color: #9FA3AC; color: midnightblue }
+.color-p-1 { background-color: #5B71A8; color: white; }
+.color-p-3 { background-color: #0A2B7D; color: white; }
+.color-p-4 { background-color: #021B59; color: white; }
+
+.color-s1-0 { color: #3827A4 }	/* Main Secondary color (1) */
+.color-s1-1 { color: #A6A4B2 }
+.color-s1-2 { color: #6B60AE }
+.color-s1-3 { color: #1D0D81 }
+.color-s1-4 { color: #0E025C }
+
+.color-s2-0 { color: #187295 }	/* Main Secondary color (2) */
+.color-s2-1 { color: #939EA1 }
+.color-s2-2 { color: #50889D }
+.color-s2-3 { color: #045675 }
+.color-s2-4 { color: #013C53 }
+
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    color: #9FA3AC; color: midnightblue
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
+li.subnav{
+    display : none;
+}
+
+li.subnav:hover > ul{
+    display : block;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
