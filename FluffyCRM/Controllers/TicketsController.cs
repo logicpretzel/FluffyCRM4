@@ -17,13 +17,15 @@ namespace FluffyCRM.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Tickets
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Client,Staff")]
         public async Task<ActionResult> Index()
         {
-            return View(await db.Tickets.ToListAsync());
+            var v = View(await db.Tickets.ToListAsync());
+            return v;
         }
 
         // GET: Tickets/Details/5
+        [Authorize(Roles = "Admin,Client,Staff")]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -39,7 +41,7 @@ namespace FluffyCRM.Controllers
         }
 
         // GET: Tickets/Create
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Client,Staff")]
         public ActionResult Create()
         {
             return View();
@@ -63,7 +65,7 @@ namespace FluffyCRM.Controllers
         }
 
         // GET: Tickets/Edit/5
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Client,Staff")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -83,7 +85,7 @@ namespace FluffyCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Client,Staff")]
         public async Task<ActionResult> Edit([Bind(Include = "TicketId,Subject,CategoryId,CreateDate,Description,Status,DeleteInd,ClientId,StartDate,CompletedDate,DueDate")] Ticket ticket)
         {
             if (ModelState.IsValid)

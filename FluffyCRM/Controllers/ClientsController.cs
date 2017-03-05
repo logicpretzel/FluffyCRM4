@@ -51,7 +51,7 @@ namespace FluffyCRM.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public ActionResult Create([Bind(Include = "ClientId,FirstName,LastName,Address1,Address2,City,State,Zip,Phone1,PhoneType1")] Client client)
+        public ActionResult Create([Bind(Include = "ClientId,CompanyName,Address1,Address2,City,State,Zip,Phone1,PhoneType1")] Client client)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace FluffyCRM.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public ActionResult Edit([Bind(Include = "ClientId,FirstName,LastName,Address1,Address2,City,State,Zip,Phone1,PhoneType1")] Client client)
+        public ActionResult Edit([Bind(Include = "ClientId,CompanyName,Address1,Address2,City,State,Zip,Phone1,PhoneType1")] Client client)
         {
             if (ModelState.IsValid)
             {
