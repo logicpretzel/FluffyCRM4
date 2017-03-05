@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -10,27 +11,24 @@ using FluffyCRM.Models;
 
 namespace FluffyCRM.Controllers
 {
-    [Authorize]
     public class ClientsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Clients
-        [Authorize(Roles = "Admin")]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View(db.Clients.ToList());
+            return View(await db.Clients.ToListAsync());
         }
 
         // GET: Clients/Details/5
-        [Authorize(Roles = "Admin")]
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Client client = db.Clients.Find(id);
+            Client client = await db.Clients.FindAsync(id);
             if (client == null)
             {
                 return HttpNotFound();
@@ -39,7 +37,6 @@ namespace FluffyCRM.Controllers
         }
 
         // GET: Clients/Create
-        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -50,13 +47,12 @@ namespace FluffyCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
-        public ActionResult Create([Bind(Include = "ClientId,CompanyName,Address1,Address2,City,State,Zip,Phone1,PhoneType1")] Client client)
+        public async Task<ActionResult> Create([Bind(Include = "ClientId,CompanyName,Address1,Address2,City,State,Zip,Phone1,PhoneType1")] Client client)
         {
             if (ModelState.IsValid)
             {
                 db.Clients.Add(client);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
@@ -64,14 +60,13 @@ namespace FluffyCRM.Controllers
         }
 
         // GET: Clients/Edit/5
-        [Authorize(Roles = "Admin")]
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Client client = db.Clients.Find(id);
+            Client client = await db.Clients.FindAsync(id);
             if (client == null)
             {
                 return HttpNotFound();
@@ -84,27 +79,25 @@ namespace FluffyCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
-        public ActionResult Edit([Bind(Include = "ClientId,CompanyName,Address1,Address2,City,State,Zip,Phone1,PhoneType1")] Client client)
+        public async Task<ActionResult> Edit([Bind(Include = "ClientId,CompanyName,Address1,Address2,City,State,Zip,Phone1,PhoneType1")] Client client)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(client).State = EntityState.Modified;
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(client);
         }
 
         // GET: Clients/Delete/5
-        [Authorize(Roles = "Admin")]
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Client client = db.Clients.Find(id);
+            Client client = await db.Clients.FindAsync(id);
             if (client == null)
             {
                 return HttpNotFound();
@@ -115,12 +108,11 @@ namespace FluffyCRM.Controllers
         // POST: Clients/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
-        public ActionResult DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Client client = db.Clients.Find(id);
+            Client client = await db.Clients.FindAsync(id);
             db.Clients.Remove(client);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
