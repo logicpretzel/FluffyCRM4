@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FluffyCRM.Models.Ticket>
+﻿@model IEnumerable<FluffyCRM.ViewModels.TicketList>
 
 @{
     ViewBag.Title = "Index";
@@ -7,7 +7,19 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @if (User.IsInRole("Staff")|| User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Create New", "Create")
+    }
+    else if (User.IsInRole("Client"))
+    {
+        @Html.ActionLink("Create New", "AddClientTicket")
+    }
+    else
+    {
+       
+    }
+
 </p>
 <table class="table">
     <tr>
@@ -21,16 +33,14 @@
             @Html.DisplayNameFor(model => model.CreateDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.ShortDesc)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Status)
         </th>
+        
         <th>
-            @Html.DisplayNameFor(model => model.DeleteInd)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ClientId)
+            @Html.DisplayNameFor(model => model.FullName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.StartDate)
@@ -38,9 +48,7 @@
         <th>
             @Html.DisplayNameFor(model => model.CompletedDate)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DueDate)
-        </th>
+       
         <th></th>
     </tr>
 
@@ -56,16 +64,14 @@
             @Html.DisplayFor(modelItem => item.CreateDate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Description)
+            @Html.DisplayFor(modelItem => item.ShortDesc)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Status)
         </td>
+       
         <td>
-            @Html.DisplayFor(modelItem => item.DeleteInd)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ClientId)
+            @Html.DisplayFor(modelItem => item.FullName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.StartDate)
@@ -73,9 +79,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.CompletedDate)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DueDate)
-        </td>
+        
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.TicketId }) |
             @Html.ActionLink("Details", "Details", new { id=item.TicketId }) |

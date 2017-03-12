@@ -1,26 +1,57 @@
-﻿.color-p-2 { background-color: #23469F; color: white }	/* Main Primary color */
-.color-p-0 { background-color: #9FA3AC; color: midnightblue }
+﻿.color-p-2 { background-color: #23469F; color: white; }	/* Main Primary color */
+.color-p-0 { background-color: #9FA3AC; color: midnightblue; }
 .color-p-1 { background-color: #5B71A8; color: white; }
 .color-p-3 { background-color: #0A2B7D; color: white; }
 .color-p-4 { background-color: #021B59; color: white; }
 
-.color-s1-0 { color: #3827A4 }	/* Main Secondary color (1) */
-.color-s1-1 { color: #A6A4B2 }
-.color-s1-2 { color: #6B60AE }
-.color-s1-3 { color: #1D0D81 }
-.color-s1-4 { color: #0E025C }
+.color-s1-0 { background-color: #3827A4 ; color: white;}	/* Main Secondary color (1) */
+.color-s1-1 { background-color: #A6A4B2; color: midnightblue; }
+.color-s1-2 { background-color: #6B60AE ; color: white;}
+.color-s1-3 { background-color: #1D0D81 ; color: white;}
+.color-s1-4 { background-color: #0E025C ; color: white;}
 
-.color-s2-0 { color: #187295 }	/* Main Secondary color (2) */
-.color-s2-1 { color: #939EA1 }
-.color-s2-2 { color: #50889D }
-.color-s2-3 { color: #045675 }
-.color-s2-4 { color: #013C53 }
+.color-s2-0 {
+    background-color: #187295;
+    color: white;
+}
+.color-s2-1 { background-color: #939EA1 ; color: white;}
+.color-s2-2 { background-color: #50889D; color: midnightblue; }
+.color-s2-3 { background-color: #045675 ; color: white;}
+.color-s2-4 { background-color: #013C53 ; color: white;}
 
-
+html {
+    background-color: midnightblue;
+    color: white;
+}
 body {
     padding-top: 50px;
     padding-bottom: 20px;
-    color: #9FA3AC; color: midnightblue
+    background-color: white;
+    color: midnightblue;
+    height: 95%;
+    min-height: 800px;
+    /*    color: #9FA3AC; color: midnightblue */
+    background-image: url('../Images/clear-004.jpg');
+}
+.home_header {
+    background-color: rgba(24, 114, 149, 0.41);
+}
+
+.home_container {
+     background-color: rgba(49, 82, 174, 0.62);
+}
+
+.table {
+    background-color: rgba(86, 111, 170, 0.85)
+}
+
+.home_panel {
+    border-radius: 20px;
+    margin: 10px ;
+    padding:10px;
+    border-color: #A6A4B2;
+    background-color: rgba(49, 82, 174, 0.42);
+    
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -47,7 +78,26 @@ li.subnav:hover > ul{
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
-select,
+select
+ {
+    max-width: 400px;
+}
+
 textarea {
-    max-width: 280px;
+     max-width: 600px;
+     width: 75%;
+     min-height: 200px;
+     height: auto;
+
+     
+}
+
+@media (max-width: 400px) {
+    input,
+    select, 
+    textarea
+    {   width: auto;
+        display: block;
+        max-width: 98%;
+    }
 }

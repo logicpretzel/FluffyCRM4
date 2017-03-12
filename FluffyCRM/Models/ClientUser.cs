@@ -10,8 +10,8 @@ namespace FluffyCRM.Models
     {
         [StringLength(128)]
         public string UserId { get; set; }
-        public int  ClientId  { get; set; }
-        public int ContactId { get; set; }
+        public int?  ClientId  { get; set; }
+        public int? ContactId { get; set; }
 
         [Key]
         public int Id        { get; set; }
