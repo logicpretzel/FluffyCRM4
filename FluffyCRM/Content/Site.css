@@ -35,15 +35,26 @@ body {
 }
 .home_header {
     background-color: rgba(24, 114, 149, 0.41);
+ color: white;
 }
 
 .home_container {
      background-color: rgba(49, 82, 174, 0.62);
+      color: white;
 }
 
 .table {
-    background-color: rgba(86, 111, 170, 0.85)
+    background-color: rgba(86, 111, 170, 0.85);
+     color: white;
 }
+
+.table a, a:visited, a:active {
+    color: black;
+}
+.table a:hover {
+    color: white;
+}
+
 
 .home_panel {
     border-radius: 20px;
