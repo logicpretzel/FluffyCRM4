@@ -34,7 +34,7 @@ body {
     background-image: url('../Images/clear-004.jpg');
 }
 .home_header {
-    background-color: rgba(24, 114, 149, 0.41);
+    background-color: rgba(63, 146, 146, 0.89);
  color: white;
 }
 
@@ -44,17 +44,25 @@ body {
 }
 
 .table {
-    background-color: rgba(86, 111, 170, 0.85);
+    background-color: rgba(71, 125, 115, 0.80);
+    
      color: white;
 }
 
 .table a, a:visited, a:active {
-    color: black;
+    color: rgb(98, 40, 3);
 }
 .table a:hover {
     color: white;
 }
 
+.form-horizontal {
+      background-color: rgba(105, 178, 165, 0.50);
+      border-radius: 20px;
+      width: 70%;
+      padding: 20px;
+
+}
 
 .home_panel {
     border-radius: 20px;

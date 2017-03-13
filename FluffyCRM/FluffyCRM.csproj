@@ -171,6 +171,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -231,10 +232,19 @@
     <Compile Include="Migrations\201703050730328_clientuser mod1.Designer.cs">
       <DependentUpon>201703050730328_clientuser mod1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703131430460_category.cs" />
+    <Compile Include="Migrations\201703131430460_category.Designer.cs">
+      <DependentUpon>201703131430460_category.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703131434229_category1.cs" />
+    <Compile Include="Migrations\201703131434229_category1.Designer.cs">
+      <DependentUpon>201703131434229_category1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Attachment.cs" />
     <Compile Include="Models\AttachmentXREF.cs" />
+    <Compile Include="Models\category.cs" />
     <Compile Include="Models\ClientUser.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\ContactLog.cs" />
@@ -361,6 +371,11 @@
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Account\UserProfile.cshtml" />
     <Content Include="Views\Account\View.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -409,6 +424,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703050730328_clientuser mod1.resx">
       <DependentUpon>201703050730328_clientuser mod1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703131430460_category.resx">
+      <DependentUpon>201703131430460_category.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703131434229_category1.resx">
+      <DependentUpon>201703131434229_category1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
