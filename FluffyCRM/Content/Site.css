@@ -63,6 +63,9 @@ body {
       padding: 20px;
 
 }
+.font-med-large {
+    font-size:3em;
+}
 
 .home_panel {
     border-radius: 20px;
