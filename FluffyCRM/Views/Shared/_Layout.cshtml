@@ -40,12 +40,14 @@
 
                             <li>@Html.ActionLink("Clients", "Index", "Clients")</li>
                             <li>@Html.ActionLink("Support Tickets", "Index", "Tickets")</li>
-                            <li>@Html.ActionLink("Zipcode Master", "Index", "ZipCodes")</li>
+                          
 @if (User.IsInRole("Admin") )
 {
                             <li role="separator" class="divider"></li>
                             <li>@Html.ActionLink("User Admin", "Index", "Account")</li>
                             <li>@Html.ActionLink("Roles Management", "Index", "Roles")</li>
+                            <li>@Html.ActionLink("Zipcode Master", "Index", "ZipCodes")</li>
+                            <li>@Html.ActionLink("Categories Master", "Index", "Categories")</li>
 }
 
                         </ul>

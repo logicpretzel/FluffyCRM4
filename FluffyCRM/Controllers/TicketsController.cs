@@ -61,6 +61,8 @@ namespace FluffyCRM.Controllers
         [Authorize(Roles = "Admin,Client,Staff")]
         public ActionResult Create()
         {
+            ViewBag.TicketCategories = new SelectList(_repos.GetCategoryList(FLCatType.Ticket), "id", "Name", null);
+            ViewBag.CustList = new SelectList(_repos.GetClientListAll(), "ClientId", "CompanyName", null);
             return View();
         }
 

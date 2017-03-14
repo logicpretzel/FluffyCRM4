@@ -46,8 +46,13 @@ namespace FluffyCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Name,Type,delete_ind,Description,CreateDate")] Category category)
+        public ActionResult Create([Bind(Include = "id,Name,Type,Description")] Category category)
         {
+            DateTime dt = new DateTime();
+            dt = DateTime.Now;
+
+            category.delete_ind = 0;
+            category.CreateDate = dt;
             if (ModelState.IsValid)
             {
                 db.Categories.Add(category);

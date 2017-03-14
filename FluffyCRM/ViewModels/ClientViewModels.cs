@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace FluffyCRM.ViewModels
 {
@@ -50,12 +51,15 @@ namespace FluffyCRM.ViewModels
         public int TicketId { get; set; }
         public string       Subject { get; set; }
         [DisplayName("Category")]
-        public int?          CategoryId { get; set; }
+        public string          Category { get; set; }
         [DisplayName("Create Date")]
         public DateTime     CreateDate { get; set; }
         public ticketStatus Status { get; set; }
 
         [DisplayName("Client")]
+        public string CompanyName { get; set; }
+
+        [DisplayName("ClientId")]
         public int?          ClientId { get; set; }
         [DisplayName("Start Date")]
         public DateTime?     StartDate { get; set; }
@@ -77,5 +81,47 @@ namespace FluffyCRM.ViewModels
 
     }
 
+    
+    public class TicketAddVM
+    {
+       
+        
+        [Key]
+        [DisplayName("Ticket Number")]
+        public int TicketId { get; set; }
+
+        [DisplayName("Subject")]
+        [StringLength(255)]
+        public string Subject { get; set; }
+
+        [DisplayName("Category")]
+        public int? CategoryId { get; set; }
+
+        
+
+
+        [DisplayName("Description")]
+        [StringLength(8000)]
+        [DataType(DataType.MultilineText)]
+        public string Description { get; set; }
+
+        [DefaultValue(0)]
+        public ticketStatus? Status { get; set; }
+
+     
+
+        [DisplayName("Customer")]
+        public int? ClientId { get; set; }
+
+        [DisplayName("Start Date")]
+        public DateTime? StartDate { get; set; }
+        [DisplayName("Date Completed")]
+        public DateTime? CompletedDate { get; set; }
+        [DisplayName("Due Date")]
+        public DateTime? DueDate { get; set; }
+       
+
+
+    }
 
 }

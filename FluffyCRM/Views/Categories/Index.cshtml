@@ -17,15 +17,11 @@
         <th>
             @Html.DisplayNameFor(model => model.Type)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.delete_ind)
-        </th>
+       
         <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </th>
+       
         <th></th>
     </tr>
 
@@ -37,15 +33,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.Type)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.delete_ind)
-        </td>
+        
         <td>
             @Html.DisplayFor(modelItem => item.Description)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreateDate)
-        </td>
+        
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
             @Html.ActionLink("Details", "Details", new { id=item.id }) |

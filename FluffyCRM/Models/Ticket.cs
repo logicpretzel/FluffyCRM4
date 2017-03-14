@@ -63,4 +63,6 @@ namespace FluffyCRM.Models
         public string CreatedBy { get; set; }
 
     }
+
+   
 }
