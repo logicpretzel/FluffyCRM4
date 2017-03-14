@@ -22,8 +22,11 @@
 html {
     background-color: midnightblue;
     color: white;
+    font-family: 'Open Sans Condensed';
+    font-size: 1em;
 }
 body {
+    font-family: 'Open Sans';
     padding-top: 50px;
     padding-bottom: 20px;
     background-color: white;
@@ -63,9 +66,20 @@ body {
       padding: 20px;
 
 }
-.font-med-large {
-    font-size:3em;
+.btn-med-large {
+    font-family:'Open Sans Condensed';
+    font-size: 5em;
+     color: white;
+     background-color: rgba(19, 50, 98, 0.44);
 }
+    .btn-med-large >  a:visited  {
+        color: white;
+
+    }
+     .btn-med-large >  a  {
+        color: white;
+
+    }
 
 .home_panel {
     border-radius: 20px;
