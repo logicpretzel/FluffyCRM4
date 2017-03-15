@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace FluffyCRM.Models
 {
@@ -34,7 +35,13 @@ namespace FluffyCRM.Models
         [Display(Name = "Zip")]
         [MaxLength(10)]
         public string Zip { get; set; }
-   
+
+        public int? ClientID { get; set; }
+        [DefaultValue(0)]
+        public bool NewClient { get; set; }
+        [DefaultValue(0)]
+        public bool RequestInfo { get; set; }
+        
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

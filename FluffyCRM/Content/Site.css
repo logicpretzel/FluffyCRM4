@@ -117,6 +117,7 @@ input,
 select
  {
     max-width: 400px;
+    color: rgba(28, 144, 112, 0.92);
 }
 
 textarea {
