@@ -36,6 +36,12 @@ body {
     /*    color: #9FA3AC; color: midnightblue */
     background-image: url('../Images/clear-004.jpg');
 }
+footer {
+    position: fixed;
+    bottom: 0;
+    background-color: rgba(63, 146, 146, 0.89);
+    color: white;
+}
 .home_header {
     background-color: rgba(63, 146, 146, 0.89);
  color: white;
@@ -68,7 +74,7 @@ body {
 }
 .btn-med-large {
     font-family:'Open Sans Condensed';
-    font-size: 5em;
+    font-size: 3em;
      color: white;
      background-color: rgba(19, 50, 98, 0.44);
 }
