@@ -156,12 +156,12 @@ namespace FluffyCRM.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin,Client,Staff")]
-        public async Task<ActionResult> Edit([Bind(Include = "TicketId,Subject,CategoryId,CreateDate,Description,Status,DeleteInd,ClientId,StartDate,CompletedDate,DueDate")] Ticket ticket)
+        public ActionResult Edit([Bind(Include = "TicketId,Subject,CategoryId,Description,Status,ClientId,StartDate,CompletedDate,DueDate")] Ticket ticket)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(ticket).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(ticket);

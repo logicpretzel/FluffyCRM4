@@ -272,6 +272,7 @@ namespace FluffyCRM.Controllers
 
             return View(model);
         }
+
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
