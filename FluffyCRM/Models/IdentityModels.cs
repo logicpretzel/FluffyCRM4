@@ -37,8 +37,10 @@ namespace FluffyCRM.Models
         public string Zip { get; set; }
 
         public int? ClientID { get; set; }
+
         [DefaultValue(0)]
         public bool NewClient { get; set; }
+
         [DefaultValue(0)]
         public bool RequestInfo { get; set; }
         
