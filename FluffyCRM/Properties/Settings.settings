@@ -8,5 +8,20 @@
     <Setting Name="Publisher" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Crystal Clear Software Solutions, LLC.</Value>
     </Setting>
+    <Setting Name="FLMailUserName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">dar@ccssllc.com</Value>
+    </Setting>
+    <Setting Name="FLMailPassWord" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">I81ou812</Value>
+    </Setting>
+    <Setting Name="FLMailBCCAddress" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">dar@ccssllc.com</Value>
+    </Setting>
+    <Setting Name="FLServerName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">relay-hosting.secureserver.net</Value>
+    </Setting>
+    <Setting Name="FLServerPort" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">25</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

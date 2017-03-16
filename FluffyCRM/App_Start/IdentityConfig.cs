@@ -19,6 +19,10 @@ namespace FluffyCRM
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
+            // Plug in your email service here to send an email.
+            utils.EmailSender eSender = new utils.EmailSender();
+            var msg = eSender.Send(message.Destination, message.Subject, message.Body, true, null);
+            eSender = null;
             return Task.FromResult(0);
         }
     }
