@@ -100,6 +100,8 @@ namespace FluffyCRM.DAL
 
             return model;
         }
+
+
         public int GetClientByUID(string uid)
         {
             var idParam = new SqlParameter
@@ -111,6 +113,15 @@ namespace FluffyCRM.DAL
             return rc.ClientID;
 
         }
+
+        public StaffDashBoard GetUserClientCounts()
+        {
+            StaffDashBoard model = new StaffDashBoard();
+            model  = _dc.Database.SqlQuery<StaffDashBoard>("select   (select count(*) from Clients u) ClientCount, (select count(*) from AspNetUsers u) UserCount, (select count(*) from AspNetUsers u2 where u2.EmailConfirmed = 'False' ) UsersAwaitingValidation").SingleOrDefault();
+            return model;
+
+        }
+
 
     }
 }

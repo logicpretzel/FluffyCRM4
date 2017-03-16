@@ -6,93 +6,107 @@
 
 <h2>Details</h2>
 
-<div>
+
     <h4>Ticket</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Subject)
-        </dt>
+<div class="col-md-10">
+    <table>
+        <tr class="kv">
+            <td class="right">
+                @Html.DisplayNameFor(model => model.Subject)
+            </td>
+            <td class="">
+                @Html.DisplayFor(model => model.Subject)
+            </td>
+        </tr>
+        <tr class="kv">
+            <td class="right">
+                @Html.DisplayNameFor(model => model.CategoryId)
+            </td>
+            <td class="">
+                @Html.DisplayFor(model => model.CategoryId)
+            </td>
+        </tr>
+        <tr class="kv">
+            <td class="right">
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </td>
+            <td class="">
+                @Html.DisplayFor(model => model.CreateDate)
+            </td>
+        </tr>
+        <tr class="kv">
+            <td class="">
+                @Html.DisplayNameFor(model => model.Description)
+            </td>
+            <td class="">
+                @Html.DisplayFor(model => model.Description)
+            </td>
+        </tr>
+        <tr class="kv">
 
-        <dd>
-            @Html.DisplayFor(model => model.Subject)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CategoryId)
-        </dt>
+            <td class="right">
+                @Html.DisplayNameFor(model => model.Status)
+            </td>
+            <td class="">
+                @Html.DisplayFor(model => model.Status)
+            </td>
+        </tr>
+        <tr class="kv">
 
-        <dd>
-            @Html.DisplayFor(model => model.CategoryId)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </dt>
+            <td class="right">
+                @Html.DisplayNameFor(model => model.DeleteInd)
+            </td>
+            <td class="">
+                @Html.DisplayFor(model => model.DeleteInd)
+            </td>
+        </tr>
+        <tr class="kv">
 
-        <dd>
-            @Html.DisplayFor(model => model.CreateDate)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+            <td class="right">
+                @Html.DisplayNameFor(model => model.ClientId)
+            </td>
+            <td class="">
+                @Html.DisplayFor(model => model.ClientId)
+            </td>
+        </tr>
+        <tr class="kv">
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
+            <td class="right">
+                @Html.DisplayNameFor(model => model.StartDate)
+            </td>
+            <td class="">
+                @Html.DisplayFor(model => model.ClientId)
+            </td>
+        </tr>
+        <tr class="kv">
 
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DeleteInd)
-        </dt>
+            <td class="right">
+                @Html.DisplayNameFor(model => model.CompletedDate)
+            </td>
+            <td class="">
+                @Html.DisplayFor(model => model.CompletedDate)
+            </td>
+        </tr>
+        <tr class="kv">
 
-        <dd>
-            @Html.DisplayFor(model => model.DeleteInd)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ClientId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ClientId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CompletedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CompletedDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DueDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DueDate)
-        </dd>
-
-    </dl>
+            <td class="right">
+                @Html.DisplayNameFor(model => model.DueDate)
+            </td>
+            <td class="">
+                @Html.DisplayFor(model => model.DueDate)
+            </td>
+        </tr>
+    </table>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.TicketId }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.TicketId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

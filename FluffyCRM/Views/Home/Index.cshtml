@@ -10,6 +10,9 @@
 <div class="container-fluid color-p-0 home_container ">
     @if (User.Identity.IsAuthenticated)
     {
+        if (User.IsInRole("Admin")) {
+            @Html.Action("DisplayStaffDashboard")
+        }
     }
     else
     {

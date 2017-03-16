@@ -10,6 +10,14 @@ using System.Web.Mvc;
 namespace FluffyCRM.ViewModels
 {
    
+        public class StaffDashBoard
+        {
+            
+            public int ClientCount { get; set; }
+            public int UserCount { get; set; }
+            public int UsersAwaitingValidation { get; set; }
+        } 
+
         public class ClientTicket
         {
            

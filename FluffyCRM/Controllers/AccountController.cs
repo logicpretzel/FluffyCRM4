@@ -487,13 +487,10 @@ namespace FluffyCRM.Controllers
                     // Send an email with this link
                      string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                      var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    //   await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    //////// /* use with microsoft // */   await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
                     var es = new EmailService();
                     var msg = new IdentityMessage();
-
-
                     msg.Destination = model.Email;
-
                     msg.Subject = "FluffyCRM Account Confirmation";
                     msg.Body = "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>";
                     await es.SendAsync(msg);

@@ -46,6 +46,30 @@ body {
       color: white;
 }
 
+table {
+      background-color: rgba(71, 125, 115, 0.80);
+    border-radius:8px;
+     color: white;
+}
+
+tr.kv >  td:first-child {
+    text-align: right;
+    width: 15%;
+}
+
+tr.kv > td {
+    
+    vertical-align: top;  
+    border-radius:  15px;
+    /*margin-bottom:  2px;*/
+    padding-bottom: 15px;
+    /*padding-left:   8px;
+    padding-left:   8px;*/
+      width:        85%;
+    padding: 10px;
+}
+
+
 .table {
     background-color: rgba(71, 125, 115, 0.80);
     
@@ -66,6 +90,21 @@ body {
       padding: 20px;
 
 }
+
+.color-dash-btn-1 {
+      background-color: rgba(105, 178, 165, 0.50);
+      color: white;
+}
+
+.med-largefont {
+    font-family: 'Open Sans Condensed';
+    font-size: 2em;
+}
+.largefont {
+    font-family: 'Open Sans Condensed';
+    font-size: 3em;
+}
+
 .btn-med-large {
     font-family:'Open Sans Condensed';
     font-size: 5em;
