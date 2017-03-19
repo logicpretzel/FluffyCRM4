@@ -19,6 +19,9 @@ namespace FluffyCRM.Models
         public string Description { get; set; }
 
         [DefaultValue(0)]
+        public int? TaskType { get; set; }
+
+        [DefaultValue(0)]
         public int? ProdId { get; set; }
 
         [DefaultValue(0)]
@@ -31,7 +34,7 @@ namespace FluffyCRM.Models
         public int? Level { get; set; }
 
         [DefaultValue(0)]
-        public int? ClientId { get; set; }
+        public int? TicketId { get; set; }
         
         [StringLength(128)]
         public string ContactUserId { get; set; }
