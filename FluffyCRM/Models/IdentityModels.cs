@@ -70,7 +70,7 @@ namespace FluffyCRM.Models
         public DbSet<Client>        Clients         { get; set; }
        
         public DbSet<Ticket>        Tickets         { get; set; }
-        public DbSet<Product>       Products        { get; set; }
+ 
         public DbSet<ZipCode>       ZipCodes        { get; set; }
         public DbSet<ContactPhone>  ContactPhones   { get; set; }
         public DbSet<ContactType>   ContactTypes    { get; set; }
@@ -78,10 +78,15 @@ namespace FluffyCRM.Models
         public DbSet<ContactLog>    ContactLogs     { get; set; }
         public DbSet<ClientUser>    ClientUsers     { get; set; }
         public DbSet<Category>      Categories      { get; set; }
+        public DbSet<TicketComment> TicketComments  { get; set; }
+        
 
-        public DbSet<AuthCode> AuthCodes { get; set; }
+        public DbSet<AuthCode>      AuthCodes       { get; set; }
 
+        public System.Data.Entity.DbSet<FluffyCRM.Models.ProductSolution> ProductSolutions { get; set; }
 
+        public System.Data.Entity.DbSet<FluffyCRM.Models.JobTask> JobTasks { get; set; }
 
+        public System.Data.Entity.DbSet<FluffyCRM.Models.WorkProject> WorkProjects { get; set; }
     }
 }

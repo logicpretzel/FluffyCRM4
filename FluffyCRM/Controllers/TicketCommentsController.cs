@@ -10,108 +10,107 @@ using FluffyCRM.Models;
 
 namespace FluffyCRM.Controllers
 {
-    public class ProductsController : Controller
+    public class TicketCommentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Products
-        [Authorize(Roles = "Admin")]
+        // GET: TicketComments
         public ActionResult Index()
         {
-            return View(db.Products.ToList());
+            return View(db.TicketComments.ToList());
         }
 
-        // GET: Products/Details/5
+        // GET: TicketComments/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            TicketComment ticketComment = db.TicketComments.Find(id);
+            if (ticketComment == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(ticketComment);
         }
 
-        // GET: Products/Create
+        // GET: TicketComments/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Products/Create
+        // POST: TicketComments/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,CreateDate,CurrentVersion")] Product product)
+        public ActionResult Create([Bind(Include = "Id,TicketId,Subject,Description,CategoryId,CreateDate,Status,LocalTime,DeleteInd,CreatedBy")] TicketComment ticketComment)
         {
             if (ModelState.IsValid)
             {
-                db.Products.Add(product);
+                db.TicketComments.Add(ticketComment);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(product);
+            return View(ticketComment);
         }
 
-        // GET: Products/Edit/5
+        // GET: TicketComments/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            TicketComment ticketComment = db.TicketComments.Find(id);
+            if (ticketComment == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(ticketComment);
         }
 
-        // POST: Products/Edit/5
+        // POST: TicketComments/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,CreateDate,CurrentVersion")] Product product)
+        public ActionResult Edit([Bind(Include = "Id,TicketId,Subject,Description,CategoryId,CreateDate,Status,LocalTime,DeleteInd,CreatedBy")] TicketComment ticketComment)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
+                db.Entry(ticketComment).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(product);
+            return View(ticketComment);
         }
 
-        // GET: Products/Delete/5
+        // GET: TicketComments/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            TicketComment ticketComment = db.TicketComments.Find(id);
+            if (ticketComment == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(ticketComment);
         }
 
-        // POST: Products/Delete/5
+        // POST: TicketComments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Products.Find(id);
-            db.Products.Remove(product);
+            TicketComment ticketComment = db.TicketComments.Find(id);
+            db.TicketComments.Remove(ticketComment);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
