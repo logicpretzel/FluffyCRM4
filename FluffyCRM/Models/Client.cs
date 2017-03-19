@@ -37,7 +37,7 @@ namespace FluffyCRM.Models
 
         public FLPhoneTypes PhoneType1 { get; set; }
 
-        public ICollection<ClientPhone> ClientPhones { get; set; }
+     
 
     }
 }

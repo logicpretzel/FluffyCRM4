@@ -22,7 +22,7 @@
 
 </p>
 <table class="table">
-    <tr>
+    <tr><td>Ticket#</td>
         <th>
             @Html.DisplayNameFor(model => model.Subject)
         </th>
@@ -48,14 +48,17 @@
             @Html.DisplayNameFor(model => model.StartDate)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.DueDate)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.CompletedDate)
         </th>
        
-        <th></th>
+        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
+    <tr><td>@Html.DisplayFor(modelItem => item.TicketId)</td>
         <td>
             @Html.DisplayFor(modelItem => item.Subject)
         </td>
@@ -81,13 +84,17 @@
             @Html.DisplayFor(modelItem => item.StartDate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CompletedDate)
+            @Html.DisplayFor(modelItem => item.DueDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompletedDate) 
         </td>
         
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TicketId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TicketId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TicketId })
+           
+            @Html.ActionLink(" ", "Edit", new { id=item.TicketId }, new { @class = "glyphicon glyphicon-edit" }) &nbsp;
+            @Html.ActionLink(" ", "Details", new { id=item.TicketId }, new { @class = "glyphicon glyphicon-file" })  &nbsp;
+            @Html.ActionLink(" ", "Delete", new { id=item.TicketId }, new { @class = "glyphicon glyphicon-remove" })
         </td>
     </tr>
 }

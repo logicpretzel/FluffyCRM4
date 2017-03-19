@@ -34,24 +34,41 @@ namespace FluffyCRM.DAL
                 public string       ShortDesc { get; set; }
 
         */
+        public IEnumerable<ContactPhone> ClientPhonesList(int ClientID = 0)
+        {
+            IEnumerable<ContactPhone> model;
+
+            var idParam1 = new SqlParameter
+            {
+                ParameterName = "ClientID",
+                Value = ClientID
+            };
+
+            model = _dc.Database.SqlQuery<ContactPhone>("Select * from ContactPhones where ParentId = @ClientId and ParentRecordType = 1 order by PhoneType", idParam1).ToList();
+           
+
+            
+            return model;
+        }
+
         public IEnumerable<TicketList> GetTicketList(string UserID = "")
         {
             IEnumerable<TicketList> model;
             Guid result;
             if (UserID.Length == 0)
             {
-                model = _dc.Database.SqlQuery<TicketList>("Select TicketId, Subject, CategoryId, Category,  CreateDate, Status, ClientId, CompanyName, StartDate, CompletedDate, CreatedBy, LastName, FirstName, FullName, left(Description,35) as ShortDesc from vTickets").ToList();
+                model = _dc.Database.SqlQuery<TicketList>("Select TicketId, Subject, CategoryId, Category,  CreateDate, Status, ClientId, CompanyName, StartDate, CompletedDate, DueDate, CreatedBy, LastName, FirstName, FullName, left(Description,35) as ShortDesc from vTickets").ToList();
             }
             else
             {
                 if (Guid.TryParse(UserID, out result))
                 {
-                    model = _dc.Database.SqlQuery<TicketList>("Select TicketId, Subject, CategoryId,Category, CreateDate, Status, ClientId, CompanyName, StartDate, CompletedDate, CreatedBy, LastName, FirstName, FullName, left(Description,35) as ShortDesc from vTickets").Where(s => s.CreatedBy.ToString() == result.ToString()).ToList();
+                    model = _dc.Database.SqlQuery<TicketList>("Select TicketId, Subject, CategoryId,Category, CreateDate, Status, ClientId, CompanyName, StartDate, CompletedDate, DueDate, CreatedBy, LastName, FirstName, FullName, left(Description,35) as ShortDesc from vTickets").Where(s => s.CreatedBy.ToString() == result.ToString()).ToList();
 
                 }
                 else
                 {
-                    model = _dc.Database.SqlQuery<TicketList>("Select TicketId, Subject, CategoryId,Category, CreateDate, Status, ClientId, CompanyName, StartDate, CompletedDate, CreatedBy, LastName, FirstName, FullName, left(Description,35) as ShortDesc from vTickets where [TicketId] is null").ToList(); // should not happen. return empty model
+                    model = _dc.Database.SqlQuery<TicketList>("Select TicketId, Subject, CategoryId,Category, CreateDate, Status, ClientId, CompanyName, StartDate, CompletedDate, DueDate, CreatedBy, LastName, FirstName, FullName, left(Description,35) as ShortDesc from vTickets where [TicketId] is null").ToList(); // should not happen. return empty model
 
                 }
 
@@ -100,6 +117,8 @@ namespace FluffyCRM.DAL
 
             return model;
         }
+
+
         public int GetClientByUID(string uid)
         {
             var idParam = new SqlParameter
@@ -111,6 +130,15 @@ namespace FluffyCRM.DAL
             return rc.ClientID;
 
         }
+
+        public StaffDashBoard GetUserClientCounts()
+        {
+            StaffDashBoard model = new StaffDashBoard();
+            model  = _dc.Database.SqlQuery<StaffDashBoard>("select   (select count(*) from Clients u) ClientCount, (select count(*) from AspNetUsers u) UserCount, (select count(*) from AspNetUsers u2 where u2.EmailConfirmed = 'False' ) UsersAwaitingValidation").SingleOrDefault();
+            return model;
+
+        }
+
 
     }
 }

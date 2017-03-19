@@ -18,28 +18,32 @@ namespace FluffyCRM.Models
         Videochat = 128
     }
 
+    public enum FlParentRecType {
+        None=0,
+        Client=1,
+        Contact=2,
+        Staff=3
+
+    }
+
     public class ContactPhone
     {
         [StringLength(50)]
         public string Phone { get; set; }
+       
         public FLPhoneTypes PhoneType { get; set; }
-        public int ContactId { get; set; }
-        [Key]
-        public int Id { get; set; }
 
-    }
+        [Required]
+        public int ParentId { get; set; }
 
-    public class ClientPhone
-    {
+        public FlParentRecType ParentRecordType { get; set; }
         [StringLength(50)]
-        public string Phone { get; set; }
-        public FLPhoneTypes PhoneType { get; set; }
-        public int ClientId { get; set; }
-
+        public string Comment { get; set; }
         [Key]
         public int Id { get; set; }
 
     }
+
 
 
 

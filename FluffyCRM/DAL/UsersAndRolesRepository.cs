@@ -208,8 +208,39 @@ namespace FluffyCRM.DAL
             return model.ToList();
         } // GetRolesForUser
 
+        public bool UpdateTicket(Ticket ticket)
+        {
+            bool rc = false;
+            
+          
 
+            string sql = "UPDATE [Tickets]   SET [Subject] = @Subject,[CategoryId]=@CategoryId,[Description]= @Description,[Status]= @Status,[DeleteInd] = @DeleteInd ,[ClientId]= @ClientId,[StartDate]= @StartDate,[CompletedDate]= @CompletedDate,[DueDate]= @DueDate WHERE TicketID = @TicketID";
+            
+            //try
+            //     {
 
+            _dc.Database.ExecuteSqlCommand(sql
+                     , new SqlParameter("@Subject",ticket.Subject.ToString())
+                     , new SqlParameter("@CategoryId", ticket.CategoryId.Value)
+                     , new SqlParameter("@Description", ticket.Description.ToString())
+                     , new SqlParameter("@Status", Convert.ToInt32(ticket.Status.Value))
+                     , new SqlParameter("@DeleteInd", Convert.ToBoolean(ticket.DeleteInd))
+                     , new SqlParameter("@ClientId", Convert.ToInt32(ticket.ClientId.Value))
+                     , new SqlParameter("@StartDate",  ticket.StartDate == null ? DBNull.Value : (object)ticket.StartDate)
+                     , new SqlParameter("@DueDate", ticket.DueDate == null ? DBNull.Value : (object)ticket.DueDate)
+                     , new SqlParameter("@CompletedDate", ticket.CompletedDate == null ? DBNull.Value : (object)ticket.CompletedDate)
+                     , new SqlParameter("@TicketId",ticket.TicketId)
+
+                     );
+                rc = true;
+        //    }
+       //     catch
+       //     {
+       //         rc = false;
+       //     }
+            return rc;
+
+        }
 
         public bool AddRoleToUser(string userID, string role, string userManagerID)
         {

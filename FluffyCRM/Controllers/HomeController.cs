@@ -1,4 +1,6 @@
-﻿using FluffyCRM.Properties;
+﻿using FluffyCRM.DAL;
+using FluffyCRM.Properties;
+using FluffyCRM.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +11,21 @@ namespace FluffyCRM.Controllers
 {
     public class HomeController : Controller
     {
+        DataRepository _rp = new DataRepository();
         Settings setting = new Settings();
         public ActionResult Index()
         {
             ViewBag.Title = setting.AppTitle;
             ViewBag.Publisher = setting.Publisher;
             return View();
+        }
+
+        public ActionResult DisplayStaffDashboard() {
+
+            StaffDashBoard model = new StaffDashBoard();
+            model = _rp.GetUserClientCounts();
+            return View(model);
+
         }
 
         public ActionResult About()

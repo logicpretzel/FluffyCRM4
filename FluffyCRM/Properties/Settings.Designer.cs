@@ -40,5 +40,50 @@ namespace FluffyCRM.Properties {
                 return ((string)(this["Publisher"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("dar@ccssllc.com")]
+        public string FLMailUserName {
+            get {
+                return ((string)(this["FLMailUserName"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("I81ou812")]
+        public string FLMailPassWord {
+            get {
+                return ((string)(this["FLMailPassWord"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("dar@ccssllc.com")]
+        public string FLMailBCCAddress {
+            get {
+                return ((string)(this["FLMailBCCAddress"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("relay-hosting.secureserver.net")]
+        public string FLServerName {
+            get {
+                return ((string)(this["FLServerName"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("25")]
+        public string FLServerPort {
+            get {
+                return ((string)(this["FLServerPort"]));
+            }
+        }
     }
 }

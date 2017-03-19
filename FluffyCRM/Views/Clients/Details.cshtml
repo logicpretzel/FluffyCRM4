@@ -63,18 +63,26 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Phone1)
+            @Html.DisplayFor(model => model.Phone1)<br />@Html.DisplayFor(model => model.PhoneType1)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PhoneType1)
+           Additional Phone Numbers:<br />@Html.ActionLink("Add", "AddClientPhone", new { clientID = Model.ClientId })
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PhoneType1)
+           
+            @Html.Action("GetAddlPhones", "Clients", new { clientID = Model.ClientId })
         </dd>
+       
+      
 
+       
     </dl>
+   
+    
+   
+    
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ClientId }) |

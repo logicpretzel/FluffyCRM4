@@ -50,12 +50,21 @@ namespace FluffyCRM.Models
         [DisplayName("Customer")]
         public int? ClientId { get; set; }
 
+        [DataType(DataType.Date)]
         [DisplayName("Start Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? StartDate { get; set; }
+
+        [DataType(DataType.Date)]
         [DisplayName("Date Completed")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? CompletedDate { get; set; }
+
         [DisplayName("Due Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? DueDate { get; set; }
+
         public DateTime? LocalTime { get; set; }
 
 

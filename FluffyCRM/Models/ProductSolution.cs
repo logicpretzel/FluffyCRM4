@@ -6,7 +6,7 @@ using System.Web;
 
 namespace FluffyCRM.Models
 {
-    public class Product
+    public class ProductSolution
     {   [Key]
         public int Id { get; set; }
         [Required]

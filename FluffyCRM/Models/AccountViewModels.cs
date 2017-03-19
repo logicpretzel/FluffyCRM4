@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace FluffyCRM.Models
@@ -64,6 +65,7 @@ namespace FluffyCRM.Models
 
     public class RegisterViewModel
     {
+        [Key]
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -79,10 +81,51 @@ namespace FluffyCRM.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+
+        [Required]
+        [Display(Name = "Last Name")]
+        [MaxLength(50)]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "First Name")]
+        [MaxLength(50)]
+        public string FirstName { get; set; }
+
+        [Required]
+        [MaxLength(20)]
+        [DataType(DataType.PhoneNumber)]
+        public string PhoneNumber { get; set; }
+
+        [DefaultValue(0)]
+        public bool RequestInfo { get; set; }
+
+        [Display(Name = "Address")]
+        public string Address { get; set; }
+
+        [Display(Name = "City")]
+        [MaxLength(50)]
+        public string City { get; set; }
+
+        [Display(Name = "State")]
+        [MaxLength(50)]
+        public string State { get; set; }
+
+        [Display(Name = "Zip")]
+        [MaxLength(10)]
+        public string Zip { get; set; }
+
+        [DefaultValue(0)]
+        public bool NewClient { get; set; }
+
+     
+
     }
 
     public class ResetPasswordViewModel
     {
+       
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -99,7 +142,11 @@ namespace FluffyCRM.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
+
+        [StringLength(255)]
         public string Code { get; set; }
+
+
     }
 
     public class ForgotPasswordViewModel
@@ -158,7 +205,8 @@ namespace FluffyCRM.Models
 
 
         public bool EmailConfirmed { get; set; }
-
+        [DisplayName("Customer")]
+        public int? ClientId { get; set; }
 
     }
 
@@ -210,6 +258,9 @@ namespace FluffyCRM.Models
         [Display(Name = "Zip")]
         [MaxLength(10)]
         public string Zip { get; set; }
+
+        [DisplayName("Customer")]
+        public int? ClientId { get; set; }
     }
 
     public class SetUserPasswordViewModel

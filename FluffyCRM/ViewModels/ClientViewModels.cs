@@ -10,6 +10,14 @@ using System.Web.Mvc;
 namespace FluffyCRM.ViewModels
 {
    
+        public class StaffDashBoard
+        {
+            
+            public int ClientCount { get; set; }
+            public int UserCount { get; set; }
+            public int UsersAwaitingValidation { get; set; }
+        } 
+
         public class ClientTicket
         {
            
@@ -53,6 +61,8 @@ namespace FluffyCRM.ViewModels
         [DisplayName("Category")]
         public string          Category { get; set; }
         [DisplayName("Create Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yy HH:mm}")]
         public DateTime     CreateDate { get; set; }
         public ticketStatus Status { get; set; }
 
@@ -62,9 +72,20 @@ namespace FluffyCRM.ViewModels
         [DisplayName("ClientId")]
         public int?          ClientId { get; set; }
         [DisplayName("Start Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yy}")]
         public DateTime?     StartDate { get; set; }
+
         [DisplayName("Date Completed")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yy}")]
         public DateTime?     CompletedDate { get; set; }
+
+        [DisplayName("Due Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yy}")]
+        public DateTime? DueDate { get; set; }
+
         [StringLength(128)]
         public string       CreatedBy { get; set; }
         [DisplayName("Last Name")]

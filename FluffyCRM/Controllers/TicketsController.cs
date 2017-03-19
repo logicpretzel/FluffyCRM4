@@ -26,14 +26,14 @@ namespace FluffyCRM.Controllers
             IEnumerable<TicketList> lst = new List<TicketList>();
 
             string userId = User.Identity.GetUserId().ToString();
-            if (!(User.IsInRole("Staff") || User.IsInRole("Admin")))
+            if ((User.IsInRole("Staff") || User.IsInRole("Admin")))
             {
-                lst = _repos.GetTicketList(userId);
+                lst = _repos.GetTicketList("");
 
 
             }
             else {
-                lst = _repos.GetTicketList("");
+                lst = _repos.GetTicketList(userId);
             }
             
 
@@ -147,6 +147,10 @@ namespace FluffyCRM.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.TicketCategories = new SelectList(_repos.GetCategoryList(FLCatType.Ticket), "id", "Name", null);
+            ViewBag.CustList = new SelectList(_repos.GetClientListAll(), "ClientId", "CompanyName", null);
+
             return View(ticket);
         }
 
@@ -161,7 +165,8 @@ namespace FluffyCRM.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(ticket).State = EntityState.Modified;
-                 db.SaveChanges();
+                //  db.SaveChanges();
+                _repos.UpdateTicket(ticket);
                 return RedirectToAction("Index");
             }
             return View(ticket);
