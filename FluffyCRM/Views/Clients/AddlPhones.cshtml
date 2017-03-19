@@ -1,0 +1,46 @@
+﻿@model IEnumerable<FluffyCRM.Models.ContactPhone>
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+</p>
+<div class="col_med-4">
+    <table class="table  " style="width: 50%; font-size: smaller;">
+        @*<tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Phone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhoneType)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Comment)
+                </th>
+                <th></th>
+            </tr>*@
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneType)
+                </td>
+
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comment)
+                </td>
+                <td>
+                    @Html.ActionLink(" ", "DeletePhone","Clients", new { id = item.Id, clientId = item.ParentId }, new { @class = "glyphicon glyphicon-remove" })
+                    @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

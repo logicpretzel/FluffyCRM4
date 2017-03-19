@@ -52,7 +52,7 @@ namespace FluffyCRM.Models
 
         public int ClientId { get; set; }
 
-        public ICollection<ContactPhone> ContactPhones { get; set; }
+        //public ICollection<ContactPhone> ContactPhones { get; set; }
 
 
     }

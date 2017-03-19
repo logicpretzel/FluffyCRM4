@@ -119,6 +119,7 @@ namespace FluffyCRM.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
+            ViewBag.CustList = new SelectList(_dc.GetClientListAll(), "ClientId", "CompanyName", null);
             return View();
         }
 
@@ -132,7 +133,7 @@ namespace FluffyCRM.Controllers
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "UserName,Email, Password,ConfirmPassword, FirstName, LastName, Address, City, State, Zip")]CreateViewModel model)
+        public async Task<ActionResult> Create([Bind(Include = "UserName,Email, Password,ConfirmPassword, FirstName, LastName, Address, City, State, Zip, ClientId")]CreateViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -145,7 +146,8 @@ namespace FluffyCRM.Controllers
                     Address = model.Address,
                     City = model.City,
                     State = model.State,
-                    Zip = model.Zip
+                    Zip = model.Zip,
+                  
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -164,7 +166,7 @@ namespace FluffyCRM.Controllers
                 }
                 AddErrors(result);
             }
-
+            ViewBag.CustList = new SelectList(_dc.GetClientListAll(), "ClientId", "CompanyName", null);
             // If we got this far, something failed, redisplay form
             return View(model);
         }
@@ -195,6 +197,8 @@ namespace FluffyCRM.Controllers
             model.Zip = user.Zip;
             model.PhoneNumber = user.PhoneNumber;
             model.EmailConfirmed = user.EmailConfirmed;
+            model.ClientId = user.ClientID;
+            ViewBag.CustList = new SelectList(_dc.GetClientListAll(), "ClientId", "CompanyName", null);
             return View(model);
 
         }
@@ -210,7 +214,7 @@ namespace FluffyCRM.Controllers
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "UserName, Email, FirstName, LastName, Address, City, State, Zip, EmailConfirmed,PhoneNumber,PhoneNumberConfirmed, Password, LockoutEnabled, AccessFailedCount")]EditUserViewModel model)
+        public async Task<ActionResult> Edit([Bind(Include = "UserName, Email, FirstName, LastName, Address, City, State, Zip, EmailConfirmed,PhoneNumber,PhoneNumberConfirmed, Password, LockoutEnabled, AccessFailedCount,ClientId")]EditUserViewModel model)
         {
 
 
@@ -234,7 +238,7 @@ namespace FluffyCRM.Controllers
                     user.Zip = model.Zip;
                     user.PhoneNumber = model.PhoneNumber;
                     user.EmailConfirmed = model.EmailConfirmed;
-
+                    user.ClientID = model.ClientId;
                     IdentityResult result = await UserManager.UpdateAsync(user);
 
                     if (result.Succeeded == true)
@@ -251,6 +255,7 @@ namespace FluffyCRM.Controllers
 
             }
             // If we got this far, something failed, redisplay form
+            ViewBag.CustList = new SelectList(_dc.GetClientListAll(), "ClientId", "CompanyName", null);
             return View(model);
         }
 

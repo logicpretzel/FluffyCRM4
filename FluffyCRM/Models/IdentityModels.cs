@@ -68,7 +68,7 @@ namespace FluffyCRM.Models
         }
 
         public DbSet<Client>        Clients         { get; set; }
-        public DbSet<ClientPhone>   ClientPhones    { get; set; }
+       
         public DbSet<Ticket>        Tickets         { get; set; }
         public DbSet<Product>       Products        { get; set; }
         public DbSet<ZipCode>       ZipCodes        { get; set; }
@@ -79,9 +79,9 @@ namespace FluffyCRM.Models
         public DbSet<ClientUser>    ClientUsers     { get; set; }
         public DbSet<Category>      Categories      { get; set; }
 
-     //   public System.Data.Entity.DbSet<FluffyCRM.Models.ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<AuthCode> AuthCodes { get; set; }
 
 
-        // public System.Data.Entity.DbSet<FluffyCRM.Models.Client> Clients { get; set; }
+
     }
 }

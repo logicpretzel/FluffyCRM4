@@ -205,7 +205,8 @@ namespace FluffyCRM.Models
 
 
         public bool EmailConfirmed { get; set; }
-
+        [DisplayName("Customer")]
+        public int? ClientId { get; set; }
 
     }
 
@@ -257,6 +258,9 @@ namespace FluffyCRM.Models
         [Display(Name = "Zip")]
         [MaxLength(10)]
         public string Zip { get; set; }
+
+        [DisplayName("Customer")]
+        public int? ClientId { get; set; }
     }
 
     public class SetUserPasswordViewModel
