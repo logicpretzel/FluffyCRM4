@@ -41,7 +41,8 @@ footer {
     bottom: 0;
     background-color: rgba(63, 146, 146, 0.89);
     color: white;
-}
+    /*margin-left: -20px;*/
+    }
 .home_header {
     background-color: rgba(63, 146, 146, 0.89);
  color: white;
