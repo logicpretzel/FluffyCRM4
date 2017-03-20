@@ -10,9 +10,22 @@
 <div class="container-fluid color-p-0 home_container ">
     @if (User.Identity.IsAuthenticated)
     {
-        if (User.IsInRole("Admin")) {
+        if (User.IsInRole("Admin") || User.IsInRole("Staff")) {
             @Html.Action("DisplayStaffDashboard")
+
+
+            <div class="panel  col-sm-3  home_panel">
+
+                <div class="panel-body  ">
+                    <br /><br /><br /><br /><br />
+                    
+                    @Html.ActionLink("Tasks", "Index", "JobTasks",null, new { @class = "btn btn-primary  col-sm-5" })
+                    <br /><br /><br /><br /><br /><br />
+                </div>
+            </div>
         }
+
+
     }
     else
     {
