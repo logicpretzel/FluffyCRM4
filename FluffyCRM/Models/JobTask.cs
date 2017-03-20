@@ -22,12 +22,15 @@ namespace FluffyCRM.Models
         public int? TaskType { get; set; }
 
         [DefaultValue(0)]
+        [DisplayName("Product Name")]
         public int? ProdId { get; set; }
 
         [DefaultValue(0)]
+        [DisplayName("Project Name")]
         public int? ProjectId { get; set; }
 
         [DefaultValue(0)]
+        [DisplayName("Parent Task")]
         public int? ParentTaskId { get; set; }
 
         [DefaultValue(0)]
