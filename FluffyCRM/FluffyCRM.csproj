@@ -173,6 +173,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
+    <Compile Include="Controllers\ContactsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobTasksController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -286,6 +287,14 @@
     <Compile Include="Migrations\201703192102012_jobs.cs" />
     <Compile Include="Migrations\201703192102012_jobs.Designer.cs">
       <DependentUpon>201703192102012_jobs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703210359255_phones2.cs" />
+    <Compile Include="Migrations\201703210359255_phones2.Designer.cs">
+      <DependentUpon>201703210359255_phones2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703210407584_client4.cs" />
+    <Compile Include="Migrations\201703210407584_client4.Designer.cs">
+      <DependentUpon>201703210407584_client4.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -450,6 +459,11 @@
     <Content Include="Views\WorkProjects\Edit.cshtml" />
     <Content Include="Views\WorkProjects\Index.cshtml" />
     <Content Include="Views\Account\SendAuthCode.cshtml" />
+    <Content Include="Views\Contacts\Create.cshtml" />
+    <Content Include="Views\Contacts\Delete.cshtml" />
+    <Content Include="Views\Contacts\Details.cshtml" />
+    <Content Include="Views\Contacts\Edit.cshtml" />
+    <Content Include="Views\Contacts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -537,6 +551,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703192102012_jobs.resx">
       <DependentUpon>201703192102012_jobs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703210359255_phones2.resx">
+      <DependentUpon>201703210359255_phones2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703210407584_client4.resx">
+      <DependentUpon>201703210407584_client4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

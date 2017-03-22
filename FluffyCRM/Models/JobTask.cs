@@ -16,6 +16,7 @@ namespace FluffyCRM.Models
         public string Name { get; set; }
 
         [StringLength(8000)]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
         [DefaultValue(0)]
@@ -29,19 +30,24 @@ namespace FluffyCRM.Models
         [DisplayName("Project Name")]
         public int? ProjectId { get; set; }
 
+      
         [DefaultValue(0)]
         [DisplayName("Parent Task")]
         public int? ParentTaskId { get; set; }
 
+        [ScaffoldColumn(false)]
         [DefaultValue(0)]
         public int? Level { get; set; }
 
+        [DisplayName("Ticket")]
         [DefaultValue(0)]
         public int? TicketId { get; set; }
-        
+
+        [DisplayName("Contact")]
         [StringLength(128)]
         public string ContactUserId { get; set; }
 
+        [DisplayName("Created By")]
         [StringLength(128)]
         public string CreatedBy { get; set; }
 

@@ -19,12 +19,14 @@ namespace FluffyCRM.Controllers
         // GET: Clients
         public async Task<ActionResult> Index()
         {
+            ViewBag.Title = "Clients";
             return View(await db.Clients.ToListAsync());
         }
 
         // GET: Clients/Details/5
         public async Task<ActionResult> Details(int? id)
         {
+            ViewBag.Title = "Clients";
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -40,7 +42,8 @@ namespace FluffyCRM.Controllers
         // GET: Clients/Create
         public ActionResult Create()
         {
-           
+            ViewBag.Title = "Add Clients";
+
             return View();
         }
 
@@ -51,6 +54,7 @@ namespace FluffyCRM.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "ClientId,CompanyName,Address1,Address2,City,State,Zip,Phone1,PhoneType1")] Client client)
         {
+            ViewBag.Title = "Clients";
             if (ModelState.IsValid)
             {
                 db.Clients.Add(client);
@@ -64,6 +68,7 @@ namespace FluffyCRM.Controllers
         // GET: Clients/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
+            ViewBag.Title = "Edit Clients";
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -83,6 +88,7 @@ namespace FluffyCRM.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "ClientId,CompanyName,Address1,Address2,City,State,Zip,Phone1,PhoneType1")] Client client)
         {
+            ViewBag.Title = "Clients";
             if (ModelState.IsValid)
             {
                 db.Entry(client).State = EntityState.Modified;
@@ -95,6 +101,7 @@ namespace FluffyCRM.Controllers
         // GET: Clients/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
+            ViewBag.Title = "Delete Clients";
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -112,6 +119,7 @@ namespace FluffyCRM.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
+            ViewBag.Title = "Clients";
             Client client = await db.Clients.FindAsync(id);
             db.Clients.Remove(client);
             await db.SaveChangesAsync();
@@ -121,6 +129,7 @@ namespace FluffyCRM.Controllers
 
         public ActionResult GetAddlPhones(int clientID)
         {
+            ViewBag.Title = "Clients - Additional Phone Numbers";
             var model = _repos.ClientPhonesList(clientID);
             // fill some data for your model here
             return PartialView("AddlPhones", model);
@@ -141,6 +150,7 @@ namespace FluffyCRM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddClientPhone([Bind(Include = "ParentId,Phone,PhoneType,Comment")] ContactPhone model)
         {
+            ViewBag.Title = "Clients - Add Phone";
             model.ParentRecordType = FlParentRecType.Client;
 
             if (ModelState.IsValid)
@@ -155,7 +165,8 @@ namespace FluffyCRM.Controllers
 
         public RedirectToRouteResult DeletePhone(int id, int clientId)
         {
-           // Client client = await db.Clients.FindAsync(id);
+           // ViewBag.Title = "Delete Phone Number";
+            // Client client = await db.Clients.FindAsync(id);
             ContactPhone phone = db.ContactPhones.Find(id);
             if (ModelState.IsValid)
             {

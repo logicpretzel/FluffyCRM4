@@ -36,15 +36,25 @@ namespace FluffyCRM.Models
         [MaxLength(50)]
         public string State { get; set; }
 
+        [DataType(DataType.EmailAddress)]
         [Display(Name = "Zip")]
         [MaxLength(10)]
         public string Zip { get; set; }
 
         [Display(Name = "Phone")]
         [MaxLength(50)]
+        [DataType(DataType.PhoneNumber)]
         public string Phone1 { get; set; }
 
+
+
         public FLPhoneTypes PhoneType1 { get; set; }
+
+        [Display(Name = "Email")]
+        [MaxLength(50)]
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
+
 
         [Key]
         public int Id { get; set; }

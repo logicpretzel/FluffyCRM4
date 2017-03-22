@@ -29,6 +29,7 @@ namespace FluffyCRM.Models
     public class ContactPhone
     {
         [StringLength(50)]
+        [DataType(DataType.PhoneNumber)]
         public string Phone { get; set; }
        
         public FLPhoneTypes PhoneType { get; set; }

@@ -10,120 +10,107 @@ using FluffyCRM.Models;
 
 namespace FluffyCRM.Controllers
 {
-    public class CategoriesController : Controller
+    public class ContactsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Categories
+        // GET: Contacts
         public ActionResult Index()
         {
-            ViewBag.Title = "Categories";
-            return View(db.Categories.ToList());
+            return View(db.Contacts.ToList());
         }
 
-        // GET: Categories/Details/5
+        // GET: Contacts/Details/5
         public ActionResult Details(int? id)
         {
-            ViewBag.Title = "Categories";
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
-            if (category == null)
+            Contact contact = db.Contacts.Find(id);
+            if (contact == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(contact);
         }
 
-        // GET: Categories/Create
+        // GET: Contacts/Create
         public ActionResult Create()
         {
-            ViewBag.Title = "Add Categories";
             return View();
         }
 
-        // POST: Categories/Create
+        // POST: Contacts/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Name,Type,Description")] Category category)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Address1,Address2,City,State,Zip,Phone1,PhoneType1,Email,ClientId")] Contact contact)
         {
-            ViewBag.Title = "Categories";
-            DateTime dt = new DateTime();
-            dt = DateTime.Now;
-
-            category.delete_ind = 0;
-            category.CreateDate = dt;
             if (ModelState.IsValid)
             {
-                db.Categories.Add(category);
+                db.Contacts.Add(contact);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(category);
+            return View(contact);
         }
 
-        // GET: Categories/Edit/5
+        // GET: Contacts/Edit/5
         public ActionResult Edit(int? id)
         {
-            ViewBag.Title = "Edit - Categories";
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
-            if (category == null)
+            Contact contact = db.Contacts.Find(id);
+            if (contact == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(contact);
         }
 
-        // POST: Categories/Edit/5
+        // POST: Contacts/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Name,Type,delete_ind,Description,CreateDate")] Category category)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Address1,Address2,City,State,Zip,Phone1,PhoneType1,Email,ClientId")] Contact contact)
         {
-            ViewBag.Title = "Categories";
             if (ModelState.IsValid)
             {
-                db.Entry(category).State = EntityState.Modified;
+                db.Entry(contact).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(category);
+            return View(contact);
         }
 
-        // GET: Categories/Delete/5
+        // GET: Contacts/Delete/5
         public ActionResult Delete(int? id)
         {
-            ViewBag.Title = "Delete -Categories";
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
-            if (category == null)
+            Contact contact = db.Contacts.Find(id);
+            if (contact == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(contact);
         }
 
-        // POST: Categories/Delete/5
+        // POST: Contacts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ViewBag.Title = "Categories";
-            Category category = db.Categories.Find(id);
-            db.Categories.Remove(category);
+            Contact contact = db.Contacts.Find(id);
+            db.Contacts.Remove(contact);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
