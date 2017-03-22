@@ -57,7 +57,11 @@ namespace FluffyCRM.Controllers
 
             return View(workProject);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: WorkProjects/Edit/5
         public ActionResult Edit(int? id)
         {
