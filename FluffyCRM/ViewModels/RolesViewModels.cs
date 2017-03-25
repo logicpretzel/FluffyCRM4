@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace FluffyCRM.ViewModels
 {
@@ -48,5 +50,20 @@ namespace FluffyCRM.ViewModels
         public string UserId { get; set; }
         public string Disabled { get; set; }
     }
+
+    public class UserRoleHeader {
+        [HiddenInput]
+        public string UserId { get; set; }
+        [ReadOnly(true)]
+        public string FirstName { get; set; }
+        [ReadOnly(true)]
+        public string LastName { get; set; }
+        [ReadOnly(true)]
+        public string Email { get; set; }
+        [ReadOnly(true)]
+        public string Phone { get; set; }
+
+    }
+
 
 }

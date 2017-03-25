@@ -174,9 +174,11 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\ContactsController.cs" />
+    <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobTasksController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NotesController.cs" />
     <Compile Include="Controllers\ProductSolutionsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\TicketCommentsController.cs" />
@@ -296,6 +298,30 @@
     <Compile Include="Migrations\201703210407584_client4.Designer.cs">
       <DependentUpon>201703210407584_client4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703222211043_notes.cs" />
+    <Compile Include="Migrations\201703222211043_notes.Designer.cs">
+      <DependentUpon>201703222211043_notes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703222249475_wp.cs" />
+    <Compile Include="Migrations\201703222249475_wp.Designer.cs">
+      <DependentUpon>201703222249475_wp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703230041334_fk_jobtask.cs" />
+    <Compile Include="Migrations\201703230041334_fk_jobtask.Designer.cs">
+      <DependentUpon>201703230041334_fk_jobtask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703230049485_fk_notes.cs" />
+    <Compile Include="Migrations\201703230049485_fk_notes.Designer.cs">
+      <DependentUpon>201703230049485_fk_notes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703230050384_fk_notes3.cs" />
+    <Compile Include="Migrations\201703230050384_fk_notes3.Designer.cs">
+      <DependentUpon>201703230050384_fk_notes3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703251427416_employees.cs" />
+    <Compile Include="Migrations\201703251427416_employees.Designer.cs">
+      <DependentUpon>201703251427416_employees.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Attachment.cs" />
@@ -304,6 +330,9 @@
     <Compile Include="Models\category.cs" />
     <Compile Include="Models\ClientUser.cs" />
     <Compile Include="Models\JobTask.cs" />
+    <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\TaskNote.cs" />
+    <Compile Include="Models\TaskAssignment.cs" />
     <Compile Include="Models\TicketComment.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\ContactLog.cs" />
@@ -329,6 +358,7 @@
     <Compile Include="utils\HtmlEncode.cs" />
     <Compile Include="utils\StaticImageResizer.cs" />
     <Compile Include="ViewModels\ClientViewModels.cs" />
+    <Compile Include="ViewModels\ProjectTasksViewModels.cs" />
     <Compile Include="ViewModels\RolesViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -464,6 +494,13 @@
     <Content Include="Views\Contacts\Details.cshtml" />
     <Content Include="Views\Contacts\Edit.cshtml" />
     <Content Include="Views\Contacts\Index.cshtml" />
+    <Content Include="Views\WorkProjects\_Projects.cshtml" />
+    <Content Include="Views\WorkProjects\Projects.cshtml" />
+    <Content Include="Views\Employees\Create.cshtml" />
+    <Content Include="Views\Employees\Delete.cshtml" />
+    <Content Include="Views\Employees\Details.cshtml" />
+    <Content Include="Views\Employees\Edit.cshtml" />
+    <Content Include="Views\Employees\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -557,6 +594,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703210407584_client4.resx">
       <DependentUpon>201703210407584_client4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703222211043_notes.resx">
+      <DependentUpon>201703222211043_notes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703222249475_wp.resx">
+      <DependentUpon>201703222249475_wp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703230041334_fk_jobtask.resx">
+      <DependentUpon>201703230041334_fk_jobtask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703230049485_fk_notes.resx">
+      <DependentUpon>201703230049485_fk_notes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703230050384_fk_notes3.resx">
+      <DependentUpon>201703230050384_fk_notes3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703251427416_employees.resx">
+      <DependentUpon>201703251427416_employees.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

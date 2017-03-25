@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FluffyCRM.Models;
+using PagedList;
 
 namespace FluffyCRM.Controllers
 {
@@ -15,9 +16,58 @@ namespace FluffyCRM.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: JobTasks
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    return View(db.JobTasks.ToList());
+        //}
+
+
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+
         {
-            return View(db.JobTasks.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            // ViewBag.ZipSortParm = sortOrder == "Zip" ? "Zip_desc" : "Zip";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var JobTasks = from s in db.JobTasks
+                           select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                JobTasks = JobTasks.Where(s => s.Name.StartsWith(searchString) 
+                                            || s.Description.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    JobTasks = JobTasks.OrderByDescending(s => s.Name);
+                    break;
+
+                default:  // Name ascending 
+                    JobTasks = JobTasks.OrderBy(s => s.Name);
+                    break;
+            }
+
+            int pageSize = 50;
+            int pageNumber = (page ?? 1);
+
+            if (Request.IsAjaxRequest() == true) {
+                return PartialView(JobTasks.ToPagedList(pageNumber, pageSize));
+            }
+            else
+            {
+                return View(JobTasks.ToPagedList(pageNumber, pageSize));
+            }
         }
 
         // GET: JobTasks/Details/5

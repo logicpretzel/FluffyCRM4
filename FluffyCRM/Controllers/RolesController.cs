@@ -1,5 +1,6 @@
 ﻿using FluffyCRM.DAL;
 using FluffyCRM.Models;
+using FluffyCRM.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -187,7 +188,22 @@ namespace FluffyCRM.Controllers
         {
             if (IsAdmin() == false) { return NotAdmin(); }
             string userManagerID = User.Identity.GetUserId().ToString();
+            
             var model = _rp.GetRolesForUser(Id, userManagerID);
+            var manager = System.Web.HttpContext.Current.Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+
+            var user = manager.FindById(Id);
+
+            UserRoleHeader hdr = new UserRoleHeader()
+            {
+                UserId = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Phone = user.PhoneNumber,
+                Email = user.Email
+            };
+
+            ViewBag.HdrModel = hdr;
             ViewBag.UserID = Id;
             ViewBag.Roles = "";
             return PartialView(model);
@@ -203,7 +219,7 @@ namespace FluffyCRM.Controllers
             string userID = "";
             string userManagerID = User.Identity.GetUserId();
             string msg = "";
-
+            bool ok = false;
             if (fc["UserId"] != null)
             {
                 userID = fc["UserId"];
@@ -242,11 +258,27 @@ namespace FluffyCRM.Controllers
                 }
                 else
                 {
-                    msg = "Changes Successfully Saved.";
+                    ok = true;
+                    msg = "";
                 }
             }
-            TempData["Sucess"] = rc;
+            TempData["Success"] = rc;
             TempData["msg"] = msg;
+            var manager = System.Web.HttpContext.Current.Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+
+            var user = manager.FindById(userID);
+
+            UserRoleHeader hdr = new UserRoleHeader()
+            {
+                UserId = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Phone = user.PhoneNumber,
+                Email = user.Email
+            };
+
+            ViewBag.HdrModel = hdr;
+            if (ok == true) return RedirectToAction("UserList");
             return RedirectToAction("UserDetail", new { id = userID });
 
         }

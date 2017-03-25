@@ -48,5 +48,7 @@ namespace FluffyCRM.Models
         [ScaffoldColumn(false)]
         public DateTime? LocalTime { get; set; }
 
+        public ICollection<JobTask> JobTasks { get; set; }
+
     }
 }

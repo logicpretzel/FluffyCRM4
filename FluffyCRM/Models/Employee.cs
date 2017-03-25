@@ -6,23 +6,30 @@ using System.Web;
 
 namespace FluffyCRM.Models
 {
-    public class Client
+    public class Employee
     {
         [Key]
-        public int ClientId { get; set; }
+        public int Id { get; set; }
 
-        [Display(Name = "Company Name")]
-        [MaxLength(150)]
-        public string CompanyName { get; set; }
+        [StringLength(100)]
+        public string FirstName { get; set; }
 
-     
-        [Display(Name = "Address 1")]
-        [MaxLength(150)]
-        public string Address1 { get; set; }
+        [StringLength(100)]
+        public string LastName { get; set; }
 
-        [Display(Name = "Address 2")]
+        [StringLength(3)]
+        public string Initials { get; set; }
+
+        [StringLength(100)]
+        public string JobTitle { get; set; }
+
+        [StringLength(128)]
+        public string UserId { get; set; }
+
+        [Display(Name = "Address")]
         [MaxLength(150)]
-        public string Address2 { get; set; }
+        public string Address { get; set; }
+   
 
         [Display(Name = "City")]
         [MaxLength(50)]
@@ -44,7 +51,12 @@ namespace FluffyCRM.Models
 
         public FLPhoneTypes? PhoneType1 { get; set; }
 
-     
+        [Display(Name = "Phone")]
+        [MaxLength(50)]
+        [DataType(DataType.PhoneNumber)]
+        public string Phone2 { get; set; }
+
+        public FLPhoneTypes? PhoneType2 { get; set; }
 
     }
 }

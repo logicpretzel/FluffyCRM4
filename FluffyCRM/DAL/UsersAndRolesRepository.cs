@@ -213,10 +213,12 @@ namespace FluffyCRM.DAL
         public bool AddRoleToUser(string userID, string role, string userManagerID)
         {
             bool rc = false;
-            if (userID == userManagerID)
-            {
-                if (role.ToLower().Trim() == "admin") return true;  // can't use this method to create an admin role to your own user account.
-            }
+           
+
+            //if (userID == userManagerID)
+            //{
+            //    if (role.ToLower().Trim() == "admin") return true;  // can't use this method to create an admin role to your own user account.
+            //}
 
             var idParam1 = new SqlParameter
             {
@@ -229,10 +231,13 @@ namespace FluffyCRM.DAL
                 ParameterName = "Role",
                 Value = GetRoleByName(role)
             };
+
+
+
             try
             {
 
-                _dc.Database.ExecuteSqlCommand("Insert into AspNetUserRoles (UserId,RoleId) values (@UID, @Role)", idParam1, idParam2);
+                _dc.Database.ExecuteSqlCommand("EXEC webuser.AddRoleToUser @UID=@UID, @Role=@Role", idParam1, idParam2);
                 rc = true;
             }
             catch

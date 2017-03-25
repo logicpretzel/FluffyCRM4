@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FluffyCRM.Models;
+using PagedList;
 
 namespace FluffyCRM.Controllers
 {
@@ -15,9 +16,103 @@ namespace FluffyCRM.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: WorkProjects
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    return View(db.WorkProjects.ToList());
+        //}
+
+        public ActionResult Projects(string searchString, string sortOption, int page = 1)
         {
-            return View(db.WorkProjects.ToList());
+            int pageSize = 10;
+
+           
+
+            var lst = db.WorkProjects.AsQueryable();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                lst = db.WorkProjects.Where(p => p.Name.ToLower().Contains(searchString));
+            }
+
+            ViewBag.CurrentFilter = searchString;
+            if (sortOption == null) sortOption = "name_acs";
+            ViewBag.sortOption = sortOption;
+    
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                lst = lst.Where(s => s.Name.StartsWith(searchString) || s.Description.Contains(searchString));
+            }
+            switch (sortOption)
+            {
+                case "name_acs":
+                    lst = lst.OrderBy(p => p.Name);
+                    ViewBag.sortOption = "name_desc";
+                    break;
+                case "name_desc":
+                    lst = lst.OrderByDescending(p => p.Name);
+                    ViewBag.sortOption = "name_asc";
+                    break;
+               
+                default:
+                    lst = lst.OrderBy(p => p.LocalTime);
+                    ViewBag.sortOption = "name_desc";
+                    break;
+
+            }
+
+            
+            
+
+
+            return Request.IsAjaxRequest()
+               ? (ActionResult)PartialView("_Projects", lst.ToPagedList(page, pageSize))
+               : View(lst.ToPagedList(page, pageSize));
+
+
+        }
+
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+
+        {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+           // ViewBag.ZipSortParm = sortOrder == "Zip" ? "Zip_desc" : "Zip";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var WorkProjects = from s in db.WorkProjects
+                               select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                WorkProjects = WorkProjects.Where(s => s.Name.StartsWith(searchString) ||   s.Description.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    WorkProjects = WorkProjects.OrderByDescending(s => s.Name);
+                    break;
+ 
+                default:  // Name ascending 
+                    WorkProjects = WorkProjects.OrderBy(s => s.Name);
+                    break;
+            }
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+                return View(WorkProjects.ToPagedList(pageNumber, pageSize));
+            
+            
         }
 
         // GET: WorkProjects/Details/5

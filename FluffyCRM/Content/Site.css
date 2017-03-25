@@ -49,10 +49,12 @@ footer {
 }
 
 a {
+    background-color: rgba(49, 82, 174, 0.62);
     color: white;
 }
 
 a:visited {
+    
     color: white;
 }
 
@@ -62,13 +64,38 @@ a:hover {
     text-decoration:underline;
 }
 
+.sidenav {
+    position: absolute ;
+    left: 3px ;
+    top: 75px;
+    width: 300px;
+
+}
+
+.sidetable {
+   
+   font-size: .8em;
+ 
+   margin:7px;
+   padding: 5px;
+}
+.sidetableitm {
+   border-style: solid ;
+   border-width: thin;
+   font-size: 1.5em;
+   border-radius: 8px;
+   border-color: rgba(42, 55, 203, 0.80);
+   margin: 3px;
+   padding: 5px;
+}
 .home_container {
-     background-color: rgba(49, 82, 174, 0.62);
+       
+    background-color: rgba(49, 82, 174, 0.62);
       color: white;
 }
 
 table {
-      background-color: rgba(71, 125, 115, 0.80);
+     background-color: rgba(71, 125, 115, 0.80);
     border-radius:8px;
      color: white;
 }

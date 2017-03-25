@@ -83,10 +83,15 @@ namespace FluffyCRM.Models
 
         public DbSet<AuthCode>      AuthCodes       { get; set; }
 
-        public System.Data.Entity.DbSet<FluffyCRM.Models.ProductSolution> ProductSolutions { get; set; }
+        public DbSet<ProductSolution> ProductSolutions { get; set; }
 
-        public System.Data.Entity.DbSet<FluffyCRM.Models.JobTask> JobTasks { get; set; }
+        public DbSet<JobTask>       JobTasks { get; set; }
 
-        public System.Data.Entity.DbSet<FluffyCRM.Models.WorkProject> WorkProjects { get; set; }
+        public DbSet<WorkProject>   WorkProjects { get; set; }
+
+        public DbSet<TaskNote> TaskNotes { get; set; }
+        public DbSet<TaskAssignment> TaskAssignments { get; set; }
+
+        public System.Data.Entity.DbSet<FluffyCRM.Models.Employee> Employees { get; set; }
     }
 }

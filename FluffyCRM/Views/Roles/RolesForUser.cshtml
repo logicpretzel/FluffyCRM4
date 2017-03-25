@@ -1,9 +1,12 @@
-﻿@model IEnumerable<FluffyCRM.ViewModels.RolesForUser>
+﻿@model IEnumerable<RolesForUser>
+@using FluffyCRM.ViewModels
 @{
 
     Layout = "";
     string ck = "";
     string disabled = "";
+    //UserRoleHeader hdr = ViewBag.HdrModel;
+    //hdr = ViewBag.HdrModel;
 }
 
 
@@ -15,8 +18,13 @@
     
 
 <input type="hidden" value="@ViewBag.UserId" name="UserId" id="UserId" />
+@*<div>
+    <label>Name: </label><div>@(hdr.FirstName)&nbsp;@(hdr.LastName)</div><br />
+    <label>Email: </label><div>@(hdr.Email)&nbsp;<label>Phone: </label>@(hdr.Phone)</div>
+
+</div>*@
 <div class="col-sm-6">
-    <table class="table tablechart table-striped ">
+    <table class="table  ">
         <tr>
             <th class="width_20">
                 @Html.DisplayNameFor(model => model.HasRole)

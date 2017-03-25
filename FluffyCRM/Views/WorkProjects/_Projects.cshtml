@@ -1,0 +1,31 @@
+﻿@model PagedList.IPagedList<FluffyCRM.Models.WorkProject>
+@using PagedList.Mvc;
+
+<div class="sidenav-title table"> @Html.ActionLink("Name", "Projects")</div>
+<div class="sidetable">
+    
+
+
+    @foreach (var item in Model)
+    {
+        
+            <div class="col-med-12 sidetableitm">
+                @Html.DisplayFor(modelItem => item.Name): @Html.DisplayFor(modelItem => item.Version)
+            </div>
+
+    
+    }
+
+</div> 
+<div class="row">
+    <div class="col-lg-4">
+        <br />
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+       @Html.PagedListPager(Model, page => Url.Action("Projects", new { page }))
+
+
+    </div>
+
+</div>
+

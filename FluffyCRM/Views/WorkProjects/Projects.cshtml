@@ -1,0 +1,161 @@
+﻿@model IEnumerable<FluffyCRM.Models.WorkProject>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Index";
+}
+<p>
+    Find by name: <input id="SearchString" name="SearchString" type="text" value="" />
+    <input type="button" value="Search" id="btnSearch" />
+</p>
+<div class="sidenav">
+    
+     @Html.ActionLink("Create New", "Create")
+
+    
+    <div id="ProjectList" >
+       
+        @Html.Partial("_Projects", Model)
+    </div>
+</div>
+
+
+
+
+
+
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        // Adding popstate event listener to handle browser back button
+        window.addEventListener("popstate", function (e) {
+            $.ajax({
+                url: location.href,
+                success: function (result) {
+                    $('#ProjectList').html(result);
+                }
+            });
+        });
+
+        function ChangeUrl(page, url) {
+            if (typeof (history.pushState) != "undefined") {
+                var obj = { Page: page, Url: url };
+                history.pushState(null, obj.Page, obj.Url);
+            } else {
+                alert("Browser does not support HTML5.");
+            }
+        }
+
+        function getUrlVars() {
+            var vars = [], hash;
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for (var i = 0; i < hashes.length; i++) {
+                hash = hashes[i].split('=');
+                vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
+            return vars;
+        }
+
+        function search() {
+            $.ajax({
+                url: "/WorkProjects/Projects?searchString=" + $('#SearchString').val(),
+                success: function(result) {
+                    ChangeUrl("index", "/WorkProjects/Projects?searchString=" + $('#SearchString').val());
+                    $('#ProjectList').html(result);
+                }
+            });
+        }
+
+        $(function() {
+            $("#btnSearch").click(function() {
+                search();
+            });
+
+            $("#SearchString").keypress(function(e) {
+                if (e.keyCode == 13) {
+                    search();
+                }
+            });
+            $('body').on('click', '#ProjectList  .pagination a', function (event) {
+                event.preventDefault();
+                console.log('page');
+                var searchString = $('#SearchString').val();
+                if (searchString == undefined || searchString == '') {
+                    searchString = '';
+                } else {
+                    searchString = '&searchString=' + searchString;
+                }
+                var url = $(this).attr('href') + searchString;
+                console.log(url);
+                $.ajax({
+                    url: url,
+                    success: function(result) {
+                        ChangeUrl('index', url);
+                        $('#ProjectList').html(result);
+                    }
+                });
+            });
+
+
+            $('body').on('click', '#ProjectList .table a', function(event) {
+
+                event.preventDefault();
+
+                var searchString = $('#SearchString').val();
+                if (searchString == undefined || searchString == '') {
+                    searchString = '';
+                } else {
+                    searchString = '&searchString=' + searchString;
+                }
+
+                var columnToSort = $(this).text();
+                var currentSortOption = getUrlVars()['sortOption'];
+                console.log(currentSortOption);
+                var sort;
+                switch (currentSortOption) {
+                case "name_acs":
+                    sort = 'sortOption=name_desc';
+                    break;
+                case "name_desc":
+                    sort = 'sortOption=name_acs';
+                    break;
+              
+                default:
+                    sort = "sortOption=name_acs";
+                    break;
+                }
+
+
+                switch (columnToSort) {
+                case 'Name':
+                    if (currentSortOption != 'name_acs' && currentSortOption != 'name_desc') {
+                        sort = 'sortOption=name_acs';
+                    }
+                    break;
+                
+                default:
+                    sort = '';
+                    break;
+
+                }
+                if (sort != '' & searchString != '') {
+                    sort = '&' + sort;
+                }
+                var url = '/WorkProjects/Projects?' + searchString + sort;
+                $.ajax({
+                    url: url,
+                    success: function(result) {
+                        ChangeUrl('index', url);
+                        $('#ProjectList').html(result);
+                    }
+                });
+            });
+
+        });
+
+    </script>
+
+}

@@ -8,7 +8,7 @@
 <h2>@ViewBag.Title </h2>
 <hr />
 <div class="col-sm-6">
-   <table class="table table-striped tablechart  ">
+   <table class="table   ">
        <tr>
           <td class="lbl " >Name: </td>
           <td class="fld">@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)  <br />(@Html.DisplayFor(model => model.UserName))
@@ -44,13 +44,13 @@
     </div>
     {  
        
-        if (TempData["Sucess"] != null)
+        if (TempData["Success"] != null)
         {
-            if ((bool)TempData["Sucess"] == true)
+            if ((bool)TempData["Success"] == true)
             {
                 sclass = "alert alert-success";
             }
-            else if ((bool)TempData["Sucess"] == true)
+            else if ((bool)TempData["Success"] == false)
             {
                 sclass = "alert alert-danger";
             }
