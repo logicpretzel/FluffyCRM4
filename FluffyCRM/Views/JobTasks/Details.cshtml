@@ -8,62 +8,65 @@
 @*<h2>Details</h2>*@
 
 <div>
-    <h4>@(ViewBag.Title)</h4>
-    <hr />
-    <div class="container-fluid">
-        <div class="panel col-med-12 col-med-12 col-lg-12 col-xs-12 ">
-            
 
-                <div class="col-sm-6 col-med-4 col-lg-4  col-xs-12">
-                    <span>@Html.DisplayNameFor(model => model.Name)</span><br />
+    <div class="container-fluid">
+        <div class="panel col-med-12 col-med-12 col-lg-12 col-xs-12 panel-primary">
+            
+            <div class="panel-heading color-p-1">
+                <div class="col-lg-4">@(ViewBag.Title)</div> <div class="col-lg-4 center-block">&nbsp;@Html.DisplayNameFor(model => model.Id):&nbsp;<span>@Html.DisplayFor(model => model.Id)</span></div>
+                <div class="color-p-1 col-lg-4 text-right"><div class="btn btn-sm btn-default ">    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) </div> <div class="btn btn-sm btn-default js-detailclose" data-url=''>Close</div></div>
+                <br />  
+            </div>
+                <div class="col-sm-6 col-med-4 col-lg-4  col-xs-12  ">
+                    <span class="smalllabel">@Html.DisplayNameFor(model => model.Name)</span><br />
                     @Html.DisplayFor(model => model.Name)
                 </div>
-                <div class="col-sm-6 col-med-4 col-lg-4  col-xs-12 ">
-                    <span>  @Html.DisplayNameFor(model => model.CreatedBy)</span><br />
-                            @Html.DisplayFor(model => model.CreatedBy)      <br />
+                <div class="col-sm-6 col-med-4 col-lg-4  col-xs-12  ">
+                    <span class="smalllabel">  @Html.DisplayNameFor(model => model.CreatedBy)</span><br />
+                    @Html.DisplayFor(model => model.CreatedBy)      <br />
                     @if (Model.ContactUserId != null)
                     {
-                         <span> @Html.DisplayNameFor(model => model.ContactUserId)</span><br />
-                                @Html.DisplayFor(model => model.ContactUserId)      <br />
+                        <span> @Html.DisplayNameFor(model => model.ContactUserId)</span><br />
+                        @Html.DisplayFor(model => model.ContactUserId)      <br />
                     }
-                   
+
                 </div>
-                <div class="col-sm-6 col-med-4 col-lg-4  col-xs-12">
-                    <span>@Html.DisplayNameFor(model => model.StartDate)</span><br />
+                <div class="col-sm-6 col-med-4 col-lg-4  col-xs-12  boxborder">
+                    <span class="smalllabel">@Html.DisplayNameFor(model => model.StartDate)</span><br />
                     @Html.DisplayFor(model => model.StartDate)<br />
-                    <span>@Html.DisplayNameFor(model => model.DueDate)</span><br />
+                    <span class="smalllabel">@Html.DisplayNameFor(model => model.DueDate)</span><br />
                     @Html.DisplayFor(model => model.DueDate)<br />
-                    <span>@Html.DisplayNameFor(model => model.CompletedDate)</span><br />
+                    <span class="smalllabel">@Html.DisplayNameFor(model => model.CompletedDate)</span><br />
                     @Html.DisplayFor(model => model.CompletedDate)<br />
 
                 </div>
 
 
-
+            
           
-            <div class="col-sm-6 col-med-6 col-lg-6  col-xs-12">
-                <span>@Html.DisplayNameFor(model => model.TicketId)</span><br />
+            <div class="col-sm-6 col-med-6 col-lg-6  col-xs-12 ">
+                <span class="smalllabel">@Html.DisplayNameFor(model => model.TicketId)</span><br />
                 @Html.DisplayFor(model => model.TicketId)<br />
             </div>
-            <div class="col-sm-6 col-med-6 col-lg-6  col-xs-12">
-                <span>@Html.DisplayNameFor(model => model.ParentTaskId)</span><br />
+            <div class="col-sm-6 col-med-6 col-lg-6  col-xs-12 ">
+                <span class="smalllabel">@Html.DisplayNameFor(model => model.ParentTaskId)</span><br />
                 <span>@Html.DisplayFor(model => model.ParentTaskId)</span> <br />
             </div>
-                <div class="col-sm-12 col-med-12 col-lg-12  col-xs-12">
-                    <span>@Html.DisplayNameFor(model => model.Description)</span><br />
+                <div class="col-sm-12 col-med-12 col-lg-12  col-xs-12  boxborder">
+                    <span class="smalllabel">@Html.DisplayNameFor(model => model.Description)</span><br />
                     @Html.DisplayFor(model => model.Description)<br />
                 </div>
 
-           
+            @*<div class="col-med-12 col-lg-12 col-sm-12 col-xs-12">
+                <div class="btn btn-sm btn-default ">    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) </div> <div class="btn btn-sm btn-default js-detailclose" data-url=''>Close</div>
+            </div>*@
         </div>
   
    
 
        
-
+       
 
     </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |  @Html.ActionLink("Back to List", "Index")
-    </p>
+   
 </div>

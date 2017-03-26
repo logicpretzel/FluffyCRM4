@@ -102,6 +102,14 @@ a:hover {
     padding-left: 10px;
 }
 
+.smalllabel {
+  font-size: 0.8em;
+}
+.boxborder {
+    border-style: solid;
+    border-color: rgba(82, 101, 212, 0.82);
+    border-width: thin;
+}
 
 .home_container {
        

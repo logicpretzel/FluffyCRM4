@@ -145,14 +145,30 @@
 
         $('.js-loaddetail').on('click', function (evt) {
             evt.preventDefault();
-            //evt.stopPropagation();
+            evt.stopPropagation();
 
             var $details = $('#taskdetail'),
                 url = $(this).data('url');
             //alert(url);
             $.get(url, function (data) {
-                $details.html(data);
+                $details.html(data).fadeIn();
             });
+          
+
+               
+          
         });
+
+       
+
+        $(document).on("click", '.js-detailclose', function (event) {
+            var $details = $('#taskdetail');
+                    
+
+
+            $details.fadeOut();
+
+        });
+
     </script>
 }
