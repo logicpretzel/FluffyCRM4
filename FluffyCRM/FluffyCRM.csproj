@@ -178,9 +178,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobTasksController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\NotesController.cs" />
     <Compile Include="Controllers\ProductSolutionsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\TaskNotesController.cs" />
     <Compile Include="Controllers\TicketCommentsController.cs" />
     <Compile Include="Controllers\TicketsController.cs" />
     <Compile Include="Controllers\WorkProjectsController.cs" />
@@ -329,6 +329,10 @@
     <Compile Include="Migrations\201703252131587_clientstuff21.cs" />
     <Compile Include="Migrations\201703252131587_clientstuff21.Designer.cs">
       <DependentUpon>201703252131587_clientstuff21.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703262337202_tasknotes.cs" />
+    <Compile Include="Migrations\201703262337202_tasknotes.Designer.cs">
+      <DependentUpon>201703262337202_tasknotes.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -513,6 +517,12 @@
     <Content Include="Views\JobTasks\AssignedTo.cshtml" />
     <Content Include="Views\Shared\_LayoutLeft.cshtml" />
     <Content Include="Views\JobTasks\_LayoutLeft.cshtml" />
+    <Content Include="Views\TaskNotes\Create.cshtml" />
+    <Content Include="Views\TaskNotes\Delete.cshtml" />
+    <Content Include="Views\TaskNotes\Details.cshtml" />
+    <Content Include="Views\TaskNotes\Edit.cshtml" />
+    <Content Include="Views\TaskNotes\Index.cshtml" />
+    <Content Include="Views\JobTasks\Notes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -630,6 +640,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703252131587_clientstuff21.resx">
       <DependentUpon>201703252131587_clientstuff21.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703262337202_tasknotes.resx">
+      <DependentUpon>201703262337202_tasknotes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

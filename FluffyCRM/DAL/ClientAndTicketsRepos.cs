@@ -276,6 +276,30 @@ namespace FluffyCRM.DAL
 
         }
 
+        public IEnumerable<DevNotes> TaskNoteList(int TaskId, string assignedto, string kw)
+        {
 
+            var idParam1 = new SqlParameter
+            {
+                ParameterName = "TaskId",
+                Value = TaskId
+            };
+            var idParam2 = new SqlParameter
+            {
+                ParameterName = "assignedto",
+                Value = assignedto.Length > 0 ? assignedto : SqlString.Null
+            };
+
+            var idParam3 = new SqlParameter
+            {
+                ParameterName = "kw",
+                Value = kw.Length > 0 ? kw : SqlString.Null
+
+            };
+            IEnumerable<DevNotes> lst = _dc.Database.SqlQuery<DevNotes>("exec webuser.TaskNotesList  @TaskId=@TaskId, @assignedTo=@assignedTo,@kw=@kw", idParam1, idParam2, idParam3).ToList();
+
+
+            return lst;
+        }
     }
 }

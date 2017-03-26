@@ -10,107 +10,107 @@ using FluffyCRM.Models;
 
 namespace FluffyCRM.Controllers
 {
-    public class NotesController : Controller
+    public class TaskNotesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Notes
+        // GET: TaskNotes
         public ActionResult Index()
         {
             return View(db.TaskNotes.ToList());
         }
 
-        // GET: Notes/Details/5
+        // GET: TaskNotes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TaskNote note = db.TaskNotes.Find(id);
-            if (note == null)
+            TaskNote taskNote = db.TaskNotes.Find(id);
+            if (taskNote == null)
             {
                 return HttpNotFound();
             }
-            return View(note);
+            return View(taskNote);
         }
 
-        // GET: Notes/Create
+        // GET: TaskNotes/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Notes/Create
+        // POST: TaskNotes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CategoryId,Subject,Comment,ParentId,CreatedBy,CreateDate,Status,DeleteInd,ClientId,StartDate,CompletedDate,DueDate,LocalTime")] TaskNote note)
+        public ActionResult Create([Bind(Include = "Id,CategoryId,Subject,Comment,ParentId,CreatedBy,CreateDate,Status,DeleteInd,ClientId,StartDate,CompletedDate,DueDate,LocalTime")] TaskNote taskNote)
         {
             if (ModelState.IsValid)
             {
-                db.TaskNotes.Add(note);
+                db.TaskNotes.Add(taskNote);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(note);
+            return View(taskNote);
         }
 
-        // GET: Notes/Edit/5
+        // GET: TaskNotes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TaskNote note = db.TaskNotes.Find(id);
-            if (note == null)
+            TaskNote taskNote = db.TaskNotes.Find(id);
+            if (taskNote == null)
             {
                 return HttpNotFound();
             }
-            return View(note);
+            return View(taskNote);
         }
 
-        // POST: Notes/Edit/5
+        // POST: TaskNotes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CategoryId,Subject,Comment,ParentId,CreatedBy,CreateDate,Status,DeleteInd,ClientId,StartDate,CompletedDate,DueDate,LocalTime")] TaskNote note)
+        public ActionResult Edit([Bind(Include = "Id,CategoryId,Subject,Comment,ParentId,CreatedBy,CreateDate,Status,DeleteInd,ClientId,StartDate,CompletedDate,DueDate,LocalTime")] TaskNote taskNote)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(note).State = EntityState.Modified;
+                db.Entry(taskNote).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(note);
+            return View(taskNote);
         }
 
-        // GET: Notes/Delete/5
+        // GET: TaskNotes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TaskNote note = db.TaskNotes.Find(id);
-            if (note == null)
+            TaskNote taskNote = db.TaskNotes.Find(id);
+            if (taskNote == null)
             {
                 return HttpNotFound();
             }
-            return View(note);
+            return View(taskNote);
         }
 
-        // POST: Notes/Delete/5
+        // POST: TaskNotes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            TaskNote note = db.TaskNotes.Find(id);
-            db.TaskNotes.Remove(note);
+            TaskNote taskNote = db.TaskNotes.Find(id);
+            db.TaskNotes.Remove(taskNote);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

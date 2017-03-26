@@ -21,6 +21,25 @@ namespace FluffyCRM.ViewModels
 
     }
 
+    public class DevNotes : TaskNote {
+        [DisplayName("Note Type")]
+        [StringLength(100)]
+        public string CategoryName { get; set; }
+
+        [StringLength(255)]
+        [DisplayName("Linked To Task")]
+        public string ParentTaskName { get; set; }
+
+        [StringLength(255)]
+        [DisplayName("Created By")]
+        public string CreatedByName { get; set; }
+
+        [StringLength(255)]
+        [DisplayName("Client Name")]
+        public string ClientName { get; set; }
+        
+    }
+
     public class TaskListNarrow {
         [Key]
         public int Id { get; set; }
