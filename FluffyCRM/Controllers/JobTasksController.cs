@@ -78,9 +78,17 @@ namespace FluffyCRM.Controllers
             JobTask jobTask = db.JobTasks.Find(id);
             if (jobTask == null)
             {
-                return HttpNotFound();
+                return null;
             }
-            return View(jobTask);
+
+            if (Request.IsAjaxRequest() == true)
+            {
+                return PartialView(jobTask);
+            } else
+            {
+                return View(jobTask);
+            }
+                
         }
 
         public ActionResult AssignedTo(int? taskId)

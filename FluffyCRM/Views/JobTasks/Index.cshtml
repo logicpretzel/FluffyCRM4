@@ -3,133 +3,156 @@
 @using PagedList.Mvc;
 @{
     Layout = "~/Views/Shared/_LayoutLeft.cshtml";
-   
+    ViewBag.Title = "Project-Task Listing";
 }
+<div class="container-fluid">
+    <div class="col-lg-4 col-med-4 col-sm-6 col-xs-12">
+        <h2>@(ViewBag.Title)</h2>
 
-<h2>@(ViewBag.Title)</h2>
-@using (Html.BeginForm("Index", "JobTasks", FormMethod.Get))
-{
-    <p>
-       Search: @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
 
-        <input type="submit" value="Search" />
-    </p>
-}
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table " style="width: 30%; margin-left: 5px; left: 1px;  " >
-    <tr>
-       
-       
-        <th>
-            Project
-        </th>
-        <th>
-            @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+        @using (Html.BeginForm("Index", "JobTasks", FormMethod.Get))
+        {
+            <p>
+                Search: @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
 
-        </th>
-        @*<th>
-           Project   @Html.DisplayNameFor(model => model.ProjectId)
-        </th>*@
-        @*<th>
-            @Html.DisplayNameFor(model => model.ParentTaskId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Level)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TicketId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ContactUserId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </th>*@
-        @*<th>
-            State Date
-        </th>
-        <th>
-            Completed Date
-        </th>
-        <th>
-           Due Date
-        </th>*@
-        @*<th>
-            @Html.DisplayNameFor(model => model.LocalTime)
-        </th>*@
-        <th></th>
-    </tr>
+                <input type="submit" value="Search" />
+            </p>
+        }
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
 
-@foreach (var item in Model) {
-    <tr>
-       
-        <td>
-            <span> @Html.DisplayFor(modelItem => item.ProjectName) </span> 
-            @*@Html.DisplayFor(modelItem => item.Name)*@
-           
-        </td>
-        <td>
-            <span>@Html.ActionLink(item.Name, "Edit", new { id = item.Id })</span>
-        </td>
-         
-        @*<td>
-            @Html.DisplayFor(modelItem => item.ProjectId)
-        </td>*@
-        <td>
-            @Html.Action("AssignedTo", "JobTasks" ,  new { taskId = item.Id })
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.ParentTaskId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Level)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TicketId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ContactUserId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedBy)
-        </td>*@
-        @*<td>
-            @Html.DisplayFor(modelItem => item.StartDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CompletedDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DueDate)
-        </td>*@
-        @*<td>
-            @Html.DisplayFor(modelItem => item.LocalTime)
-        </td>*@
-        @*<td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>*@
-    </tr>
-}
+        <table class="table " style="margin-left: 5px; left: 1px;  ">
+            <tr>
 
-</table>
-<br />
-    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-    @Html.PagedListPager(Model, page => Url.Action("Index",
+                <th>
+                    Project
+                </th>
+                <th>
+                    @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+
+                </th>
+                @*<th>
+                       Project   @Html.DisplayNameFor(model => model.ProjectId)
+                    </th>*@
+                @*<th>
+                        @Html.DisplayNameFor(model => model.ParentTaskId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Level)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TicketId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ContactUserId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedBy)
+                    </th>*@
+                @*<th>
+                        State Date
+                    </th>
+                    <th>
+                        Completed Date
+                    </th>
+                    <th>
+                       Due Date
+                    </th>*@
+                @*<th>
+                        @Html.DisplayNameFor(model => model.LocalTime)
+                    </th>*@
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        <span> @Html.DisplayFor(modelItem => item.ProjectName) </span>
+                        @*@Html.DisplayFor(modelItem => item.Name)*@
+
+                    </td>
+                    <td>
+                        <label data-url='@Url.Action("Details","JobTasks", new { id = item.Id } )'
+                               class="js-loaddetail">@Html.DisplayFor(modelItem => item.Name)</label>
+                            @*@Html.ActionLink(item.Name, "Edit", new { id = item.Id })*@
+                        </td>
+
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.ProjectId)
+                            </td>*@
+                        <td>
+                            @Html.Action("AssignedTo", "JobTasks", new { taskId = item.Id })
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.ParentTaskId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Level)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TicketId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ContactUserId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreatedBy)
+                            </td>*@
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.StartDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CompletedDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DueDate)
+                            </td>*@
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.LocalTime)
+                            </td>*@
+                        @*<td>
+                                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+                            </td>*@
+                    </tr>
+            }
+
+        </table>
+        <br />
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("Index",
     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    </div>
+    <div class="col-lg-8 col-med-8 col-sm-6 col-xs-12">
+        <div id="taskdetail">
 
+        </div>
+    </div>
 
+</div>
 
 @section Scripts {
     <script>
         $(function () {
             $('[data-toggle="tooltip"]').tooltip();
         });
-       
 
+        $('.js-loaddetail').on('click', function (evt) {
+            evt.preventDefault();
+            //evt.stopPropagation();
+
+            var $details = $('#taskdetail'),
+                url = $(this).data('url');
+            //alert(url);
+            $.get(url, function (data) {
+                $details.html(data);
+            });
+        });
     </script>
 }

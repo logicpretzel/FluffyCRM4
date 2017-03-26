@@ -1,122 +1,69 @@
 ﻿@model FluffyCRM.Models.JobTask
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Job: Task Details";
+    Layout = "";
 }
 
-<h2>Details</h2>
+@*<h2>Details</h2>*@
 
 <div>
-    <h4>JobTask</h4>
+    <h4>@(ViewBag.Title)</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+    <div class="container-fluid">
+        <div class="panel col-med-12 col-med-12 col-lg-12 col-xs-12 ">
+            
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+                <div class="col-sm-6 col-med-4 col-lg-4  col-xs-12">
+                    <span>@Html.DisplayNameFor(model => model.Name)</span><br />
+                    @Html.DisplayFor(model => model.Name)
+                </div>
+                <div class="col-sm-6 col-med-4 col-lg-4  col-xs-12 ">
+                    <span>  @Html.DisplayNameFor(model => model.CreatedBy)</span><br />
+                            @Html.DisplayFor(model => model.CreatedBy)      <br />
+                    @if (Model.ContactUserId != null)
+                    {
+                         <span> @Html.DisplayNameFor(model => model.ContactUserId)</span><br />
+                                @Html.DisplayFor(model => model.ContactUserId)      <br />
+                    }
+                   
+                </div>
+                <div class="col-sm-6 col-med-4 col-lg-4  col-xs-12">
+                    <span>@Html.DisplayNameFor(model => model.StartDate)</span><br />
+                    @Html.DisplayFor(model => model.StartDate)<br />
+                    <span>@Html.DisplayNameFor(model => model.DueDate)</span><br />
+                    @Html.DisplayFor(model => model.DueDate)<br />
+                    <span>@Html.DisplayNameFor(model => model.CompletedDate)</span><br />
+                    @Html.DisplayFor(model => model.CompletedDate)<br />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ProdId)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ProdId)
-        </dd>
+          
+            <div class="col-sm-6 col-med-6 col-lg-6  col-xs-12">
+                <span>@Html.DisplayNameFor(model => model.TicketId)</span><br />
+                @Html.DisplayFor(model => model.TicketId)<br />
+            </div>
+            <div class="col-sm-6 col-med-6 col-lg-6  col-xs-12">
+                <span>@Html.DisplayNameFor(model => model.ParentTaskId)</span><br />
+                <span>@Html.DisplayFor(model => model.ParentTaskId)</span> <br />
+            </div>
+                <div class="col-sm-12 col-med-12 col-lg-12  col-xs-12">
+                    <span>@Html.DisplayNameFor(model => model.Description)</span><br />
+                    @Html.DisplayFor(model => model.Description)<br />
+                </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ProjectId)
-        </dt>
+           
+        </div>
+  
+   
 
-        <dd>
-            @Html.DisplayFor(model => model.ProjectId)
-        </dd>
+       
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ParentTaskId)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ParentTaskId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Level)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Level)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TicketId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TicketId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ContactUserId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ContactUserId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedBy)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CompletedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CompletedDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DueDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DueDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LocalTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LocalTime)
-        </dd>
-
-    </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |  @Html.ActionLink("Back to List", "Index")
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
