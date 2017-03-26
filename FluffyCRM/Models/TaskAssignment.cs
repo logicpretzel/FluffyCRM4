@@ -10,8 +10,10 @@ namespace FluffyCRM.Models
     {
         [Key]
         public int Id { get; set; }
+
         [Required]
-        public int TaskId { get; set; }
+        public int? TaskId { get; set; }
+
         [StringLength(128)]
         public string UserId { get; set; }
 

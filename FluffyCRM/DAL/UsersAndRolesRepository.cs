@@ -177,6 +177,27 @@ namespace FluffyCRM.DAL
             return model;
         } // END GetUserList
 
+        
+        public string GetRoleName(string role)
+        {
+
+
+            string rc = "";
+            
+
+
+            var idParam = new SqlParameter
+            {
+                ParameterName = "role",
+                Value = role
+            };
+
+          
+
+            rc = _dc.Database.SqlQuery<string>("webuser.GetRoleName(@role)", idParam).Single();
+
+            return rc;
+        } // 
 
         public IEnumerable<RolesForUser> GetRolesForUser(string userID, string userManagerID)
         {
@@ -189,6 +210,7 @@ namespace FluffyCRM.DAL
                 return null;
 
             }
+
 
 
             var idParam = new SqlParameter
@@ -208,18 +230,21 @@ namespace FluffyCRM.DAL
             return model.ToList();
         } // GetRolesForUser
 
-       
+        
 
         public bool AddRoleToUser(string userID, string role, string userManagerID)
         {
             bool rc = false;
-           
+            string roleNm = "";
+            int cd = 0;
+            //TODO: Need first admin function to override for first user
+            if (userID == userManagerID)
+            {
+                if (role.ToLower().Trim() == "admin") return true;  // can't use this method to create an admin role to your own user account.
+            }
 
-            //if (userID == userManagerID)
-            //{
-            //    if (role.ToLower().Trim() == "admin") return true;  // can't use this method to create an admin role to your own user account.
-            //}
 
+            roleNm = GetRoleName(role);
             var idParam1 = new SqlParameter
             {
                 ParameterName = "UID",
@@ -229,10 +254,19 @@ namespace FluffyCRM.DAL
             var idParam2 = new SqlParameter
             {
                 ParameterName = "Role",
-                Value = GetRoleByName(role)
+                Value = roleNm
             };
 
 
+            //TODO: If you're trying to add a client role and user is not attached to a client, should retuen error
+            if (roleNm == "Client")
+            {
+                cd = GetClientByUID(userID);
+                if (cd < 1)
+                {
+                    return false;
+                }
+            }
 
             try
             {

@@ -32,12 +32,21 @@ namespace FluffyCRM.ViewModels
             [StringLength(8000)]
             public string Description { get; set; }
 
-       
 
+            [Key]
+            [HiddenInput]
+            public int? TicketId { get; set; }
 
-
+            [HiddenInput]
+            public DateTime CreateDate { get; set; }
+             
+            [HiddenInput]
+            public ticketStatus Status { get; set; }
 
     }
+
+
+
 
     public class TicketList {
         /*      ,[Subject]

@@ -20,6 +20,7 @@ namespace FluffyCRM.Models
         public string Description { get; set; }
 
         [DefaultValue(0)]
+        [DisplayName("Task Type")]
         public int? TaskType { get; set; }
 
         [DefaultValue(0)]

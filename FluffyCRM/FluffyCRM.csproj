@@ -322,6 +322,14 @@
     <Compile Include="Migrations\201703251427416_employees.Designer.cs">
       <DependentUpon>201703251427416_employees.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703251910166_clientstuff1.cs" />
+    <Compile Include="Migrations\201703251910166_clientstuff1.Designer.cs">
+      <DependentUpon>201703251910166_clientstuff1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703252131587_clientstuff21.cs" />
+    <Compile Include="Migrations\201703252131587_clientstuff21.Designer.cs">
+      <DependentUpon>201703252131587_clientstuff21.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Attachment.cs" />
@@ -358,6 +366,7 @@
     <Compile Include="utils\HtmlEncode.cs" />
     <Compile Include="utils\StaticImageResizer.cs" />
     <Compile Include="ViewModels\ClientViewModels.cs" />
+    <Compile Include="ViewModels\HiddenFieldAttribute.cs" />
     <Compile Include="ViewModels\ProjectTasksViewModels.cs" />
     <Compile Include="ViewModels\RolesViewModels.cs" />
   </ItemGroup>
@@ -501,6 +510,9 @@
     <Content Include="Views\Employees\Details.cshtml" />
     <Content Include="Views\Employees\Edit.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
+    <Content Include="Views\JobTasks\AssignedTo.cshtml" />
+    <Content Include="Views\Shared\_LayoutLeft.cshtml" />
+    <Content Include="Views\JobTasks\_LayoutLeft.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -612,6 +624,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703251427416_employees.resx">
       <DependentUpon>201703251427416_employees.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703251910166_clientstuff1.resx">
+      <DependentUpon>201703251910166_clientstuff1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703252131587_clientstuff21.resx">
+      <DependentUpon>201703252131587_clientstuff21.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,0 +1,23 @@
+﻿@model IEnumerable<FluffyCRM.ViewModels.TaskAssignee>
+@{ 
+    Layout = "";
+}
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+
+
+
+
+    @foreach (var item in Model)
+    {
+
+        @*<span class="btn btn-sm btn-info" data-bind=""><span class="badge" title="@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)">@Html.DisplayFor(modelItem => item.Initials)</span><span class="badgebtn badge-hide">@Html.DisplayFor(modelItem => item.FirstName)<span>&nbsp;</span>@Html.DisplayFor(modelItem => item.LastName)</span>  </span>*@
+
+        <span data-toggle="tooltip" data-placement="right" class="badge" title="@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)">@Html.DisplayFor(modelItem => item.Initials)</span>  
+
+
+
+    }
+
+

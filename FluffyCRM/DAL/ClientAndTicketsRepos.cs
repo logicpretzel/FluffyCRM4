@@ -3,6 +3,7 @@ using FluffyCRM.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Web;
 
@@ -153,6 +154,101 @@ namespace FluffyCRM.DAL
             return model;
         }
 
+        public IEnumerable<TaskAssignee> AssigneeList(int TaskId) {
+
+            var idParam1 = new SqlParameter
+            {
+                ParameterName = "TaskId",
+                Value = TaskId
+            };
+
+            IEnumerable<TaskAssignee> lst = _dc.Database.SqlQuery<TaskAssignee>("select 	ta.FirstName,	ta.LastName,	left(isnull(ta.FirstName,''),1) + left(isnull(ta.LastName,''),1) as Initials,	ta.TaskId,	ta.UserId,	ta.Id	 from TaskAssignments ta where ta.TaskId = @TaskId", idParam1).ToList();
+
+            
+            return lst;
+        }
+
+        public IEnumerable<TaskListNarrow> GetTaskList(int? _ProjectId, string assignedto, string kw)
+        {
+            int ProjectId = 0;
+            if (_ProjectId != null) { ProjectId = (int)_ProjectId; }
+
+
+            var idParam1 = new SqlParameter
+            {
+                ParameterName = "ProjectId",
+                Value = ProjectId
+            };
+
+            var idParam2 = new SqlParameter
+            {
+                ParameterName = "assignedto",
+                Value = assignedto.Length > 0 ? assignedto : SqlString.Null
+            };
+
+            var idParam3 = new SqlParameter
+            {
+                ParameterName = "kw",
+                Value = kw.Length > 0 ? kw : SqlString.Null
+               
+            };
+
+            IEnumerable<TaskListNarrow> lst = _dc.Database.SqlQuery<TaskListNarrow>("EXEC webuser.GetTaskList @projectid=@ProjectId, @assignedto=@assignedto, @kw=@kw", idParam1, idParam2, idParam3).ToList();
+
+
+            return lst;
+        }
+
+        public bool LinkClientByUID(string uid, string createdBy, int? _clientID)
+        {
+            int ClientID = 0;
+            Guid result;
+            if (_clientID != null) { ClientID = (int)_clientID; } else { ClientID = GetClientByUID(uid); }
+
+
+            bool rc = false;
+
+            if (Guid.TryParse(createdBy, out result)) { 
+                createdBy = result.ToString();
+            }
+            if (Guid.TryParse(uid, out result)) { 
+                uid = result.ToString();
+            }
+
+
+            var idParam1 = new SqlParameter
+            {
+                ParameterName = "uid",
+                Value = uid
+            };
+
+            var idParam2 = new SqlParameter
+            {
+                ParameterName = "clientid",
+                Value = ClientID
+            };
+
+            var idParam3 = new SqlParameter
+            {
+                ParameterName = "userID",
+                Value = createdBy
+            };
+            // 
+            try
+            {
+
+                _dc.Database.ExecuteSqlCommand("EXEC webuser.LinkUserToClient @UID=@uid, @clientid=@clientid, @UserId=@userId", idParam1, idParam2, idParam3);
+                rc = true;
+            }
+            catch
+            {
+                rc = false;
+            }
+            return rc;
+
+      
+        }
+
 
         public int GetClientByUID(string uid)
         {
@@ -161,9 +257,15 @@ namespace FluffyCRM.DAL
                 ParameterName = "uid",
                 Value = uid
             };
-            clID rc = _dc.Database.SqlQuery<clID>("Select top 1 UserID, ClientID, ContactID from ClientUsers where UserId = @uid", idParam).SingleOrDefault();
-            return rc.ClientID;
 
+
+
+            clID rc = _dc.Database.SqlQuery<clID>("Select top 1 u.Id as UserId, u.ClientId as ClientId, cu.ContactId from AspNetUsers u  left outer join ClientUsers cu on cu.UserId = u.Id where u.Id = @uid", idParam).SingleOrDefault();
+            if (rc != null)
+            {
+                return rc.ClientID;
+            }
+            else return -1;
         }
 
         public StaffDashBoard GetUserClientCounts()

@@ -8,11 +8,13 @@ using System.Web;
 using System.Web.Mvc;
 using FluffyCRM.Models;
 using PagedList;
+using FluffyCRM.DAL;
 
 namespace FluffyCRM.Controllers
 {
     public class JobTasksController : Controller
     {
+        private DataRepository _repos = new DataRepository();
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: JobTasks
@@ -25,6 +27,7 @@ namespace FluffyCRM.Controllers
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
 
         {
+            ViewBag.Title = "Task Listing";
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             // ViewBag.ZipSortParm = sortOrder == "Zip" ? "Zip_desc" : "Zip";
@@ -39,14 +42,9 @@ namespace FluffyCRM.Controllers
             }
 
             ViewBag.CurrentFilter = searchString;
-
-            var JobTasks = from s in db.JobTasks
-                           select s;
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                JobTasks = JobTasks.Where(s => s.Name.StartsWith(searchString) 
-                                            || s.Description.Contains(searchString));
-            }
+            if (searchString == null) { searchString = ""; }
+            var JobTasks = _repos.GetTaskList(0,"", searchString);
+           
             switch (sortOrder)
             {
                 case "name_desc":
@@ -85,6 +83,21 @@ namespace FluffyCRM.Controllers
             return View(jobTask);
         }
 
+        public ActionResult AssignedTo(int? taskId)
+        {
+            if (taskId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var lst = _repos.AssigneeList((int)taskId);
+            if (lst == null)
+            {
+                return null;
+            }
+            return View(lst);
+        }
+
+
         // GET: JobTasks/Create
         public ActionResult Create()
         {
@@ -115,6 +128,11 @@ namespace FluffyCRM.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            ViewBag.TaskCategories = new SelectList(_repos.GetCategoryList(FLCatType.Task), "id", "Name", null);
+
+            var proj_lst = db.WorkProjects.ToList();
+            ViewBag.WorkProjects = new SelectList(db.WorkProjects.OrderBy(o=>o.Name).ToList(), "id", "Name", null);
             JobTask jobTask = db.JobTasks.Find(id);
             if (jobTask == null)
             {
@@ -128,7 +146,7 @@ namespace FluffyCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,ProdId,ProjectId,ParentTaskId,Level,ClientId,ContactUserId,CreatedBy,StartDate,CompletedDate,DueDate,LocalTime")] JobTask jobTask)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description,ProdId,TaskType,ProjectId,ParentTaskId,Level,ClientId,ContactUserId,CreatedBy,StartDate,CompletedDate,DueDate,LocalTime")] JobTask jobTask)
         {
             if (ModelState.IsValid)
             {

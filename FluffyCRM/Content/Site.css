@@ -25,6 +25,8 @@ html {
     font-family: 'Open Sans Condensed';
     font-size: 1em;
 }
+
+
 body {
     font-family: 'Open Sans';
     padding-top: 50px;
@@ -88,6 +90,19 @@ a:hover {
    margin: 3px;
    padding: 5px;
 }
+
+.badge-hide {
+   visibility: hidden;
+}
+.badgebtn {
+}
+
+.leftside {
+    margin-left: 0px;
+    padding-left: 10px;
+}
+
+
 .home_container {
        
     background-color: rgba(49, 82, 174, 0.62);
@@ -214,6 +229,9 @@ textarea {
      height: auto;
 
      
+}
+table {
+    width: 300px;
 }
 
 @media (max-width: 400px) {
