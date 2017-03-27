@@ -1,69 +1,80 @@
 ﻿@model FluffyCRM.Models.Ticket
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Support Ticket Details";
 }
 
-<h2>Details</h2>
+<div>
 
-
-    <h4>Ticket</h4>
-    <hr />
-<div class="col-md-10">
-    <table>
-        <tr class="kv">
-            <td class="right">
-                @Html.DisplayNameFor(model => model.Subject)
-            </td>
-            <td class="">
+    <div class="container-fluid">
+        <div class="panel col-med-12 col-med-12 col-lg-12 col-xs-12 panel-primary">
+            <!-- HEADING  -->
+            <div class="panel-heading color-p-1">
+                <div class="col-sm-6 col-med-4 col-lg-4  col-xs-12">
+                    @(ViewBag.Title)
+                
+                </div>
+                <div class="col-sm-6 col-med-4 col-lg-4  col-xs-12">
+                    <span class="smalllabel">@Html.DisplayNameFor(model => model.TicketId)</span><br />
+                    @Html.DisplayFor(model => model.TicketId)
+                    <br />
+                </div>
+                <div class="col-sm-6 col-med-4 col-lg-4  col-xs-12">
+                    &nbsp;
+                    <br />
+                </div>
+                <br /><br />
+            </div>
+           
+            <!-- END HEADING  -->
+            <div class="col-sm-6 col-med-4 col-lg-4  col-xs-12  ">
+                <span class="smalllabel">@Html.DisplayNameFor(model => model.Subject)</span><br />
                 @Html.DisplayFor(model => model.Subject)
-            </td>
-        </tr>
-        <tr class="kv">
-            <td class="right">
-                @Html.DisplayNameFor(model => model.CategoryId)
-            </td>
-            <td class="">
-                @Html.DisplayFor(model => model.CategoryId)
-            </td>
-        </tr>
-        <tr class="kv">
-            <td class="right">
-                @Html.DisplayNameFor(model => model.CreateDate)
-            </td>
-            <td class="">
-                @Html.DisplayFor(model => model.CreateDate)
-            </td>
-        </tr>
-        <tr class="kv">
-            <td class="">
-                @Html.DisplayNameFor(model => model.Description)
-            </td>
-            <td class="">
-                @Html.DisplayFor(model => model.Description)
-            </td>
-        </tr>
-        <tr class="kv">
+            </div>
+
+            <div class="col-sm-6 col-med-4 col-lg-4  col-xs-12  ">
+                <span class="smalllabel">@Html.DisplayNameFor(model => model.CreateDate)</span><br />
+                @Html.DisplayFor(model => model.CreateDate)<br />
+
+                <!-- Staff and admin can see dates -->
+                @if (User.IsInRole("Admin") || User.IsInRole("Staff"))
+                {
+                <span class="smalllabel">@Html.DisplayNameFor(model => model.StartDate)</span><br />
+                @Html.DisplayFor(model => model.StartDate)<br />
+
+                <span class="smalllabel">@Html.DisplayNameFor(model => model.DueDate)</span><br />
+                @Html.DisplayFor(model => model.DueDate)<br />
+
+                <span class="smalllabel">@Html.DisplayNameFor(model => model.CompletedDate)</span><br />
+                @Html.DisplayFor(model => model.CompletedDate)<br />
+                }
+                <!-- //TODO: need closed indicator --> 
+
+            </div>
+
+            <div class="col-sm-6 col-med-4 col-lg-4  col-xs-12  ">
+                <span class="smalllabel">@Html.DisplayNameFor(model => model.Status)</span><br />
+                @Html.DisplayFor(model => model.Status)<br />
+
+                <span class="smalllabel">@Html.DisplayNameFor(model => model.CategoryId)</span><br />
+                @Html.DisplayFor(model => model.CategoryId)<br />
+
+            </div>
+
+            <div class="col-sm-12 col-med-12 col-lg-12  col-xs-12  boxborder">
+                <span class="smalllabel">@Html.DisplayNameFor(model => model.Description)</span><br />
+                @Html.DisplayFor(model => model.Description)<br />
+            </div>
+
+        </div>
+    </div>
+</div>
 
 
-            <td class="right">
-                @Html.DisplayNameFor(model => model.Status)
-            </td>
-            <td class="">
-                @Html.DisplayFor(model => model.Status)
-            </td>
-        </tr>
-        <tr class="kv">
 
-
-            <td class="right">
-                @Html.DisplayNameFor(model => model.DeleteInd)
-            </td>
-            <td class="">
-                @Html.DisplayFor(model => model.DeleteInd)
-            </td>
-        </tr>
-        <tr class="kv">
+      
+      
+        @*<tr class="kv">
 
 
             <td class="right">
@@ -72,41 +83,12 @@
             <td class="">
                 @Html.DisplayFor(model => model.ClientId)
             </td>
-        </tr>
-        <tr class="kv">
-
-
-            <td class="right">
-                @Html.DisplayNameFor(model => model.StartDate)
-            </td>
-            <td class="">
-                @Html.DisplayFor(model => model.ClientId)
-            </td>
-        </tr>
-        <tr class="kv">
-
-
-            <td class="right">
-                @Html.DisplayNameFor(model => model.CompletedDate)
-            </td>
-            <td class="">
-                @Html.DisplayFor(model => model.CompletedDate)
-            </td>
-        </tr>
-        <tr class="kv">
-
-
-            <td class="right">
-                @Html.DisplayNameFor(model => model.DueDate)
-            </td>
-            <td class="">
-                @Html.DisplayFor(model => model.DueDate)
-            </td>
-        </tr>
-    </table>
+        </tr>*@
+        
+    
     <p>
         @Html.ActionLink("Edit", "Edit", new { id = Model.TicketId }) |
         @Html.ActionLink("Back to List", "Index")
     </p>
-</div>
+
 

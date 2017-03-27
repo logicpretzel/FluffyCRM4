@@ -36,8 +36,7 @@ namespace FluffyCRM.Models
         public string Comment { get; set; }
 
         [Required]
-        [ScaffoldColumn(false)]
-        public int ParentId { get; set; }
+        public int JobTask_Id { get; set; }
 
         [ScaffoldColumn(false)]
         [StringLength(128)]
@@ -45,7 +44,7 @@ namespace FluffyCRM.Models
 
         [DisplayName("Created")]
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
 
         [DefaultValue(0)]
         public FlNoteStatus? Status { get; set; }

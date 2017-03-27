@@ -22,7 +22,7 @@ namespace FluffyCRM.Controllers
         [Authorize(Roles = "Admin,Client,Staff")]
         public ActionResult Index()
         {
-
+            ViewBag.CurrentUser = User.Identity.GetUserId();
             IEnumerable<TicketList> lst = new List<TicketList>();
 
             string userId = User.Identity.GetUserId().ToString();
@@ -45,6 +45,7 @@ namespace FluffyCRM.Controllers
         [Authorize(Roles = "Admin,Client,Staff")]
         public async Task<ActionResult> Details(int? id)
         {
+            ViewBag.CurrentUser = User.Identity.GetUserId();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -138,6 +139,7 @@ namespace FluffyCRM.Controllers
         [Authorize(Roles = "Admin,Client,Staff")]
         public async Task<ActionResult> Edit(int? id)
         {
+            ViewBag.CurrentUser = User.Identity.GetUserId();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -166,7 +168,14 @@ namespace FluffyCRM.Controllers
             {
                 db.Entry(ticket).State = EntityState.Modified;
                 //  db.SaveChanges();
-                _repos.UpdateTicket(ticket);
+                if (User.IsInRole("Admin") || User.IsInRole("Staff"))
+                {
+                    _repos.UpdateTicket(ticket);
+                }
+                else {
+                    _repos.UpdateClientTicket(ticket);
+                }
+               
                 return RedirectToAction("Index");
             }
             return View(ticket);

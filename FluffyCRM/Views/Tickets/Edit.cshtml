@@ -7,10 +7,14 @@
 <h2>Edit</h2>
 
 
-@using (Html.BeginForm())
+
+@if (Model.CreatedBy == ViewBag.CurrentUser || (User.IsInRole("Admin")))
+{
+<span>&nbsp;</span>
+using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
     
         <hr />
@@ -44,7 +48,8 @@
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        @if (User.IsInRole("Admin"))
+        {
         <div class="form-group">
             @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -94,7 +99,7 @@
                 @Html.ValidationMessageFor(model => model.DueDate, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        }
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
@@ -103,6 +108,9 @@
     </div>
 }
 
+} else {
+<div class="well alert-warning" >You may only edit text for you own tickets. You can copy and pase the content into another ticket if necessary.  </div>
+}
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>

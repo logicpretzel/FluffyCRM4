@@ -77,6 +77,34 @@ namespace FluffyCRM.DAL
             return model;
         }
 
+
+        public bool UpdateClientTicket(Ticket ticket)
+        {
+            bool rc = false;
+
+
+
+            string sql = "UPDATE [Tickets]   SET [Subject] = @Subject,[CategoryId]=@CategoryId,[Description]= @Description WHERE TicketID = @TicketID";
+
+            //try
+            //     {
+
+            _dc.Database.ExecuteSqlCommand(sql
+                     , new SqlParameter("@Subject", ticket.Subject.ToString())
+                     , new SqlParameter("@CategoryId", ticket.CategoryId.Value)
+                     , new SqlParameter("@Description", ticket.Description.ToString())
+                     , new SqlParameter("@TicketId", ticket.TicketId)
+
+                     );
+            rc = true;
+            //    }
+            //     catch
+            //     {
+            //         rc = false;
+            //     }
+            return rc;
+
+        }
         public bool UpdateTicket(Ticket ticket)
         {
             bool rc = false;

@@ -7,17 +7,21 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FluffyCRM.Models;
+using FluffyCRM.DAL;
 
 namespace FluffyCRM.Controllers
 {
     public class TaskNotesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private DataRepository _repos = new DataRepository();
 
         // GET: TaskNotes
         public ActionResult Index()
         {
-            return View(db.TaskNotes.ToList());
+            var lst = _repos.TaskNoteList(0, "", "");
+
+            return View(lst);
         }
 
         // GET: TaskNotes/Details/5
@@ -46,7 +50,7 @@ namespace FluffyCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CategoryId,Subject,Comment,ParentId,CreatedBy,CreateDate,Status,DeleteInd,ClientId,StartDate,CompletedDate,DueDate,LocalTime")] TaskNote taskNote)
+        public ActionResult Create([Bind(Include = "Id,CategoryId,Subject,Comment,JobTask_Id,CreatedBy,CreateDate,Status,DeleteInd,ClientId,StartDate,CompletedDate,DueDate,LocalTime")] TaskNote taskNote)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +82,7 @@ namespace FluffyCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CategoryId,Subject,Comment,ParentId,CreatedBy,CreateDate,Status,DeleteInd,ClientId,StartDate,CompletedDate,DueDate,LocalTime")] TaskNote taskNote)
+        public ActionResult Edit([Bind(Include = "Id,CategoryId,Subject,Comment,JobTask_Id,CreatedBy,CreateDate,Status,DeleteInd,ClientId,StartDate,CompletedDate,DueDate,LocalTime")] TaskNote taskNote)
         {
             if (ModelState.IsValid)
             {

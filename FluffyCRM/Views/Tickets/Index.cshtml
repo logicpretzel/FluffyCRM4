@@ -26,9 +26,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Subject)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Category)
-        </th>
+        
         <th>
             @Html.DisplayNameFor(model => model.CreateDate)
         </th>
@@ -44,7 +42,10 @@
         <th>
             @Html.DisplayNameFor(model => model.FullName)
         </th>
-        <th>
+ @if (User.IsInRole("Admin") || User.IsInRole("Staff"))
+ {
+
+           <th>
             @Html.DisplayNameFor(model => model.StartDate)
         </th>
         <th>
@@ -53,7 +54,10 @@
         <th>
             @Html.DisplayNameFor(model => model.CompletedDate)
         </th>
-       
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+ }
         <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
     </tr>
 
@@ -62,9 +66,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.Subject)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category)
-        </td>
+      
         <td>
             @Html.DisplayFor(modelItem => item.CreateDate)
         </td>
@@ -80,6 +82,8 @@
         <td>
             @Html.DisplayFor(modelItem => item.FullName)
         </td>
+    @if (User.IsInRole("Admin") || User.IsInRole("Staff"))
+    {
         <td>
             @Html.DisplayFor(modelItem => item.StartDate)
         </td>
@@ -89,13 +93,24 @@
         <td>
             @Html.DisplayFor(modelItem => item.CompletedDate) 
         </td>
-        
+        <td>
+            @Html.DisplayFor(modelItem => item.Category)
+        </td>
         <td>
            
-            @Html.ActionLink(" ", "Edit", new { id=item.TicketId }, new { @class = "glyphicon glyphicon-edit" }) &nbsp;
-            @Html.ActionLink(" ", "Details", new { id=item.TicketId }, new { @class = "glyphicon glyphicon-file" })  &nbsp;
-            @Html.ActionLink(" ", "Delete", new { id=item.TicketId }, new { @class = "glyphicon glyphicon-remove" })
+            @Html.ActionLink(" ", "Edit", new { id = item.TicketId }, new { @class = "glyphicon glyphicon-edit" }) &nbsp;
+            @Html.ActionLink(" ", "Details", new { id = item.TicketId }, new { @class = "glyphicon glyphicon-file" })  &nbsp;
+            @Html.ActionLink(" ", "Delete", new { id = item.TicketId }, new { @class = "glyphicon glyphicon-remove" })
         </td>
+    }
+    else if (User.IsInRole("Client"))
+    {
+        <td>
+
+            @Html.ActionLink(" ", "Details", new { id = item.TicketId }, new { @class = "glyphicon glyphicon-file" })  &nbsp;
+        </td>
+
+    }
     </tr>
 }
 
