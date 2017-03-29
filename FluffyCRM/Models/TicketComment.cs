@@ -46,7 +46,7 @@ namespace FluffyCRM.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? CreateDate { get; set; }
 
-        public int Status { get; set; }
+        public CommentStatus Status { get; set; }
 
         public DateTime? LocalTime { get; set; }
 

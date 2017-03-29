@@ -67,28 +67,16 @@
             </div>
 
         </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.TicketId }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
     </div>
 </div>
 
 
-
-      
-      
-        @*<tr class="kv">
-
-
-            <td class="right">
-                @Html.DisplayNameFor(model => model.ClientId)
-            </td>
-            <td class="">
-                @Html.DisplayFor(model => model.ClientId)
-            </td>
-        </tr>*@
-        
     
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.TicketId }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-
+  <div class="btn btn-primary">
+    @Html.ActionLink("Add",  "Create" , "TicketComments", new { id = Model.TicketId },null)</div> 
+<div>@Html.Action("Index", "TicketComments", new { id = Model.TicketId })</div>
 

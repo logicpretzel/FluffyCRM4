@@ -111,7 +111,34 @@ namespace FluffyCRM.ViewModels
 
     }
 
-    
+    public class TicketCommentList {
+        [Key]
+        public int Id { get; set; }
+
+        [DisplayName("Ticket Number")]
+        public int TicketId { get; set; }
+
+        [DisplayName("Subject")]
+        [StringLength(255)]
+        public string Subject { get; set; }
+
+        [DisplayName("Description")]
+        [StringLength(8000)]
+        [DataType(DataType.MultilineText)]
+        public string Description { get; set; }
+
+        [DisplayName("Created")]
+        public DateTime? CreateDate { get; set; }
+
+        public CommentStatus Status { get; set; }
+
+        [DisplayName("Create Date")]
+        public DateTime? LocalTime { get; set; }
+
+        [StringLength(128)]
+        public string CreatedByName { get; set; }
+    }
+
     public class TicketAddVM
     {
        

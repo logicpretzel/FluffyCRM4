@@ -1,4 +1,10 @@
 ﻿<!DOCTYPE html>
+@using FluffyCRM.utils;
+@{ var p = new flSettings();
+    ViewBag.Publisher = p.Publisher;
+    ViewBag.AppTitle = p.AppTitle;
+
+}
 <html>
 <head>
     <meta charset="utf-8" />
@@ -65,9 +71,12 @@
     </div>
     <div class="leftside">
         @RenderBody()
-        <hr />
-        <footer class="well-sm">
-            <p>&copy; @DateTime.Now.Year @ViewBag.Publisher</p>
+        <footer class="footer col-lg-5 col-md-8 col-sm-12 col-xs-12">
+
+            <div class="well-sm ">
+                <div>&copy; @DateTime.Now.Year @ViewBag.Publisher  </div> <div class="text-right">@ViewBag.AppTitle</div>
+            </div>
+
         </footer>
     </div>
 

@@ -1,14 +1,13 @@
-﻿@model IEnumerable<FluffyCRM.Models.TicketComment>
-
+﻿@model IEnumerable<TicketCommentList>
+@using FluffyCRM.ViewModels;
 @{
     ViewBag.Title = "Index";
+  
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
+
 <table class="table">
     <tr>
         <th>
@@ -20,9 +19,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CategoryId)
-        </th>
+        
         <th>
             @Html.DisplayNameFor(model => model.CreateDate)
         </th>
@@ -32,11 +29,9 @@
         <th>
             @Html.DisplayNameFor(model => model.LocalTime)
         </th>
+       
         <th>
-            @Html.DisplayNameFor(model => model.DeleteInd)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedBy)
+            @Html.DisplayNameFor(model => model.CreatedByName)
         </th>
         <th></th>
     </tr>
@@ -52,9 +47,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.Description)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryId)
-        </td>
+        
         <td>
             @Html.DisplayFor(modelItem => item.CreateDate)
         </td>
@@ -64,16 +57,18 @@
         <td>
             @Html.DisplayFor(modelItem => item.LocalTime)
         </td>
+        
         <td>
-            @Html.DisplayFor(modelItem => item.DeleteInd)
+            @Html.DisplayFor(modelItem => item.CreatedByName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CreatedBy)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            <span>@Html.ActionLink("Edit", "Edit", new { id = item.Id }) </span>
+            <span> @Html.ActionLink("Details", "Details", new { id = item.Id }) </span>
+            @if (User.IsInRole("Admin"))
+            {
+               
+                <span>@Html.ActionLink("Delete", "Delete", new { id = item.Id })</span>
+            } 
         </td>
     </tr>
 }

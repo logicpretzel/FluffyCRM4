@@ -375,6 +375,7 @@
     <Compile Include="Settings.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="utils\EmailSender.cs" />
+    <Compile Include="utils\flSettings.cs" />
     <Compile Include="utils\HtmlEncode.cs" />
     <Compile Include="utils\StaticImageResizer.cs" />
     <Compile Include="ViewModels\ClientViewModels.cs" />
@@ -531,6 +532,7 @@
     <Content Include="Views\TaskNotes\Edit.cshtml" />
     <Content Include="Views\TaskNotes\Index.cshtml" />
     <Content Include="Views\JobTasks\Notes.cshtml" />
+    <Content Include="Views\TicketComments\NewComment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

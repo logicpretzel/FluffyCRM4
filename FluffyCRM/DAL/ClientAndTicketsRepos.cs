@@ -329,5 +329,32 @@ namespace FluffyCRM.DAL
 
             return lst;
         }
+
+
+        public IEnumerable<TicketCommentList> TicketCommentListing(int TicketId, string CreatedBy, string kw)
+        {
+
+            var idParam1 = new SqlParameter
+            {
+                ParameterName = "TicketId",
+                Value = TicketId
+            };
+            var idParam2 = new SqlParameter
+            {
+                ParameterName = "CreatedBy",
+                Value = CreatedBy.Length > 0 ? CreatedBy : SqlString.Null
+            };
+
+            var idParam3 = new SqlParameter
+            {
+                ParameterName = "kw",
+                Value = kw.Length > 0 ? kw : SqlString.Null
+
+            };
+            IEnumerable<TicketCommentList> lst = _dc.Database.SqlQuery<TicketCommentList>("exec webuser.TicketCommentList  @TicketId=@TicketId, @CreatedBy=@CreatedBy, @kw=@kw", idParam1, idParam2, idParam3).ToList();
+
+
+            return lst;
+        }
     }
 }
