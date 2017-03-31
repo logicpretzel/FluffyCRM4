@@ -214,13 +214,13 @@ namespace FluffyCRM.Controllers
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "UserName, Email, FirstName, LastName, Address, City, State, Zip, EmailConfirmed,PhoneNumber,PhoneNumberConfirmed, Password, LockoutEnabled, AccessFailedCount,ClientId")]EditUserViewModel model)
+        public async Task<ActionResult> Edit([Bind(Include = "Id, UserName, Email, FirstName, LastName, Address, City, State, Zip, EmailConfirmed,PhoneNumber,PhoneNumberConfirmed, Password, LockoutEnabled, AccessFailedCount,ClientId")]EditUserViewModel model)
         {
 
 
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.UserName);
+                var user = await UserManager.FindByIdAsync(model.Id);
                 if (user == null)
                 {
                     // Don't reveal that the user does not exist
@@ -391,14 +391,27 @@ namespace FluffyCRM.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+            string userName = "";
+
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
+            if (model.Email.Contains("@"))
+            {
+                var u = UserManager.FindByEmail(model.Email);
+                if (u != null) { userName = u.UserName;  } else { userName = "";  }
+                
+            }
+            else
+            {
+                userName = model.Email;
+            }
+
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(userName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:

@@ -19,7 +19,10 @@ namespace FluffyCRM.Controllers
             ViewBag.Publisher = setting.Publisher;
             return View();
         }
-
+        public ActionResult NeedLogon()
+        {
+            return View();
+        }
         public ActionResult DisplayStaffDashboard() {
 
             StaffDashBoard model = new StaffDashBoard();

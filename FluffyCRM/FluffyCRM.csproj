@@ -533,6 +533,7 @@
     <Content Include="Views\TaskNotes\Index.cshtml" />
     <Content Include="Views\JobTasks\Notes.cshtml" />
     <Content Include="Views\TicketComments\NewComment.cshtml" />
+    <Content Include="Views\Home\NeedLogon.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

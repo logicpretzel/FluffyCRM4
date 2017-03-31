@@ -236,6 +236,7 @@ namespace FluffyCRM.DAL
         {
             bool rc = false;
             string roleNm = "";
+            Guid result;
             int cd = 0;
             //TODO: Need first admin function to override for first user
             if (userID == userManagerID)
@@ -243,8 +244,22 @@ namespace FluffyCRM.DAL
                 if (role.ToLower().Trim() == "admin") return true;  // can't use this method to create an admin role to your own user account.
             }
 
+ 
+            if (!Guid.TryParse(userID, out result))
+            {
+                return false;
 
-            roleNm = GetRoleName(role);
+            }
+
+            if (Guid.TryParse(role, out result))
+            {
+                roleNm = GetRoleName(role);
+
+            }
+            else {
+                roleNm = role;
+            }
+            
             var idParam1 = new SqlParameter
             {
                 ParameterName = "UID",

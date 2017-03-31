@@ -139,17 +139,23 @@ namespace FluffyCRM.Controllers
         [Authorize(Roles = "Admin,Client,Staff")]
         public async Task<ActionResult> Edit(int? id)
         {
-            ViewBag.CurrentUser = User.Identity.GetUserId();
+            var userID =  User.Identity.GetUserId();
+            ViewBag.CurrentUser = userID;
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Ticket ticket = await db.Tickets.FindAsync(id);
+
             if (ticket == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Index");
             }
 
+            if (!(User.IsInRole("Admin"))) {
+                if (userID != ticket.CreatedBy) return RedirectToAction("Details", new { id = id });
+            }
             ViewBag.TicketCategories = new SelectList(_repos.GetCategoryList(FLCatType.Ticket), "id", "Name", null);
             ViewBag.CustList = new SelectList(_repos.GetClientListAll(), "ClientId", "CompanyName", null);
 
