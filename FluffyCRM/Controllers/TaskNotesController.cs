@@ -53,6 +53,7 @@ namespace FluffyCRM.Controllers
         public ActionResult Create(int? id)
         {
             TaskNote model = new TaskNote();
+            ViewBag.CustList = new SelectList(_repos.GetClientListAll(), "ClientId", "CompanyName", null);
             model.JobTask_Id = id ?? 0;
             return View(model);
         }
@@ -64,6 +65,7 @@ namespace FluffyCRM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,CategoryId,Subject,Comment,JobTask_Id,CreatedBy,CreateDate,Status,DeleteInd,ClientId,StartDate,CompletedDate,DueDate,LocalTime")] TaskNote taskNote)
         {
+            ViewBag.CustList = new SelectList(_repos.GetClientListAll(), "ClientId", "CompanyName", null);
             if (ModelState.IsValid)
             {
                 db.TaskNotes.Add(taskNote);
@@ -78,6 +80,7 @@ namespace FluffyCRM.Controllers
         // GET: TaskNotes/Create
         public ActionResult CreateNote(int? id)
         {
+            ViewBag.CustList = new SelectList(_repos.GetClientListAll(), "ClientId", "CompanyName", null);
             TaskNote model = new TaskNote();
             model.JobTask_Id = id ?? 0;
             ViewBag.TaskId = id;
@@ -91,6 +94,7 @@ namespace FluffyCRM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateNote([Bind(Include = "Id,CategoryId,Subject,Comment,JobTask_Id,CreatedBy,CreateDate,Status,DeleteInd,ClientId,StartDate,CompletedDate,DueDate,LocalTime")] TaskNote taskNote)
         {
+            ViewBag.CustList = new SelectList(_repos.GetClientListAll(), "ClientId", "CompanyName", null);
             ViewBag.TaskId = taskNote.JobTask_Id;
             if (ModelState.IsValid)
             {
@@ -109,6 +113,7 @@ namespace FluffyCRM.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            ViewBag.CustList = new SelectList(_repos.GetClientListAll(), "ClientId", "CompanyName", null);
             TaskNote taskNote = db.TaskNotes.Find(id);
             if (taskNote == null)
             {
@@ -124,6 +129,7 @@ namespace FluffyCRM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,CategoryId,Subject,Comment,JobTask_Id,CreatedBy,CreateDate,Status,DeleteInd,ClientId,StartDate,CompletedDate,DueDate,LocalTime")] TaskNote taskNote)
         {
+            ViewBag.CustList = new SelectList(_repos.GetClientListAll(), "ClientId", "CompanyName", null);
             if (ModelState.IsValid)
             {
                 db.Entry(taskNote).State = EntityState.Modified;
@@ -158,6 +164,45 @@ namespace FluffyCRM.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
+
+
+        // GET: TaskNotes/Edit/5
+        public ActionResult EditNote(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ViewBag.CustList = new SelectList(_repos.GetClientListAll(), "ClientId", "CompanyName", null);
+            TaskNote taskNote = db.TaskNotes.Find(id);
+            if (taskNote == null)
+            {
+                return HttpNotFound();
+            }
+            return View(taskNote);
+        }
+
+        // POST: TaskNotes/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditNote([Bind(Include = "Id,CategoryId,Subject,Comment,JobTask_Id,CreatedBy,CreateDate,Status,DeleteInd,ClientId,StartDate,CompletedDate,DueDate,LocalTime")] TaskNote taskNote)
+        {
+            ViewBag.CustList = new SelectList(_repos.GetClientListAll(), "ClientId", "CompanyName", null);
+            if (ModelState.IsValid)
+            {
+                db.Entry(taskNote).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index","JobTasks");
+            }
+            return View(taskNote);
+        }
+
+
+
 
         protected override void Dispose(bool disposing)
         {

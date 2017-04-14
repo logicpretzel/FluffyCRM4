@@ -7,14 +7,15 @@
 
 @*<h2>Details</h2>*@
 
-<div>
 
-    <div class="container-fluid">
-        <div class="panel col-med-12 col-med-12 col-lg-12 col-xs-12 panel-primary">
+
+    <div class="container boxcolor_1 col-lg-12">
+        <div class="flright"> <span class="btn btn-sm btn-default">@Html.ActionLink("Edit", "Edit", new { id = Model.Id })</span><span class="btn btn-sm btn-default js-detailclose" data-url=''>Close</span></div>
+        <div class="panel col-med-12 col-med-12 col-lg-12 col-xs-12  boxcolor_1">
             
             <div class="panel-heading color-p-1">
                 <div class="col-lg-4">@(ViewBag.Title)</div> <div class="col-lg-4 center-block">&nbsp;@Html.DisplayNameFor(model => model.Id):&nbsp;<span>@Html.DisplayFor(model => model.Id)</span></div>
-                <div class="color-p-1 col-lg-4 text-right"><div class="btn btn-sm btn-default ">    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) </div> <div class="btn btn-sm btn-default js-detailclose" data-url=''>Close</div></div>
+                
                 <br />  
             </div>
                 <div class="col-sm-6 col-med-4 col-lg-4  col-xs-12  ">
@@ -73,9 +74,11 @@
         
 
     </div>
-   
-</div>
+    <p>
+        @Html.ActionLink("New Note", "CreateNote", "TaskNotes", new { id = Model.Id }, new { @class="btn btn-default"})
+    </p>
 
 
+    <div>@Html.Action("_Notes", "TaskNotes", new { id = Model.Id })</div>
 
-<div>@Html.Action("_Notes", "TaskNotes", new { id = Model.Id })</div>
+

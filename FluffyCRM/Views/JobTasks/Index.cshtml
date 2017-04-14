@@ -5,7 +5,7 @@
     //Layout = "~/Views/Shared/_LayoutLeft.cshtml";
     ViewBag.Title = "Project-Task Listing";
 }
-<div class="container-fluid">
+<div class="container-fluid ">
     <div class="col-lg-4 col-med-4 col-sm-6 col-xs-12">
         <h2>@(ViewBag.Title)</h2>
 
@@ -154,7 +154,7 @@
 
             var $details = $('#taskdetail'),
                 url = $(this).data('url');
-            //alert(url);
+            
             $.get(url, function (data) {
                 $details.html(data).fadeIn();
             });

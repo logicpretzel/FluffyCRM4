@@ -156,6 +156,21 @@ a:hover {
     border-width: thin;
 }
 
+.boxcolor_1 {
+    background-color: rgba(22, 96, 124, 0.93);
+    color: antiquewhite;
+
+}
+.boxlightradial {
+    background: 
+    repeating-radial-gradient(
+      circle  at 0 0, 
+      rgba(49, 147, 185, 0.86),
+      rgba(77, 171, 208, 0.74) 50px
+    );
+
+}
+
 .home_container {
        
     background-color: rgba(49, 82, 174, 0.62);
@@ -225,6 +240,22 @@ tr.kv > td {
     font-family: 'Open Sans Condensed';
     font-size: 3em;
 }
+.flright {
+    float: right;
+}
+.btn-xs {
+    font-family: 'Open Sans Condensed';
+    font-size: 1em;
+    padding: 1px;
+}
+ .btn-xs  >  a:visited  {
+        color: white;
+
+    }
+     .btn-xs  >  a  {
+        color: white;
+
+    }
 
 .btn-med-large {
     font-family:'Open Sans Condensed';
@@ -289,9 +320,10 @@ textarea {
 
      
 }
-table {
+
+/*table {
     width: 300px;
-}
+}*/
 
 @media (max-width: 400px) {
     input,
@@ -302,4 +334,8 @@ table {
         max-width: 98%;
     }
     .sidetable { margin-left: 0px; }
+
+    
 }
+
+

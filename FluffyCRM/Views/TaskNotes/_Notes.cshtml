@@ -1,68 +1,83 @@
 ﻿@model IEnumerable<TaskNoteList>
 @using FluffyCRM.ViewModels
-<p>
-    @Html.ActionLink("New Note", "CreateNote", new { id = ViewBag.TaskId })
-</p>
-<div class="table col-lg-12">
-    <div class="row">
-        <div class="col-lg-8" >
+
+<div  class="col-lg-8 boxborder boxcolor_1">
+    @*<div class="row ">
+        <div class="col-lg-4">
             Subject
         </div>
-        <div class="col-lg-2">Create Date</div>
-        <div class="col-lg-2">
+        <div class="col-lg-1">Create Date</div>
+        <div class="col-lg-1">
             Status
         </div>
-        <div class="col-lg-12">
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
             Comment
         </div>
-        <div class="col-lg-4">
-           Linked to task?
+    </div>
+    <div class="row bottomborder">
+            <div class="col-lg-2">
+                Linked to task?
+            </div>
+            <div class="col-lg-2">
+                Assigned To
+            </div>
+
+            <div class="col-lg-2">
+                Created By
+            </div>
+   </div>*@
+
+   
+
+@foreach (var item in Model)
+{
+   
+
+        <div class="row ">
+            <div class="col-lg-8">
+                <span class="smalllabel">Subject:<br /></span>
+                @Html.DisplayFor(modelItem => item.Subject)&nbsp;
+            </div>
+
+            <div class="col-lg-2 boxborder">&nbsp;
+                <span class="smalllabel">Created Date:<br /></span>
+                @Html.DisplayFor(modelItem => item.CreateDate)&nbsp;
+            </div>
+            <div class="col-lg-2 boxborder">&nbsp;
+                <span class="smalllabel">Status:<br /></span>
+                @Html.DisplayFor(modelItem => item.Status)&nbsp;
+            </div>
         </div>
-        <div class="col-lg-4">
-            Assigned To
+
+        <div class="row">
+            <div class="col-lg-12 boxborder">
+                <span class="smalllabel">Comment:<br /></span>
+                @Html.DisplayFor(modelItem => item.Comment)&nbsp;
+            </div>
+        </div>
+
+        <div class="row bottomborder">
+            <div class="smalllabel col-lg-4">
+                @Html.DisplayFor(modelItem => item.TaskName)&nbsp;
+            </div>
+            <div class="smalllabel col-lg-4">
+                <span class="smalllabel">Assigned To:<br /></span>
+                <span> @Html.DisplayFor(modelItem => item.AssignedName)&nbsp; </span><br />
+            </div>
+            <div class="smalllabel col-lg-4">
+                <span>
+                    @Html.DisplayFor(modelItem => item.CreatedBy)&nbsp;
+                </span><br />
+                <span>@Html.DisplayFor(modelItem => item.ClientName)&nbsp; </span>
+            </div>
+
+            <div>
+                @Html.ActionLink("Edit", "EditNote", new { id = item.Id }, new { @class="btn btn-default btn-xs"})
+            </div>
         </div>
        
-        <div class="col-lg-4">
-           Created By
-        </div>
-        
-    </div>
+        }
 
-@foreach (var item in Model) {
-    <div class="row">
-        
-        <div >
-            @Html.DisplayFor(modelItem => item.Subject)
-        </div>
-        <div>
-            @Html.DisplayFor(modelItem => item.CreateDate)
-        </div>
-        <div>
-            @Html.DisplayFor(modelItem => item.Status)
-        </div>
-        <div>
-            @Html.DisplayFor(modelItem => item.Comment)
-        </div>
-        <div>
-            @Html.DisplayFor(modelItem => item.TaskName)
-        </div>
-        <div class="smalllabel">
-            <span> @Html.DisplayFor(modelItem => item.AssignedName) </span><br />
-            
-        </div>
-       
-        <div class="smalllabel">
-           
-            <span>
-                @Html.DisplayFor(modelItem => item.CreatedBy)
-            </span><br />
-            <span>@Html.DisplayFor(modelItem => item.ClientName) </span>
-        </div>
-        
-        <div>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id })
-        </div>
     </div>
-}
-
-</div>

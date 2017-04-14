@@ -536,6 +536,7 @@
     <Content Include="Views\Home\NeedLogon.cshtml" />
     <Content Include="Views\TaskNotes\_Notes.cshtml" />
     <Content Include="Views\TaskNotes\CreateNote.cshtml" />
+    <Content Include="Views\TaskNotes\EditNote.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

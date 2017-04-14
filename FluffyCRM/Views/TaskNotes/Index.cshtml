@@ -10,16 +10,16 @@
 
 <div class="noteform table-striped table-responsive table-bordered table-condensed table-padded">
     <div class="row">
-        @*<div class="col-lg-1">
-            @Html.DisplayNameFor(model => model.)
-        </div>*@
+        <div class="col-lg-1">
+            @Html.DisplayNameFor(model => model.JobTask_Id)
+        </div>
         <div class="col-lg-2">
             @Html.DisplayNameFor(model => model.Subject)
         </div>
         <div class="col-lg-4">
             @Html.DisplayNameFor(model => model.Comment)
         </div>
-        <div class="col-lg-2 smalllabel">
+        <div class="col-lg-1 smalllabel">
             Created by/ Assigned to
         </div>
         <div class="col-lg-1">
@@ -39,16 +39,16 @@
     @foreach (var item in Model)
     {
         <div class="row maccordion  expandtext">
-            @*<div class="col-lg-1">
-                @Html.DisplayFor(modelItem => item.TicketId)
-            </div>*@
+            <div class="col-lg-1">
+                @Html.DisplayFor(modelItem => item.JobTask_Id)
+            </div>
             <div class="col-lg-2">
                 @Html.DisplayFor(modelItem => item.Subject)
             </div>
             <div class="col-lg-4 ">
                 @(item.Comment)
             </div>
-            <div class="col-lg-2 smalllabel">
+            <div class="col-lg-1 smalllabel">
                C: @Html.DisplayFor(modelItem => item.CreatedBy)<br />
                A: @Html.DisplayFor(modelItem => item.AssignedName)
             </div>
