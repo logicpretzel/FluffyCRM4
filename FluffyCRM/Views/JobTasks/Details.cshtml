@@ -60,15 +60,22 @@
             @*<div class="col-med-12 col-lg-12 col-sm-12 col-xs-12">
                 <div class="btn btn-sm btn-default ">    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) </div> <div class="btn btn-sm btn-default js-detailclose" data-url=''>Close</div>
             </div>*@
+            @*<div id="tasknotes" class="col-sm-12 col-med-12 col-lg-12  col-xs-12  ">
+
+
+                <div class="col-sm-12 col-med-12 col-lg-12  col-xs-12  boxborder" >@Html.Action("_Notes", "TaskNotes", new { id = Model.Id })</div>
+            </div>*@
         </div>
   
    
 
        
-       <div id="tasknotes">
-
-       </div>
+        
 
     </div>
    
 </div>
+
+
+
+<div>@Html.Action("_Notes", "TaskNotes", new { id = Model.Id })</div>

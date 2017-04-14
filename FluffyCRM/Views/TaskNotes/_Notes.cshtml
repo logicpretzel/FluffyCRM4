@@ -1,0 +1,68 @@
+﻿@model IEnumerable<TaskNoteList>
+@using FluffyCRM.ViewModels
+<p>
+    @Html.ActionLink("New Note", "CreateNote", new { id = ViewBag.TaskId })
+</p>
+<div class="table col-lg-12">
+    <div class="row">
+        <div class="col-lg-8" >
+            Subject
+        </div>
+        <div class="col-lg-2">Create Date</div>
+        <div class="col-lg-2">
+            Status
+        </div>
+        <div class="col-lg-12">
+            Comment
+        </div>
+        <div class="col-lg-4">
+           Linked to task?
+        </div>
+        <div class="col-lg-4">
+            Assigned To
+        </div>
+       
+        <div class="col-lg-4">
+           Created By
+        </div>
+        
+    </div>
+
+@foreach (var item in Model) {
+    <div class="row">
+        
+        <div >
+            @Html.DisplayFor(modelItem => item.Subject)
+        </div>
+        <div>
+            @Html.DisplayFor(modelItem => item.CreateDate)
+        </div>
+        <div>
+            @Html.DisplayFor(modelItem => item.Status)
+        </div>
+        <div>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </div>
+        <div>
+            @Html.DisplayFor(modelItem => item.TaskName)
+        </div>
+        <div class="smalllabel">
+            <span> @Html.DisplayFor(modelItem => item.AssignedName) </span><br />
+            
+        </div>
+       
+        <div class="smalllabel">
+           
+            <span>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </span><br />
+            <span>@Html.DisplayFor(modelItem => item.ClientName) </span>
+        </div>
+        
+        <div>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id })
+        </div>
+    </div>
+}
+
+</div>

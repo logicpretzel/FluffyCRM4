@@ -73,7 +73,7 @@ namespace FluffyCRM.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             JobTask jobTask = db.JobTasks.Find(id);
             if (jobTask == null)

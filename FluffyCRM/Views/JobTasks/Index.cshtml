@@ -2,7 +2,7 @@
 @using FluffyCRM.ViewModels;
 @using PagedList.Mvc;
 @{
-    Layout = "~/Views/Shared/_LayoutLeft.cshtml";
+    //Layout = "~/Views/Shared/_LayoutLeft.cshtml";
     ViewBag.Title = "Project-Task Listing";
 }
 <div class="container-fluid">
@@ -76,8 +76,8 @@
 
                     </td>
                     <td>
-                        <label data-url='@Url.Action("Details","JobTasks", new { id = item.Id } )'
-                               class="js-loaddetail">@Html.DisplayFor(modelItem => item.Name)</label>
+                        <label data-url='@Url.Action("Details","JobTasks", new { id = item.Id } )'  
+                                class="js-loaddetail" >@Html.DisplayFor(modelItem => item.Name)</label>
                             @*@Html.ActionLink(item.Name, "Edit", new { id = item.Id })*@
                         </td>
 
@@ -133,6 +133,11 @@
         <div id="taskdetail">
 
         </div>
+        <hr />
+        <div id="tasknotes">
+
+
+        </div>
     </div>
 
 </div>
@@ -154,6 +159,7 @@
                 $details.html(data).fadeIn();
             });
           
+           
 
                
           

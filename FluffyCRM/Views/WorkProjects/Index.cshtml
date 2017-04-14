@@ -2,12 +2,12 @@
 @using PagedList.Mvc;
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Projects";
 }
 
-<h2>Index</h2>
+<h6>@ViewBag.Title</h6>
 
-<p>
+<p class="smalllabel">
     @Html.ActionLink("Create New", "Create")           Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 </p>
 <table class="table">

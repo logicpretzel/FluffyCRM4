@@ -17,12 +17,22 @@ namespace FluffyCRM.Controllers
         private DataRepository _repos = new DataRepository();
 
         // GET: TaskNotes
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            var lst = _repos.TaskNoteList(0, "", "");
+            var lst = _repos.TaskNoteListing(id ?? 0, "", "","");
 
             return View(lst);
         }
+
+        // GET: TaskNotes
+        public ActionResult _Notes(int? id, int? page)
+        {
+          
+            var lst = _repos.TaskNoteListing(id ?? 0, "", "","");
+
+            return View(lst);
+        }
+
 
         // GET: TaskNotes/Details/5
         public ActionResult Details(int? id)
@@ -40,9 +50,11 @@ namespace FluffyCRM.Controllers
         }
 
         // GET: TaskNotes/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            return View();
+            TaskNote model = new TaskNote();
+            model.JobTask_Id = id ?? 0;
+            return View(model);
         }
 
         // POST: TaskNotes/Create
@@ -57,6 +69,34 @@ namespace FluffyCRM.Controllers
                 db.TaskNotes.Add(taskNote);
                 db.SaveChanges();
                 return RedirectToAction("Index");
+            }
+
+            return View(taskNote);
+        }
+
+
+        // GET: TaskNotes/Create
+        public ActionResult CreateNote(int? id)
+        {
+            TaskNote model = new TaskNote();
+            model.JobTask_Id = id ?? 0;
+            ViewBag.TaskId = id;
+            return View(model);
+        }
+
+        // POST: TaskNotes/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateNote([Bind(Include = "Id,CategoryId,Subject,Comment,JobTask_Id,CreatedBy,CreateDate,Status,DeleteInd,ClientId,StartDate,CompletedDate,DueDate,LocalTime")] TaskNote taskNote)
+        {
+            ViewBag.TaskId = taskNote.JobTask_Id;
+            if (ModelState.IsValid)
+            {
+                db.TaskNotes.Add(taskNote);
+                db.SaveChanges();
+                return RedirectToAction("Index", "JobTasks");
             }
 
             return View(taskNote);

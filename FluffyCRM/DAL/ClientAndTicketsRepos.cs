@@ -58,18 +58,18 @@ namespace FluffyCRM.DAL
             Guid result;
             if (UserID.Length == 0)
             {
-                model = _dc.Database.SqlQuery<TicketList>("Select TicketId, Subject, CategoryId, Category,  CreateDate, Status, ClientId, CompanyName, StartDate, CompletedDate, DueDate, CreatedBy, LastName, FirstName, FullName, left(Description,35) as ShortDesc from vTickets").ToList();
+                model = _dc.Database.SqlQuery<TicketList>("Select TicketId, Subject, CategoryId, Category,  CreateDate, Status, ClientId, CompanyName, StartDate, CompletedDate, DueDate, CreatedBy, LastName, FirstName, FullName, left(Description,35) as ShortDesc, Description from vTickets").ToList();
             }
             else
             {
                 if (Guid.TryParse(UserID, out result))
                 {
-                    model = _dc.Database.SqlQuery<TicketList>("Select TicketId, Subject, CategoryId,Category, CreateDate, Status, ClientId, CompanyName, StartDate, CompletedDate, DueDate, CreatedBy, LastName, FirstName, FullName, left(Description,35) as ShortDesc from vTickets").Where(s => s.CreatedBy.ToString() == result.ToString()).ToList();
+                    model = _dc.Database.SqlQuery<TicketList>("Select TicketId, Subject, CategoryId,Category, CreateDate, Status, ClientId, CompanyName, StartDate, CompletedDate, DueDate, CreatedBy, LastName, FirstName, FullName, left(Description,35) as ShortDesc, Description from vTickets").Where(s => s.CreatedBy.ToString() == result.ToString()).ToList();
 
                 }
                 else
                 {
-                    model = _dc.Database.SqlQuery<TicketList>("Select TicketId, Subject, CategoryId,Category, CreateDate, Status, ClientId, CompanyName, StartDate, CompletedDate, DueDate, CreatedBy, LastName, FirstName, FullName, left(Description,35) as ShortDesc from vTickets where [TicketId] is null").ToList(); // should not happen. return empty model
+                    model = _dc.Database.SqlQuery<TicketList>("Select TicketId, Subject, CategoryId,Category, CreateDate, Status, ClientId, CompanyName, StartDate, CompletedDate, DueDate, CreatedBy, LastName, FirstName, FullName, left(Description,35) as ShortDesc, Description from vTickets where [TicketId] is null").ToList(); // should not happen. return empty model
 
                 }
 
@@ -330,6 +330,39 @@ namespace FluffyCRM.DAL
             return lst;
         }
 
+       
+
+        public IEnumerable<TaskNoteList> TaskNoteListing(int WorkTaskId, string assignedTo, string CreatedBy, string kw)
+        {
+
+            var idParam1 = new SqlParameter
+            {
+                ParameterName = "taskId",
+                Value = WorkTaskId
+            };
+            var idParam2 = new SqlParameter
+            {
+                ParameterName = "assignedTo",
+                Value = assignedTo.Length > 0 ? assignedTo : SqlString.Null
+            };
+            var idParam3 = new SqlParameter
+            {
+                ParameterName = "CreatedBy",
+                Value = CreatedBy.Length > 0 ? CreatedBy : SqlString.Null
+            };
+            var idParam4 = new SqlParameter
+            {
+                ParameterName = "kw",
+                Value = kw.Length > 0 ? kw : SqlString.Null
+
+            };
+            IEnumerable<TaskNoteList> lst = _dc.Database.SqlQuery<TaskNoteList>("exec webuser.TaskNotesListing  @taskId=@taskId, @assignedTo=@assignedTo, @CreatedBy=@CreatedBy, @kw=@kw", idParam1, idParam2, idParam3, idParam4).ToList();
+
+
+            return lst;
+        }
+
+
 
         public IEnumerable<TicketCommentList> TicketCommentListing(int TicketId, string CreatedBy, string kw)
         {
@@ -356,5 +389,11 @@ namespace FluffyCRM.DAL
 
             return lst;
         }
+
+
+
+
+
+
     }
 }

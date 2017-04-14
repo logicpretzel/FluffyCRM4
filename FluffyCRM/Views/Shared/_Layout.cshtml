@@ -85,11 +85,14 @@
     @RenderSection("scripts", required: false)
 
     <script>
-        $('footer').delay(2000).fadeOut('slow');
+        $('footer').delay(2000).fadeOut('slow'); //fade footer
         
         var acc = document.getElementsByClassName("maccordion");
+
         var i;
+
         // cycle through items with maccordian class and add class toggle to expand and contract row
+
         for (i = 0; i < acc.length; i++) {
             acc[i].onclick = function () {
                 this.classList.toggle("active");

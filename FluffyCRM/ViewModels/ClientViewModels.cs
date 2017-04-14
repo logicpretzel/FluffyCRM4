@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static FluffyCRM.Models.TaskNote;
 
 namespace FluffyCRM.ViewModels
 {
@@ -105,9 +106,80 @@ namespace FluffyCRM.ViewModels
         [DisplayName("Created By")]
         public String       FullName { get; set; }
 
-        [DisplayName("Description")]
+        [DisplayName("Short Desc")]
         [StringLength(35)]
         public string       ShortDesc { get; set; }
+
+        [DisplayName("Description")]
+        public string Description { get; set; }
+    }
+
+    public class TaskNoteList {
+        [Key]
+        public int Id { get; set; }
+
+        [DisplayName("Note Type")]
+        public string NoteType { get; set; }
+
+        [HiddenField]
+        public int? CategoryId { get; set; }
+
+        [StringLength(255)]
+        public string Subject { get; set; }
+
+        [StringLength(8000)]
+        [DataType(DataType.MultilineText)]
+        public string Comment { get; set; }
+
+   
+
+        [HiddenField]
+        public int JobTask_Id { get; set; }
+
+        [DisplayName("Task Name")]
+        public string TaskName { get; set; }
+
+        [HiddenField]
+        [StringLength(128)]
+        public string CreatedBy { get; set; }
+
+        [DisplayName("Created")]
+        public DateTime? CreateDate { get; set; }
+
+        [DefaultValue(0)]
+        public FlNoteStatus? Status { get; set; }
+
+        [DisplayName("Added By")]
+        public string AddedByName { get; set; }
+
+        [DisplayName("Assigned To")]
+        public string AssignedName { get; set; }
+
+        [DisplayName("Client")]
+        public string ClientName { get; set; }
+
+
+        [HiddenField]
+        public int? ClientId { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayName("Start Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime? StartDate { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayName("Date Completed")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime? CompletedDate { get; set; }
+
+        [DisplayName("Due Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime? DueDate { get; set; }
+
+        [HiddenField]
+        public DateTime? LocalTime { get; set; }
+
 
     }
 

@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using System.Linq;
 using System.Collections.Generic;
 using FluffyCRM.DAL;
+using PagedList;
 
 namespace FluffyCRM.Controllers
 {
@@ -18,27 +19,65 @@ namespace FluffyCRM.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         private DataRepository _repos = new DataRepository();
 
+
+
+
         // GET: Tickets
+
+        
         [Authorize(Roles = "Admin,Client,Staff")]
-        public ActionResult Index()
+        public ActionResult Index(string searchString = "",  string sortOption = "", int page = 1, string srchclient = "", string srchcreated = "" )
         {
-            ViewBag.CurrentUser = User.Identity.GetUserId();
+            int pageSize = 10;
+            var userId = User.Identity.GetUserId();
+
+
+            ViewBag.CurrentFilter = searchString;
+            if (sortOption == null) sortOption = "name_acs";
+            ViewBag.sortOption = sortOption;
+            ViewBag.CurrentUser = userId;
+
             IEnumerable<TicketList> lst = new List<TicketList>();
 
-            string userId = User.Identity.GetUserId().ToString();
             if ((User.IsInRole("Staff") || User.IsInRole("Admin")))
             {
                 lst = _repos.GetTicketList("");
-
-
             }
-            else {
+            else
+            {
                 lst = _repos.GetTicketList(userId);
             }
-            
+
+            //if (!String.IsNullOrEmpty(searchString))
+            //{
+            //    lst = lst.Where(s => s.Name.StartsWith(searchString) || s.Description.Contains(searchString));
+            //}
+            //switch (sortOption)
+            //{
+            //    case "name_acs":
+            //        lst = lst.OrderBy(p => p.Name);
+            //        ViewBag.sortOption = "name_desc";
+            //        break;
+            //    case "name_desc":
+            //        lst = lst.OrderByDescending(p => p.Name);
+            //        ViewBag.sortOption = "name_asc";
+            //        break;
+
+            //    default:
+            //        lst = lst.OrderBy(p => p.LocalTime);
+            //        ViewBag.sortOption = "name_desc";
+            //        break;
+
+            //}
+
+            return Request.IsAjaxRequest()
+               ? (ActionResult)PartialView("Index", lst.ToPagedList(page, pageSize))
+               : View(lst.ToPagedList(page, pageSize));
 
 
-            return View(lst);
+           
+ 
+          //  return View(lst);
         }
 
         // GET: Tickets/Details/5

@@ -6,9 +6,9 @@
 }
 
 <div class="row ">
-    <div class="col-md-2 btn btn-info  color-dash-btn-1 med-largefont" >Clients:&nbsp; <span class=" ">&nbsp;@Html.DisplayFor(Model => Model.ClientCount)</span></div>
-    <div class="col-md-2 btn btn-info  color-dash-btn-1 med-largefont">Users:&nbsp;<span class=" ">&nbsp;@Html.DisplayFor(Model => Model.UserCount) </span></div>
-    <div class="col-md-2 btn btn-info  color-dash-btn-1 med-largefont">Not Validated:&nbsp;<span class=" ">&nbsp;@Html.DisplayFor(Model => Model.UsersAwaitingValidation) </span></div>
+    <div class="col-md-2 btn btn-info  color-dash-btn-1 med-largefont" >@Html.ActionLink("Clients:", "Index", "Clients")&nbsp; <span >&nbsp;@Html.DisplayFor(Model => Model.ClientCount)</span></div>
+    <div class="col-md-2 btn btn-info  color-dash-btn-1 med-largefont">@Html.ActionLink("User:", "Index", "Account")&nbsp;<span >&nbsp;@Html.DisplayFor(Model => Model.UserCount) </span></div>
+    <div class="col-md-2 btn btn-info  color-dash-btn-1 med-largefont">Not Validated:&nbsp;<span >&nbsp;@Html.DisplayFor(Model => Model.UsersAwaitingValidation) </span></div>
 
 </div>
 

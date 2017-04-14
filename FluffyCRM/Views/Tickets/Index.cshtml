@@ -1,10 +1,11 @@
-﻿@model IEnumerable<FluffyCRM.ViewModels.TicketList>
+﻿@model PagedList.IPagedList<FluffyCRM.ViewModels.TicketList>
+@using PagedList.Mvc;
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Ticket Listing";
 }
 
-<h2>Index</h2>
+<h6>@ViewBag.Title</h6>
 
 <p>
     @if (User.IsInRole("Staff")|| User.IsInRole("Admin"))
@@ -19,99 +20,106 @@
     {
        
     }
-
 </p>
-<table class="table">
-    <tr><td>Ticket#</td>
-        <th>
-            @Html.DisplayNameFor(model => model.Subject)
-        </th>
+
+
+<div class="table">
+    <div class="row bottomborder">
+        <div class="col-lg-1">Ticket#</div>
+        <div class="col-lg-1">
+           Subject
+        </div>
         
-        <th>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ShortDesc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CompanyName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FullName)
-        </th>
+        <div class="col-lg-1">
+           Create Date
+        </div>
+       <div class="col-lg-3">
+            Short Desc
+        </div>
+        <div class="col-lg-1">
+           Status
+        </div>
+        <di class="col-lg-1">
+           Company Name
+        </di>
+        <div class="col-lg-1">
+            Full Name
+        </div>
+
  @if (User.IsInRole("Admin") || User.IsInRole("Staff"))
  {
 
-           <th>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DueDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CompletedDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Category)
-        </th>
+           <div class="col-lg-1">
+           Start Date<br /> Due Date<br /> Completed Date
+        </div>
+       
+        <div class="col-lg-1">
+            Category
+        </div>
  }
-        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-    </tr>
+        <div class="col-lg-1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+    </div>
 
 @foreach (var item in Model) {
-    <tr><td>@Html.DisplayFor(modelItem => item.TicketId)</td>
-        <td>
+    <div class="row maccordion  expandtext bottomborder "  >
+        
+        <div  class="col-lg-1 ">@Html.DisplayFor(modelItem => item.TicketId)</div>
+        
+        <div  class="col-lg-1">
             @Html.DisplayFor(modelItem => item.Subject)
-        </td>
+        </div>
       
-        <td>
+        <div  class="col-lg-1 smalllabel">
             @Html.DisplayFor(modelItem => item.CreateDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShortDesc)
-        </td>
-        <td>
+        </div>
+        
+        <div  class="col-lg-3">
+            @Html.DisplayFor(modelItem => item.Description)
+        </div>
+        
+        <div  class="col-lg-1">
             @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
+        </div>
+        
+        <div  class="col-lg-1 smalllabel">
             @Html.DisplayFor(modelItem => item.CompanyName)
-        </td>
-        <td>
+        </div>
+        
+        <div  class="col-lg-1 smalllabel">
             @Html.DisplayFor(modelItem => item.FullName)
-        </td>
+        </div>
     @if (User.IsInRole("Admin") || User.IsInRole("Staff"))
     {
-        <td>
+        <div  class="col-lg-1 smalllabel">
             @Html.DisplayFor(modelItem => item.StartDate)
-        </td>
-        <td>
+            <br />
             @Html.DisplayFor(modelItem => item.DueDate)
-        </td>
-        <td>
+            <br />
             @Html.DisplayFor(modelItem => item.CompletedDate) 
-        </td>
-        <td>
+        </div>
+        
+        <div  class="col-lg-1">
             @Html.DisplayFor(modelItem => item.Category)
-        </td>
-        <td>
-           
+        </div>
+        
+        <div  class="col-lg-1">
             @Html.ActionLink(" ", "Edit", new { id = item.TicketId }, new { @class = "glyphicon glyphicon-edit" }) &nbsp;
             @Html.ActionLink(" ", "Details", new { id = item.TicketId }, new { @class = "glyphicon glyphicon-file" })  &nbsp;
             @Html.ActionLink(" ", "Delete", new { id = item.TicketId }, new { @class = "glyphicon glyphicon-remove" })
-        </td>
+        </div>
+
     }
     else if (User.IsInRole("Client"))
     {
-        <td>
+        <div>
 
             @Html.ActionLink(" ", "Details", new { id = item.TicketId }, new { @class = "glyphicon glyphicon-file" })  &nbsp;
-        </td>
+        </div>
 
     }
-    </tr>
+    </div>
 }
 
-</table>
+</div>
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

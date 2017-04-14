@@ -70,7 +70,7 @@ a:hover {
 
 .sidenav {
     position: absolute ;
-    left: 3px ;
+    left: 5px ;
     top: 75px;
     width: 300px;
 
@@ -80,8 +80,11 @@ a:hover {
    
    font-size: .8em;
  
-   margin:7px;
-   padding: 5px;
+   margin-left:   0px;
+   margin-right:  7px;
+   margin-top:    5px;
+   margin-bottom: 5px;
+   padding:       5px;
 }
 .sidetableitm {
    border-style: solid ;
@@ -114,14 +117,23 @@ a:hover {
    padding: 5px
 }
 
-
-div.expandtext {
+.expandtext {
+    padding: 5px 18px;
+   
+    max-height: 75px;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+.bottomborder {
+     border-bottom: 1px solid white;
+}
+/*div.expandtext {
     padding: 0 18px;
    
     max-height: 100px;
     overflow: hidden;
     transition: max-height 0.2s ease-out;
-}
+}*/
 
 
 .badge-hide {
@@ -265,7 +277,8 @@ input,
 select
  {
     max-width: 400px;
-    color: rgba(28, 144, 112, 0.92);
+    color: #045675;
+    background-color: rgba(219, 232, 237, 0.50)
 }
 
 textarea {
@@ -288,4 +301,5 @@ table {
         display: block;
         max-width: 98%;
     }
+    .sidetable { margin-left: 0px; }
 }
