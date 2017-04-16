@@ -244,13 +244,19 @@ namespace FluffyCRM.Controllers
                     foreach (var r in sRoles)
                     {
                         rc = _rp.AddRoleToUser(userID, r.ToString(), userManagerID);
-
+                        if (r == "Staff") {
+                            _rp.AddEmpFromUser(userID);
+                        }
                     }
 
                 }
                 else
                 {
                     rc = _rp.AddRoleToUser(userID, s, userManagerID);
+                    if (s == "Staff")
+                    {
+                        _rp.AddEmpFromUser(userID);
+                    }
                 }
                 if (rc == false)
                 {

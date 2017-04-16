@@ -107,6 +107,45 @@ namespace FluffyCRM.Controllers
 
 
         // GET: JobTasks/Create
+        public ActionResult Assignment(int? taskId)
+        {
+            if (taskId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            ViewBag.Employees = new SelectList(_repos.EmpList(), "UserId", "Name", null);
+
+            return View();
+        }
+
+        // POST: JobTasks/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Assignment([Bind(Include = "TaskId, UserId")] TaskAssignment model)
+        {
+            Employee emp = new Employee();
+
+            if (ModelState.IsValid)
+            {
+                emp = db.Employees.Where(m => m.UserId == model.UserId).SingleOrDefault();
+                if (emp != null)
+                {
+                    model.LastName = emp.LastName;
+                    model.FirstName = emp.FirstName;
+                    model.Initials = emp.Initials;
+                    db.TaskAssignments.Add(model);
+                    db.SaveChanges();
+                }
+                return RedirectToAction("Index");
+            }
+
+            return View(model);
+        }
+
+        // GET: JobTasks/Create
         public ActionResult Create()
         {
             return View();
@@ -190,6 +229,44 @@ namespace FluffyCRM.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
+
+        // GET: TaskNotes/Create
+        public PartialViewResult CreateNote(int? id)
+        {
+            ViewBag.CustList = new SelectList(_repos.GetClientListAll(), "ClientId", "CompanyName", null);
+            TaskNote model = new TaskNote();
+            model.JobTask_Id = id ?? 0;
+            ViewBag.TaskId = id;
+            return PartialView(model);
+        }
+
+        // POST: TaskNotes/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateNote([Bind(Include = "Id,CategoryId,Subject,Comment,JobTask_Id,CreatedBy,CreateDate,Status,DeleteInd,ClientId,StartDate,CompletedDate,DueDate,LocalTime")] TaskNote taskNote)
+        {
+            ViewBag.CustList = new SelectList(_repos.GetClientListAll(), "ClientId", "CompanyName", null);
+            ViewBag.TaskId = taskNote.JobTask_Id;
+            if (ModelState.IsValid)
+            {
+                db.TaskNotes.Add(taskNote);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+
+            }
+             return PartialView(taskNote);
+
+
+
+
+        }
+
+
+
 
         protected override void Dispose(bool disposing)
         {

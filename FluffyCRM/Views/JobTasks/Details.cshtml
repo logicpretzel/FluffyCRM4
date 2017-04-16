@@ -71,14 +71,77 @@
    
 
        
-        
+        <p>
+            @*@Html.ActionLink("New Note", "CreateNote", "TaskNotes", new { id = Model.Id }, new { @class = "btn btn-default" })*@
+
+            <label data-url='@Url.Action("CreateNote", new { id = Model.Id })' 
+                   class="fl-newtasknote btn btn-default" >New Note</label>
+        </p>
+        <div id="newnote" class="col-sm-12 col-med-12 col-lg-12  col-xs-12">
+
+        </div>
+
+        <div id="notelist">@Html.Action("_Notes", "TaskNotes", new { id = Model.Id }) </div>
 
     </div>
-    <p>
-        @Html.ActionLink("New Note", "CreateNote", "TaskNotes", new { id = Model.Id }, new { @class="btn btn-default"})
-    </p>
 
 
-    <div>@Html.Action("_Notes", "TaskNotes", new { id = Model.Id })</div>
+<script>
+    $(document).on("click", '.fl-closetasknote', function (evt) {
+
+        evt.preventDefault();
+        evt.stopPropagation();
+
+        var $details = $('#newnote');
+        $details.html('').fadeOut();
 
 
+
+    });
+
+        $(document).on("click", '.fl-newtasknote', function (evt) {
+           
+            evt.preventDefault();
+            evt.stopPropagation();
+
+            var $details = $('#newnote'),
+                url = $(this).data('url');
+
+            $.get(url, function (data) {
+                $details.html(data).fadeIn();
+            });
+
+
+
+        });
+
+
+        $(document).on("click", '.fl-notesave', function (event) {
+            evt.preventDefault();
+            evt.stopPropagation();
+
+            var $details = $('#newnote'),
+                url = $(this).data('url');
+
+            $.post(url, function (data) {
+                $details.html(data).fadeOut().remove();
+            });
+           
+        });
+
+
+        $(document).on("click", '.notedeletebtn', function (event) {
+            //  evt.preventDefault();
+            //  evt.stopPropagation();
+           
+            url = $(this).data('url');
+            alert(url);
+            $.get(url, { id: id, taskId: taskId })
+            .done(function (response) {
+                $("#list").html(response);
+            });
+
+        });
+
+
+</script>

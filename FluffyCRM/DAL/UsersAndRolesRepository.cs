@@ -237,7 +237,7 @@ namespace FluffyCRM.DAL
             bool rc = false;
             string roleNm = "";
             Guid result;
-            int cd = 0;
+            int? cd = 0;
             //TODO: Need first admin function to override for first user
             if (userID == userManagerID)
             {
@@ -276,8 +276,8 @@ namespace FluffyCRM.DAL
             //TODO: If you're trying to add a client role and user is not attached to a client, should retuen error
             if (roleNm == "Client")
             {
-                cd = GetClientByUID(userID);
-                if (cd < 1)
+                cd = GetClientByUID(userID) ;
+                if (cd == null || cd == 0)
                 {
                     return false;
                 }
@@ -295,6 +295,18 @@ namespace FluffyCRM.DAL
             }
             return rc;
         } // END AddRoleToUser
+
+        public void AddEmpFromUser(string userID)
+        {
+            //bool rc = false;
+            var idParam1 = new SqlParameter
+            {
+                ParameterName = "UID",
+                Value = userID
+            };
+            _dc.Database.ExecuteSqlCommand("INSERT INTO [Employees] ([FirstName],[LastName],[Initials],[JobTitle],[UserId],[Address],[City],[State],[Zip],[Phone1],[PhoneType1]) SELECT [FirstName],[LastName]	  , left(isnull(FirstName,''),1) + left(isnull(LastName,''),1) ,'' ,[Id] ,[Address]  ,[City] ,[State]  ,[Zip] ,[PhoneNumber],1  FROM [AspNetUsers] where [Id] = @UID and not exists (select * from employees where [UserId] = @UID )  ", idParam1);
+            //rc = true;
+        }
         #endregion
 
         public string CreateAuthCode(string userID, int ClientID, string CreatedBy)

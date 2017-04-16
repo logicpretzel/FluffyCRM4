@@ -86,7 +86,9 @@
                             </td>*@
                         <td>
                             @Html.Action("AssignedTo", "JobTasks", new { taskId = item.Id })
+
                         </td>
+                        <td>@Html.ActionLink("Assign", "Assignment", new { taskId = item.Id }) </td>
                         @*<td>
                                 @Html.DisplayFor(modelItem => item.ParentTaskId)
                             </td>
@@ -133,11 +135,8 @@
         <div id="taskdetail">
 
         </div>
-        <hr />
-        <div id="tasknotes">
-
-
-        </div>
+       
+       
     </div>
 
 </div>
@@ -154,27 +153,27 @@
 
             var $details = $('#taskdetail'),
                 url = $(this).data('url');
-            
+
             $.get(url, function (data) {
                 $details.html(data).fadeIn();
             });
-          
-           
 
-               
-          
+
         });
 
-       
+
 
         $(document).on("click", '.js-detailclose', function (event) {
             var $details = $('#taskdetail');
-                    
+
 
 
             $details.fadeOut();
 
         });
 
-    </script>
+
+
+
+</script>
 }

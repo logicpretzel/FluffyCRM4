@@ -2,9 +2,10 @@
 
 @{
     ViewBag.Title = "Create";
+    Layout = "";
 }
 @* Todo: This will be a partial view called by ajax. just here for placeholder for now. *@
-<h2>Create</h2>
+
 
 
 @using (Html.BeginForm()) 
@@ -55,7 +56,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default fl-notesave" />
+                <input type="submit" value="Create" class="btn btn-default fl-notesave" /><label class="fl-closetasknote btn btn-default">Cancel</label>
             </div>
         </div>
     </div>
@@ -66,5 +67,6 @@
 </div>*@
 
 @section Scripts {
+
     @Scripts.Render("~/bundles/jqueryval")
 }

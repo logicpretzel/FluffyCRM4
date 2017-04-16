@@ -196,6 +196,19 @@ namespace FluffyCRM.DAL
             return lst;
         }
 
+
+        public IEnumerable<EmpList> EmpList()
+        {
+            IEnumerable<EmpList> model;
+
+         
+
+            model = _dc.Database.SqlQuery<EmpList>("Select Id, FirstName, LastName, IsNull(FirstName,'') + ' ' + IsNull(LastName,'') as Name, UserId from Employees order by LastName").ToList();
+
+
+
+            return model;
+        }
         public IEnumerable<TaskListNarrow> GetTaskList(int? _ProjectId, string assignedto, string kw)
         {
             int ProjectId = 0;

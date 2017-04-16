@@ -30,7 +30,35 @@ namespace FluffyCRM.Controllers
           
             var lst = _repos.TaskNoteListing(id ?? 0, "", "","");
 
-            return View(lst);
+            return View( lst);
+        }
+
+        // GET: TaskNotes/Delete/5
+        [Route("TaskNotes/DeleteNote/{id ?}/{taskId ?}")]
+        public ActionResult DeleteNote(int id =0, int taskId =0)
+        {
+            if (id == 0)
+            {
+                return RedirectToAction("Index");
+            }
+            if (taskId == 0)
+            {
+                return RedirectToAction("Index");
+            }
+
+            TaskNote taskNote = db.TaskNotes.Find(id);
+            if (taskNote == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+   
+            db.TaskNotes.Remove(taskNote);
+            db.SaveChanges();
+
+         //   var lst = _repos.TaskNoteListing(taskId, "", "", "");
+
+            return RedirectToAction( "Index", "JobTasks");
         }
 
 
@@ -78,13 +106,13 @@ namespace FluffyCRM.Controllers
 
 
         // GET: TaskNotes/Create
-        public ActionResult CreateNote(int? id)
+        public PartialViewResult CreateNote(int? id)
         {
             ViewBag.CustList = new SelectList(_repos.GetClientListAll(), "ClientId", "CompanyName", null);
             TaskNote model = new TaskNote();
             model.JobTask_Id = id ?? 0;
             ViewBag.TaskId = id;
-            return View(model);
+            return PartialView(model);
         }
 
         // POST: TaskNotes/Create
@@ -92,7 +120,7 @@ namespace FluffyCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateNote([Bind(Include = "Id,CategoryId,Subject,Comment,JobTask_Id,CreatedBy,CreateDate,Status,DeleteInd,ClientId,StartDate,CompletedDate,DueDate,LocalTime")] TaskNote taskNote)
+        public void CreateNote([Bind(Include = "Id,CategoryId,Subject,Comment,JobTask_Id,CreatedBy,CreateDate,Status,DeleteInd,ClientId,StartDate,CompletedDate,DueDate,LocalTime")] TaskNote taskNote)
         {
             ViewBag.CustList = new SelectList(_repos.GetClientListAll(), "ClientId", "CompanyName", null);
             ViewBag.TaskId = taskNote.JobTask_Id;
@@ -100,10 +128,14 @@ namespace FluffyCRM.Controllers
             {
                 db.TaskNotes.Add(taskNote);
                 db.SaveChanges();
-                return RedirectToAction("Index", "JobTasks");
-            }
+               // return PartialView(taskNote);
 
-            return View(taskNote);
+            }
+           // return PartialView(taskNote);
+
+
+
+
         }
 
         // GET: TaskNotes/Edit/5

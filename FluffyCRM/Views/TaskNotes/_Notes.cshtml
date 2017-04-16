@@ -75,9 +75,20 @@
 
             <div>
                 @Html.ActionLink("Edit", "EditNote", new { id = item.Id }, new { @class="btn btn-default btn-xs"})
-            </div>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        @*<span class="btn btn-danger btn-xs">
+                            <label data-url='@Url.Action("DeleteNote", new {id = item.Id, taskId = item.JobTask_Id  })'
+                                   class="notedeletebtn">Delete</label>
+                        </span>*@
+
+                        @Html.ActionLink("Delete", "DeleteNote", new { id = item.Id, taskId = item.JobTask_Id }, new { @class = "btn btn-default btn-xs" })
+                    }
+                   
+           </div>
         </div>
        
         }
 
     </div>
+
