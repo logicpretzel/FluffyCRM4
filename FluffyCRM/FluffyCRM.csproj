@@ -547,6 +547,7 @@
     <Content Include="Views\TaskNotes\EditNote.cshtml" />
     <Content Include="Views\JobTasks\Assignment.cshtml" />
     <Content Include="Views\JobTasks\CreateNote.cshtml" />
+    <Content Include="Views\Account\DashBoard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -13,10 +13,16 @@ namespace FluffyCRM.ViewModels
    
         public class StaffDashBoard
         {
-            
+
+            [DisplayName("Client Count")]
             public int ClientCount { get; set; }
+
+            [DisplayName("User Count")]
             public int UserCount { get; set; }
+
+            [DisplayName("Awaiting Validation")]
             public int UsersAwaitingValidation { get; set; }
+
         } 
 
         public class ClientTicket
@@ -67,13 +73,17 @@ namespace FluffyCRM.ViewModels
       ,[FullName]*/
         [Key]
         public int TicketId { get; set; }
+
         public string       Subject { get; set; }
+
         [DisplayName("Category")]
         public string          Category { get; set; }
+
         [DisplayName("Create Date")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yy HH:mm}")]
         public DateTime     CreateDate { get; set; }
+
         public ticketStatus Status { get; set; }
 
         [DisplayName("Client")]
@@ -81,6 +91,7 @@ namespace FluffyCRM.ViewModels
 
         [DisplayName("ClientId")]
         public int?          ClientId { get; set; }
+
         [DisplayName("Start Date")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yy}")]
@@ -98,8 +109,10 @@ namespace FluffyCRM.ViewModels
 
         [StringLength(128)]
         public string       CreatedBy { get; set; }
+
         [DisplayName("Last Name")]
         public string       LastName { get; set; }
+
         [DisplayName("First Name")]
         public String       FirstName { get; set; }
 
@@ -130,8 +143,6 @@ namespace FluffyCRM.ViewModels
         [StringLength(8000)]
         [DataType(DataType.MultilineText)]
         public string Comment { get; set; }
-
-   
 
         [HiddenField]
         public int JobTask_Id { get; set; }

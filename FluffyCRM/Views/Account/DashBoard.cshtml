@@ -1,0 +1,19 @@
+﻿@model FluffyCRM.ViewModels.StaffDashBoard
+
+@{
+    ViewBag.Title = "DashBoard";
+}
+
+
+
+<div class="container boxcolor_1"> 
+    <div class="panel panel-primary">
+        <div class="panel-heading panel-title">@(ViewBag.Title)</div>
+        <div class="panel-body boxcolor_1">
+            <div class="text-center col-lg-4 col-md-4 col-sm-12 col-xs-12"><span class="med-largefont">@Html.DisplayNameFor(model => model.ClientCount)<br />&nbsp;</span><span class="fonthuge text-center">@Html.DisplayFor(model => model.ClientCount)</span> </div>
+            <div class="text-center col-lg-4 col-md-4 col-sm-12 col-xs-12"><span class="med-largefont">@Html.DisplayNameFor(model => model.UserCount)<br />&nbsp;</span><span class="fonthuge text-center">@Html.DisplayFor(model => model.UserCount) </span></div>
+            <div class="text-center col-lg-4 col-md-4 col-sm-12 col-xs-12"><span class="med-largefont">@Html.DisplayNameFor(model => model.UsersAwaitingValidation)<br />&nbsp;</span><span class="fonthuge text-center">@Html.DisplayFor(model => model.UsersAwaitingValidation) </span></div>
+        </div>
+    </div>
+</div>
+

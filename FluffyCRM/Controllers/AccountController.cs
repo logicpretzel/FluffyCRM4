@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using FluffyCRM.Models;
 using FluffyCRM.DAL;
+using FluffyCRM.ViewModels;
 
 namespace FluffyCRM.Controllers
 {
@@ -66,7 +67,14 @@ namespace FluffyCRM.Controllers
         }
 
 
+        public ActionResult Dashboard()
+        {
 
+            StaffDashBoard model = new StaffDashBoard();
+            model = _dc.GetUserClientCounts();
+            return View(model);
+
+        }
 
         #region INDEX
 

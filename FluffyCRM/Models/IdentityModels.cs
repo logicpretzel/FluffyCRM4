@@ -93,5 +93,7 @@ namespace FluffyCRM.Models
         public DbSet<TaskAssignment> TaskAssignments { get; set; }
 
         public DbSet<Employee> Employees { get; set; }
+
+     //   public System.Data.Entity.DbSet<FluffyCRM.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }
