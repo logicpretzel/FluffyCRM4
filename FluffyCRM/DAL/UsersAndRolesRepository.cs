@@ -304,7 +304,7 @@ namespace FluffyCRM.DAL
                 ParameterName = "UID",
                 Value = userID
             };
-            _dc.Database.ExecuteSqlCommand("INSERT INTO [Employees] ([FirstName],[LastName],[Initials],[JobTitle],[UserId],[Address],[City],[State],[Zip],[Phone1],[PhoneType1]) SELECT [FirstName],[LastName]	  , left(isnull(FirstName,''),1) + left(isnull(LastName,''),1) ,'' ,[Id] ,[Address]  ,[City] ,[State]  ,[Zip] ,[PhoneNumber],1  FROM [AspNetUsers] where [Id] = @UID and not exists (select * from employees where [UserId] = @UID )  ", idParam1);
+            _dc.Database.ExecuteSqlCommand("INSERT INTO [Employees] ([FirstName],[LastName],[Initials],[JobTitle],[UserId],[Address],[City],[State],[Zip],[Phone1],[PhoneType1]) SELECT [FirstName],[LastName], left(isnull(FirstName,''),1) + left(isnull(LastName,''),1) ,'' ,[Id] ,[Address]  ,[City] ,[State]  ,[Zip] ,[PhoneNumber],1  FROM [AspNetUsers] where [Id] = @UID and not exists (select * from employees where [UserId] = @UID )  ", idParam1);
             //rc = true;
         }
         #endregion
