@@ -157,16 +157,16 @@ namespace FluffyCRM.Controllers
 
 
         public bool sendAssignTaskNotify(Employee emp, JobTask jt) {
-            string surl = "http://www.ccssllc.com/JobTasks/details/";
+           
             try
             {
                 bool rc = false;
                 var es = new EmailSender();
                 string subj = "You've been assigned a Fluffy New Task!";
-
+                string baseurl = "http://www.ccssllc.com/JobTasks/details/";
+                string surl = String.Format("<a href=\"{0}{1}\">{0}{1}</a>", baseurl, jt.Id.ToString());
                 var email = _repos.GetEmailByUID(emp.UserId);
-                string sTask = "You've been assigned a new task: " + utils.HtmlEncodeDecode.Encode(jt.Name)
-                        + "<br/><br/><To access directly, <a href=\"" + surl + jt.Id.ToString() + "\">Click here</a>";
+                string sTask = "You've been assigned a new task: " + utils.HtmlEncodeDecode.Encode(jt.Name) + "<br /><br />To access directly, go to: "  + surl;
                 var sBody = es.GetNotifyMsgBody("FluffyCRM", sTask);
 
                 es.Send(email, subj, sBody, true, null);
