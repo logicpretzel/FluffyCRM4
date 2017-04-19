@@ -14,11 +14,11 @@ namespace FluffyCRM.utils
 
         public string GetNotifyMsgBody(string sTitle = "", string sBody = "")
         {
-            string font = "font-family: Verdana, Arial, sans-serif; font-size: 1.5em; ";
+            string font = "font-family: Verdana, Arial, sans-serif; font-size: 32px; ";
             string rc = "<body style=\"" 
-                + font + " margin: 0; padding: 0; min-width: 100%; margin: 0; padding: 0; min-width: 100%; width: 100%;\">" 
-                + sTitle + "<hr/><table style=\"width: 100%; max-width: 600px; background-color: #AC5865; color: maroon;\"><tr><td width=\"10px\">&nbsp;&nbsp;&nbsp;</td><table style=\"" 
-                + font + " width: 100%; max-width: 600px; background-color: #AC5865; color: maroon;\"  ><tr>" 
+                + font + " margin: 10px; padding: 5px; min-width: 100%; width: 90%;\">" 
+                + sTitle + "<hr/><table style=\"width: 100%; max-width: 600px; background-color: rgb(60, 101, 234); color: white;\"><tr><td width=\"10px\">&nbsp;&nbsp;&nbsp;</td><table style=\""
+                + font + " width: 100%; max-width: 600px; background-color: steelblue; color: white;\"  ><tr>"
                 + String.Format("<td>\n{0}\n</td>",sBody) 
                 + " </tr></table></td></tr></table></body>";
  

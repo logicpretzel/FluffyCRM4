@@ -12,7 +12,8 @@
 
 .color-s2-0 {
     background-color: #187295;
-    color: white;
+    color: white ;
+
 }
 .color-s2-1 { background-color: #939EA1 ; color: white;}
 .color-s2-2 { background-color: #50889D; color: midnightblue; }
@@ -157,8 +158,8 @@ a:hover {
 }
 
 .boxcolor_1 {
-    background-color: rgba(22, 96, 124, 0.64);
-    color: antiquewhite;
+    background-color: rgba(202, 222, 229, 0.84);
+    color: rgba(18, 15, 15, 0.91);
 
 }
 

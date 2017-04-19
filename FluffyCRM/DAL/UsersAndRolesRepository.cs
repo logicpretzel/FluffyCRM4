@@ -177,7 +177,26 @@ namespace FluffyCRM.DAL
             return model;
         } // END GetUserList
 
-        
+
+
+        private class eml
+        {
+            public string Email { get; set; }
+        }
+
+        public string GetEmailByUID(string userId)
+        {
+            
+
+        var idParam = new SqlParameter
+            {
+                ParameterName = "userId",
+                Value = userId
+            };
+            var rc = _dc.Database.SqlQuery<eml>("Select Email from AspNetUsers where Id = @userId", idParam).SingleOrDefault<eml>();
+            return rc.Email;
+        }
+
         public string GetRoleName(string role)
         {
 

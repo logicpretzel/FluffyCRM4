@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using FluffyCRM.Models;
 using PagedList;
 using FluffyCRM.DAL;
+using FluffyCRM.utils;
 
 namespace FluffyCRM.Controllers
 {
@@ -127,6 +128,8 @@ namespace FluffyCRM.Controllers
         public ActionResult Assignment([Bind(Include = "TaskId, UserId")] TaskAssignment model)
         {
             Employee emp = new Employee();
+            JobTask jt = new JobTask();
+            
 
             if (ModelState.IsValid)
             {
@@ -138,12 +141,42 @@ namespace FluffyCRM.Controllers
                     model.Initials = emp.Initials;
                     db.TaskAssignments.Add(model);
                     db.SaveChanges();
+
+                    jt = db.JobTasks.Find(model.TaskId);
+                    if (jt != null)
+                    {
+                        var rc = sendAssignTaskNotify(emp, jt);
+                    }
+
                 }
                 return RedirectToAction("Index");
             }
 
             return View(model);
         }
+
+
+        public bool sendAssignTaskNotify(Employee emp, JobTask jt) {
+            string surl = "http://www.ccssllc.com/JobTasks/details/";
+            try
+            {
+                bool rc = false;
+                var es = new EmailSender();
+                string subj = "You've been assigned a Fluffy New Task!";
+
+                var email = _repos.GetEmailByUID(emp.UserId);
+                string sTask = "You've been assigned a new task: " + utils.HtmlEncodeDecode.Encode(jt.Name)
+                        + "<br/><br/><To access directly, <a href=\"" + surl + jt.Id.ToString() + "\">Click here</a>";
+                var sBody = es.GetNotifyMsgBody("FluffyCRM", sTask);
+
+                es.Send(email, subj, sBody, true, null);
+
+                es = null;
+                return rc;
+            }
+            catch { return false; }
+        }
+
 
         // GET: JobTasks/Create
         public ActionResult Create()
