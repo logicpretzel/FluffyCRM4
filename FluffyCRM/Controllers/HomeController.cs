@@ -33,7 +33,7 @@ namespace FluffyCRM.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Crystal Clear Software Solutions, LLC.";
             ViewBag.Title = setting.AppTitle;
             ViewBag.Publisher = setting.Publisher;
             return View();
