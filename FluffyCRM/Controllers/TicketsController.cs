@@ -48,10 +48,10 @@ namespace FluffyCRM.Controllers
                 lst = _repos.GetTicketList(userId);
             }
 
-            //if (!String.IsNullOrEmpty(searchString))
-            //{
-            //    lst = lst.Where(s => s.Name.StartsWith(searchString) || s.Description.Contains(searchString));
-            //}
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                lst = lst.Where(s => s.Subject.Contains(searchString) || s.Description.Contains(searchString));
+            }
             //switch (sortOption)
             //{
             //    case "name_acs":

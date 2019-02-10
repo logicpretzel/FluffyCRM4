@@ -8,19 +8,20 @@ using System.Web;
 
 namespace FluffyCRM.Models
 {
+    public enum FlNoteStatus
+    {
+        NONE = 0,
+        NEW = 1,
+        OPENED = 2,
+        STARTED = 4,
+        HOLD = 8,
+        COMPLETE = 16,
+        CLOSED = 32
+
+    }
+
     public class TaskNote
     {
-        public enum FlNoteStatus
-        {
-            NONE = 0,
-            NEW = 1,
-            OPENED = 2,
-            STARTED = 4,
-            HOLD = 8,
-            COMPLETE = 16,
-            CLOSED = 32
-
-        }
 
         [Key]
         public int Id { get; set; }
@@ -31,7 +32,7 @@ namespace FluffyCRM.Models
         [StringLength(255)]
         public string Subject { get; set; }
 
-        [StringLength(8000)]
+        [Column(TypeName = "varchar(MAX)")]
         [DataType(DataType.MultilineText)]
         public string Comment { get; set; }
 
@@ -50,7 +51,7 @@ namespace FluffyCRM.Models
         public FlNoteStatus? Status { get; set; }
 
         [DefaultValue(false)]
-        public bool DeleteInd { get; set; }
+        public bool? DeleteInd { get; set; }
 
         [DisplayName("Customer")]
         public int? ClientId { get; set; }
@@ -70,7 +71,7 @@ namespace FluffyCRM.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? DueDate { get; set; }
 
-        public DateTime? LocalTime { get; set; }
+       
 
     }
 }

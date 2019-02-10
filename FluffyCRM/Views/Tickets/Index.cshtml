@@ -7,6 +7,15 @@
 
 <h6>@ViewBag.Title</h6>
 
+
+@using (Html.BeginForm("Index", "Tickets", FormMethod.Get))
+{
+    <p>
+        Search: @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
+
+        <input type="submit" value="Search" />
+    </p>
+}
 <p>
     @if (User.IsInRole("Staff")|| User.IsInRole("Admin"))
     {

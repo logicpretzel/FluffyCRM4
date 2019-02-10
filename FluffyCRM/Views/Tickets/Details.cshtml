@@ -12,7 +12,7 @@
             <div class="panel-heading color-p-1">
                 <div class="col-sm-6 col-med-4 col-lg-4  col-xs-12">
                     @(ViewBag.Title)
-                
+                   
                 </div>
                 <div class="col-sm-6 col-med-4 col-lg-4  col-xs-12">
                     <span class="smalllabel">@Html.DisplayNameFor(model => model.TicketId)</span><br />
@@ -20,7 +20,7 @@
                     <br />
                 </div>
                 <div class="col-sm-6 col-med-4 col-lg-4  col-xs-12">
-                    &nbsp;
+                    &nbsp;<div class="text-right btn btn-info">@Html.ActionLink("Back to listing", "Index")</div>
                     <br />
                 </div>
                 <br /><br />

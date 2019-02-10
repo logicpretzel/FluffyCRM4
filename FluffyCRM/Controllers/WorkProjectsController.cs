@@ -6,21 +6,25 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using FluffyCRM.DAL;
 using FluffyCRM.Models;
 using PagedList;
 
 namespace FluffyCRM.Controllers
 {
+
+    [Authorize]
     public class WorkProjectsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+        private DataRepository _repos = new DataRepository();
         // GET: WorkProjects
         //public ActionResult Index()
         //{
         //    return View(db.WorkProjects.ToList());
         //}
 
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Projects(string searchString, string sortOption, int page = 1)
         {
             int pageSize = 10;
@@ -72,6 +76,7 @@ namespace FluffyCRM.Controllers
 
         }
 
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
 
         {
@@ -116,6 +121,7 @@ namespace FluffyCRM.Controllers
         }
 
         // GET: WorkProjects/Details/5
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -131,8 +137,11 @@ namespace FluffyCRM.Controllers
         }
 
         // GET: WorkProjects/Create
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Create()
         {
+            var lst = _repos.GetProductList();
+            ViewBag.ProductList = new SelectList(lst, "Id", "Name", null);
             return View();
         }
 
@@ -141,6 +150,7 @@ namespace FluffyCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Create([Bind(Include = "Id,Name,ProdId,Version,ProjType,Description,CreatedBy,StartDate,CompletedDate,DueDate,LocalTime")] WorkProject workProject)
         {
             if (ModelState.IsValid)
@@ -158,6 +168,7 @@ namespace FluffyCRM.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         // GET: WorkProjects/Edit/5
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -169,6 +180,8 @@ namespace FluffyCRM.Controllers
             {
                 return HttpNotFound();
             }
+            var lst = _repos.GetProductList();
+            ViewBag.ProductList = new SelectList(lst, "Id", "Name", null);
             return View(workProject);
         }
 
@@ -177,6 +190,7 @@ namespace FluffyCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Edit([Bind(Include = "Id,Name,ProdId,Version,ProjType,Description,CreatedBy,StartDate,CompletedDate,DueDate,LocalTime")] WorkProject workProject)
         {
             if (ModelState.IsValid)
@@ -189,6 +203,7 @@ namespace FluffyCRM.Controllers
         }
 
         // GET: WorkProjects/Delete/5
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -206,6 +221,7 @@ namespace FluffyCRM.Controllers
         // POST: WorkProjects/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult DeleteConfirmed(int id)
         {
             WorkProject workProject = db.WorkProjects.Find(id);

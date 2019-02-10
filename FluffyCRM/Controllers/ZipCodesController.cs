@@ -23,6 +23,7 @@ namespace FluffyCRM.Controllers
         //    return View(await db.ZipCodes.ToListAsync());
         //}
 
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Index(string sortOrder, string currentFilter,  string searchString, int? page)
 
         {
@@ -74,6 +75,7 @@ namespace FluffyCRM.Controllers
 
 
         // GET: ZipCodes/Details/5
+        [Authorize(Roles = "Admin,Staff")]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -89,6 +91,7 @@ namespace FluffyCRM.Controllers
         }
 
         // GET: ZipCodes/Create
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Create()
         {
             return View();
@@ -112,6 +115,7 @@ namespace FluffyCRM.Controllers
         }
 
         // GET: ZipCodes/Edit/5
+        [Authorize(Roles = "Admin,Staff")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -131,6 +135,7 @@ namespace FluffyCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Staff")]
         public async Task<ActionResult> Edit([Bind(Include = "ID,Zip,City,StateAbbrev,PostalOrder")] ZipCode zipCode)
         {
             if (ModelState.IsValid)
@@ -143,6 +148,7 @@ namespace FluffyCRM.Controllers
         }
 
         // GET: ZipCodes/Delete/5
+        [Authorize(Roles = "Admin,Staff")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -160,6 +166,7 @@ namespace FluffyCRM.Controllers
         // POST: ZipCodes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Staff")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             ZipCode zipCode = await db.ZipCodes.FindAsync(id);

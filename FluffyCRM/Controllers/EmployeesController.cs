@@ -10,17 +10,20 @@ using FluffyCRM.Models;
 
 namespace FluffyCRM.Controllers
 {
+    [Authorize]
     public class EmployeesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Employees
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Index()
         {
             return View(db.Employees.ToList());
         }
 
         // GET: Employees/Details/5
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,6 +39,7 @@ namespace FluffyCRM.Controllers
         }
 
         // GET: Employees/Create
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Create()
         {
             return View();
@@ -46,6 +50,7 @@ namespace FluffyCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Initials,JobTitle,UserId,Address,City,State,Zip,Phone1,PhoneType1,Phone2,PhoneType2")] Employee employee)
         {
             if (ModelState.IsValid)
@@ -59,6 +64,7 @@ namespace FluffyCRM.Controllers
         }
 
         // GET: Employees/Edit/5
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,6 +84,7 @@ namespace FluffyCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Initials,JobTitle,UserId,Address,City,State,Zip,Phone1,PhoneType1,Phone2,PhoneType2")] Employee employee)
         {
             if (ModelState.IsValid)
@@ -90,6 +97,7 @@ namespace FluffyCRM.Controllers
         }
 
         // GET: Employees/Delete/5
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -107,6 +115,7 @@ namespace FluffyCRM.Controllers
         // POST: Employees/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult DeleteConfirmed(int id)
         {
             Employee employee = db.Employees.Find(id);

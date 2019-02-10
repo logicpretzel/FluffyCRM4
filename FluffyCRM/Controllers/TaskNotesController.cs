@@ -8,15 +8,20 @@ using System.Web;
 using System.Web.Mvc;
 using FluffyCRM.Models;
 using FluffyCRM.DAL;
+using FluffyCRM.ViewModels;
 
 namespace FluffyCRM.Controllers
 {
+
+    [Authorize]
     public class TaskNotesController : Controller
     {
+        
         private ApplicationDbContext db = new ApplicationDbContext();
         private DataRepository _repos = new DataRepository();
 
         // GET: TaskNotes
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Index(int? id)
         {
             var lst = _repos.TaskNoteListing(id ?? 0, "", "","");
@@ -25,6 +30,7 @@ namespace FluffyCRM.Controllers
         }
 
         // GET: TaskNotes
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult _Notes(int? id, int? page)
         {
           
@@ -34,6 +40,7 @@ namespace FluffyCRM.Controllers
         }
 
         // GET: TaskNotes/Delete/5
+        [Authorize(Roles = "Admin,Staff")]
         [Route("TaskNotes/DeleteNote/{id ?}/{taskId ?}")]
         public ActionResult DeleteNote(int id =0, int taskId =0)
         {
@@ -63,6 +70,7 @@ namespace FluffyCRM.Controllers
 
 
         // GET: TaskNotes/Details/5
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -78,6 +86,7 @@ namespace FluffyCRM.Controllers
         }
 
         // GET: TaskNotes/Create
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Create(int? id)
         {
             TaskNote model = new TaskNote();
@@ -91,6 +100,7 @@ namespace FluffyCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Create([Bind(Include = "Id,CategoryId,Subject,Comment,JobTask_Id,CreatedBy,CreateDate,Status,DeleteInd,ClientId,StartDate,CompletedDate,DueDate,LocalTime")] TaskNote taskNote)
         {
             ViewBag.CustList = new SelectList(_repos.GetClientListAll(), "ClientId", "CompanyName", null);
@@ -106,6 +116,7 @@ namespace FluffyCRM.Controllers
 
 
         // GET: TaskNotes/Create
+        [Authorize(Roles = "Admin,Staff")]
         public PartialViewResult CreateNote(int? id)
         {
             ViewBag.CustList = new SelectList(_repos.GetClientListAll(), "ClientId", "CompanyName", null);
@@ -120,15 +131,18 @@ namespace FluffyCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Staff")]
         public void CreateNote([Bind(Include = "Id,CategoryId,Subject,Comment,JobTask_Id,CreatedBy,CreateDate,Status,DeleteInd,ClientId,StartDate,CompletedDate,DueDate,LocalTime")] TaskNote taskNote)
         {
             ViewBag.CustList = new SelectList(_repos.GetClientListAll(), "ClientId", "CompanyName", null);
             ViewBag.TaskId = taskNote.JobTask_Id;
             if (ModelState.IsValid)
             {
-                db.TaskNotes.Add(taskNote);
-                db.SaveChanges();
-               // return PartialView(taskNote);
+
+                _repos.AddOrUpdateNote(taskNote);
+                //db.TaskNotes.Add(taskNote);
+                //db.SaveChanges();
+                // return PartialView(taskNote);
 
             }
            // return PartialView(taskNote);
@@ -139,6 +153,7 @@ namespace FluffyCRM.Controllers
         }
 
         // GET: TaskNotes/Edit/5
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -159,6 +174,7 @@ namespace FluffyCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Edit([Bind(Include = "Id,CategoryId,Subject,Comment,JobTask_Id,CreatedBy,CreateDate,Status,DeleteInd,ClientId,StartDate,CompletedDate,DueDate,LocalTime")] TaskNote taskNote)
         {
             ViewBag.CustList = new SelectList(_repos.GetClientListAll(), "ClientId", "CompanyName", null);
@@ -172,6 +188,7 @@ namespace FluffyCRM.Controllers
         }
 
         // GET: TaskNotes/Delete/5
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -189,6 +206,7 @@ namespace FluffyCRM.Controllers
         // POST: TaskNotes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult DeleteConfirmed(int id)
         {
             TaskNote taskNote = db.TaskNotes.Find(id);
@@ -201,6 +219,7 @@ namespace FluffyCRM.Controllers
 
 
         // GET: TaskNotes/Edit/5
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult EditNote(int? id)
         {
             if (id == null)
@@ -221,6 +240,7 @@ namespace FluffyCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult EditNote([Bind(Include = "Id,CategoryId,Subject,Comment,JobTask_Id,CreatedBy,CreateDate,Status,DeleteInd,ClientId,StartDate,CompletedDate,DueDate,LocalTime")] TaskNote taskNote)
         {
             ViewBag.CustList = new SelectList(_repos.GetClientListAll(), "ClientId", "CompanyName", null);
@@ -233,7 +253,7 @@ namespace FluffyCRM.Controllers
             return View(taskNote);
         }
 
-
+    
 
 
         protected override void Dispose(bool disposing)

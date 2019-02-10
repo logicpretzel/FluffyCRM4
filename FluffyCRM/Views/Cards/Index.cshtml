@@ -1,0 +1,55 @@
+﻿@model IEnumerable<FluffyCRM.Models.Card>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Add Card", "AddCard")
+</p>
+<div style=" display: flex;min-width:100px; width: 100%; flex-wrap: wrap; ">
+    @foreach (var item in Model)     {
+    
+     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 " >
+        <h4 >
+            @Html.DisplayFor(modelItem => item.Title)
+        </h4>
+        <p>
+            @Html.DisplayFor(modelItem => item.Detail)
+        </p>
+        <p>
+            @Html.DisplayFor(modelItem => item.CreateDt)
+        </p>
+        <!--
+            <div>
+                @Html.DisplayFor(modelItem => item.ProjectId)
+            </div>
+            <div>
+                @Html.DisplayFor(modelItem => item.SprintId)
+            </div>
+            <div>
+                @Html.DisplayFor(modelItem => item.StartDt)
+            </div>
+            <div>
+                @Html.DisplayFor(modelItem => item.CompletedDt)
+            </div>
+            <div>
+                @Html.DisplayFor(modelItem => item.BudgetHours)
+            </div>
+            <div>
+                @Html.DisplayFor(modelItem => item.ActualHours)
+            </div>
+            <div>
+                @Html.DisplayFor(modelItem => item.CatId)
+            </div>
+            <div>
+                @Html.DisplayFor(modelItem => item.StatusId)
+            </div>
+    -->
+    </div>
+
+    }
+
+</div>

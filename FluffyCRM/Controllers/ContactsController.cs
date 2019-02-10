@@ -10,17 +10,20 @@ using FluffyCRM.Models;
 
 namespace FluffyCRM.Controllers
 {
+    [Authorize]
     public class ContactsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Contacts
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Index()
         {
             return View(db.Contacts.ToList());
         }
 
         // GET: Contacts/Details/5
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,6 +39,7 @@ namespace FluffyCRM.Controllers
         }
 
         // GET: Contacts/Create
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Create()
         {
             return View();
@@ -46,6 +50,7 @@ namespace FluffyCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Address1,Address2,City,State,Zip,Phone1,PhoneType1,Email,ClientId")] Contact contact)
         {
             if (ModelState.IsValid)
@@ -59,6 +64,7 @@ namespace FluffyCRM.Controllers
         }
 
         // GET: Contacts/Edit/5
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,6 +84,7 @@ namespace FluffyCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Address1,Address2,City,State,Zip,Phone1,PhoneType1,Email,ClientId")] Contact contact)
         {
             if (ModelState.IsValid)
@@ -90,6 +97,7 @@ namespace FluffyCRM.Controllers
         }
 
         // GET: Contacts/Delete/5
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -107,6 +115,7 @@ namespace FluffyCRM.Controllers
         // POST: Contacts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult DeleteConfirmed(int id)
         {
             Contact contact = db.Contacts.Find(id);

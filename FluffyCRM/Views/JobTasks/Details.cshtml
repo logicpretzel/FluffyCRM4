@@ -6,15 +6,15 @@
 }
 
 @*<h2>Details</h2>*@
-
-
+<br />
+<div class="caption" >@(ViewBag.Title)</div>
 
     <div class="container boxcolor_1 col-lg-12">
         <div class="flright"> <span class="btn btn-sm btn-default">@Html.ActionLink("Edit", "Edit", new { id = Model.Id })</span><span class="btn btn-sm btn-default js-detailclose" data-url=''>Close</span></div>
         <div class="panel col-med-12 col-med-12 col-lg-12 col-xs-12  boxcolor_1">
             
             <div class="panel-heading color-p-1">
-                <div class="col-lg-4">@(ViewBag.Title)</div> <div class="col-lg-4 center-block">&nbsp;@Html.DisplayNameFor(model => model.Id):&nbsp;<span>@Html.DisplayFor(model => model.Id)</span></div>
+                <div class="col-lg-4">@(ViewBag.Title)&nbsp;</div> <div class="col-lg-4 center-block">&nbsp;@Html.DisplayNameFor(model => model.Id):&nbsp;<span>@Html.DisplayFor(model => model.Id)</span></div>
                 
                 <br />  
             </div>
@@ -81,7 +81,7 @@
 
         </div>
 
-        <div id="notelist">@Html.Action("_Notes", "TaskNotes", new { id = Model.Id }) </div>
+        <div id="notelist">@Html.Action("_Notes", "JobTasks", new { id = Model.Id }) </div>
 
     </div>
 
@@ -94,7 +94,7 @@
 
         var $details = $('#newnote');
         $details.html('').fadeOut();
-
+        //$('.dropdown-toggle').dropdown();
 
 
     });
@@ -103,44 +103,44 @@
            
             evt.preventDefault();
             evt.stopPropagation();
-
+           // alert("Hi");
             var $details = $('#newnote'),
                 url = $(this).data('url');
 
             $.get(url, function (data) {
                 $details.html(data).fadeIn();
             });
-
+          //  $('.dropdown-toggle').dropdown();
 
 
         });
 
 
         $(document).on("click", '.fl-notesave', function (event) {
-            evt.preventDefault();
-            evt.stopPropagation();
+           // event.preventDefault();
+           // event.stopPropagation();
 
             var $details = $('#newnote'),
                 url = $(this).data('url');
 
             $.post(url, function (data) {
-                $details.html(data).fadeOut().remove();
+                $details.html(data).fadeOut();
             });
-           
+          //  $('.dropdown-toggle').dropdown();
         });
 
 
         $(document).on("click", '.notedeletebtn', function (event) {
-            //  evt.preventDefault();
-            //  evt.stopPropagation();
+           // event.preventDefault();
+          //  event.stopPropagation();
            
             url = $(this).data('url');
-            alert(url);
+            //alert(url);
             $.get(url, { id: id, taskId: taskId })
             .done(function (response) {
                 $("#list").html(response);
             });
-
+          //  $('.dropdown-toggle').dropdown();
         });
 
 

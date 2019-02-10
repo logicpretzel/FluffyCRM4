@@ -64,10 +64,18 @@ a:visited {
 }
 
 a:hover {
-    color: cornflowerblue;
+    color: black;
     font-weight: bolder;
     text-decoration:underline;
 }
+
+.js-loaddetail:hover {
+    color: black;
+    font-weight: bolder;
+    text-decoration:underline;
+
+}
+
 
 .sidenav {
     position: absolute ;
@@ -334,6 +342,13 @@ textarea {
 
      
 }
+
+
+
+.cardx {
+background-color: aqua;  
+}
+
 
 /*table {
     width: 300px;

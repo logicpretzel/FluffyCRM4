@@ -29,6 +29,17 @@ namespace FluffyCRM.ViewModels
 
     }
 
+    public class ProductListVM {
+        [Key]
+        public int Id { get; set; }
+
+        [StringLength(255)]
+        public string Name { get; set; }
+
+        [StringLength(32)]
+        public string Version { get; set; }
+    }
+
     public class DevNotes : TaskNote {
         [DisplayName("Note Type")]
         [StringLength(100)]

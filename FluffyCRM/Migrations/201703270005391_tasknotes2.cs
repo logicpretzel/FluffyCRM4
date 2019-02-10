@@ -7,12 +7,12 @@ namespace FluffyCRM.Migrations
     {
         public override void Up()
         {
-            DropForeignKey("dbo.TaskNotes", "JobTask_Id", "dbo.JobTasks");
-            DropIndex("dbo.TaskNotes", new[] { "JobTask_Id" });
-            AddColumn("dbo.TaskNotes", "JobTask_Id1", c => c.Int());
+            //DropForeignKey("dbo.TaskNotes", "JobTask_Id", "dbo.JobTasks");
+            ////DropIndex("dbo.TaskNotes", new[] { "JobTask_Id" });
+            AddColumn("dbo.TaskNotes", "JobTask_Id", c => c.Int());
             AlterColumn("dbo.TaskNotes", "JobTask_Id", c => c.Int(nullable: false));
-            CreateIndex("dbo.TaskNotes", "JobTask_Id1");
-            AddForeignKey("dbo.TaskNotes", "JobTask_Id1", "dbo.JobTasks", "Id");
+            CreateIndex("dbo.TaskNotes", "JobTask_Id");
+            AddForeignKey("dbo.TaskNotes", "JobTask_Id", "dbo.JobTasks", "Id");
             DropColumn("dbo.TaskNotes", "ParentId");
         }
         

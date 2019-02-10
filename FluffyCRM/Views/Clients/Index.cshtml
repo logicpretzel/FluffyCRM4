@@ -1,39 +1,45 @@
-﻿@model IEnumerable<FluffyCRM.Models.Client>
+﻿@model PagedList.IPagedList<Client>
+@using FluffyCRM.Models;
+@using PagedList.Mvc;
 
 @{
     // 
 }
 
 <h2>  @(ViewBag.Title) </h2>
+@using (Html.BeginForm("Index", "Clients", FormMethod.Get))
+{
+    <p>
+        Search: @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
 
+        <input type="submit" value="Search" />
+    </p>
+}
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.CompanyName)
+           Company Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Address1)
+            Address
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Address2)
+            City
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.City)
+            State
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.State)
+            Zip
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Zip)
+            Phone
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Phone1)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PhoneType1)
+            Phone Type
         </th>
         <th></th>
     </tr>
@@ -44,10 +50,8 @@
             @Html.DisplayFor(modelItem => item.CompanyName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Address1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address2)
+            @Html.DisplayFor(modelItem => item.Address1) <br />@Html.DisplayFor(modelItem => item.Address2)
+            
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.City)
@@ -73,3 +77,8 @@
 }
 
 </table>
+<br />
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

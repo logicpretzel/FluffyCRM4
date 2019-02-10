@@ -57,7 +57,7 @@ namespace FluffyCRM.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-              : base("CCSSLLC_DB", throwIfV1Schema: false)
+             : base("FluffyDB", throwIfV1Schema: false)
         //  : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
@@ -79,7 +79,8 @@ namespace FluffyCRM.Models
         public DbSet<ClientUser>    ClientUsers     { get; set; }
         public DbSet<Category>      Categories      { get; set; }
         public DbSet<TicketComment> TicketComments  { get; set; }
-        
+
+        public DbSet<Card>          Cards { get; set; }
 
         public DbSet<AuthCode>      AuthCodes       { get; set; }
 
@@ -89,11 +90,11 @@ namespace FluffyCRM.Models
 
         public DbSet<WorkProject>   WorkProjects { get; set; }
 
-        public DbSet<TaskNote> TaskNotes { get; set; }
+        public DbSet<TaskNote>      TaskNotes { get; set; }
         public DbSet<TaskAssignment> TaskAssignments { get; set; }
 
-        public DbSet<Employee> Employees { get; set; }
-
-     //   public System.Data.Entity.DbSet<FluffyCRM.Models.ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<Employee>      Employees { get; set; }
+        public DbSet<Picture>       Pictures { get; set; }
+        //   public System.Data.Entity.DbSet<FluffyCRM.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }

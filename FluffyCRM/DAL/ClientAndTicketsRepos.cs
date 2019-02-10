@@ -14,7 +14,7 @@ namespace FluffyCRM.DAL
         private class clID
         {
             public string UserID { get; set; }
-            public int ClientID { get; set; }
+            public int? ClientID { get; set; }
 
         }
 
@@ -51,6 +51,64 @@ namespace FluffyCRM.DAL
             
             return model;
         }
+
+        #region Notes
+
+        public TaskNote GetTaskNote(int? Id = 0)
+        {
+            TaskNote model;
+
+            var idParam1 = new SqlParameter
+            {
+                ParameterName = "Id",
+                Value = Id == null ? 0: (int)Id 
+            };
+
+            model = _dc.Database.SqlQuery<TaskNote>("Select * from TaskNotes where Id = @Id", idParam1).SingleOrDefault();
+            
+
+            return model;
+        }
+
+        public bool AddOrUpdateNote(TaskNote note)
+        {
+            bool rc = false;
+             
+
+            string sql = "EXEC	 [dbo].[AddOrUpdateNote] @JobTask_Id,@ClientId,@CategoryId,@Subject,"
+                +"@Comment,@Status,@StartDate,@CompletedDate,@DueDate,@CreatedBy,@Id,@discriminator";
+
+            //try
+            //     {
+
+            _dc.Database.ExecuteSqlCommand(sql
+                        , new SqlParameter("@JobTask_Id", note.JobTask_Id )
+                        , new SqlParameter("@ClientId", note.ClientId == null ? 0 : (object)note.ClientId)
+                        , new SqlParameter("@CategoryId", note.CategoryId == null ? 1 : (object)note.CategoryId) //1=TaskNote
+                        , new SqlParameter("@Subject", note.Subject.ToString())
+                        , new SqlParameter("@Comment", note.Comment == null ? 0 : (object)note.Comment)
+                        , new SqlParameter("@Status", note.Status == null ? 0 : (object)note.Status)
+                        , new SqlParameter("@StartDate", note.StartDate == null ? DBNull.Value : (object)note.StartDate)
+                        , new SqlParameter("@CompletedDate", note.CompletedDate == null ? DBNull.Value : (object)note.CompletedDate)
+                        , new SqlParameter("@DueDate", note.DueDate == null ? DBNull.Value : (object)note.DueDate)
+                        , new SqlParameter("@CreatedBy", note.CreatedBy == null ? 0 : (object)note.CreatedBy)
+                        , new SqlParameter("@Id", note.Id )
+                        , new SqlParameter("@discriminator", "TaskNote")
+
+
+                     );
+            rc = true;
+            //    }
+            //     catch
+            //     {
+            //         rc = false;
+            //     }
+            return rc;
+
+        }
+        #endregion
+
+
         #region TICKETS
         public IEnumerable<TicketList> GetTicketList(string UserID = "")
         {
@@ -118,7 +176,7 @@ namespace FluffyCRM.DAL
 
             _dc.Database.ExecuteSqlCommand(sql
                      , new SqlParameter("@Subject", ticket.Subject.ToString())
-                     , new SqlParameter("@CategoryId", ticket.CategoryId.Value)
+                     , new SqlParameter("@CategoryId", ticket.CategoryId == null ? 0 : (object)ticket.CategoryId.Value)
                      , new SqlParameter("@Description", ticket.Description.ToString())
                      , new SqlParameter("@Status", Convert.ToInt32(ticket.Status.Value))
                      , new SqlParameter("@DeleteInd", Convert.ToBoolean(ticket.DeleteInd))
@@ -158,6 +216,15 @@ namespace FluffyCRM.DAL
           
 
             
+            return model;
+        }
+
+        public IEnumerable<ProductListVM> GetProductList()
+        {
+            IEnumerable<ProductListVM> model;
+            
+            model = _dc.Database.SqlQuery<ProductListVM>("Select [Id] ,[Name], [CurrentVersion] from [ProductSolutions] order by Name").ToList();
+
             return model;
         }
 
@@ -234,7 +301,7 @@ namespace FluffyCRM.DAL
                
             };
 
-            IEnumerable<TaskListNarrow> lst = _dc.Database.SqlQuery<TaskListNarrow>("EXEC webuser.GetTaskList @projectid=@ProjectId, @assignedto=@assignedto, @kw=@kw", idParam1, idParam2, idParam3).ToList();
+            IEnumerable<TaskListNarrow> lst = _dc.Database.SqlQuery<TaskListNarrow>("EXEC GetTaskList @projectid=@ProjectId, @assignedto=@assignedto, @kw=@kw", idParam1, idParam2, idParam3).ToList();
 
 
             return lst;
@@ -278,7 +345,7 @@ namespace FluffyCRM.DAL
             try
             {
 
-                _dc.Database.ExecuteSqlCommand("EXEC webuser.LinkUserToClient @UID=@uid, @clientid=@clientid, @UserId=@userId", idParam1, idParam2, idParam3);
+                _dc.Database.ExecuteSqlCommand("EXEC LinkUserToClient @UID=@uid, @clientid=@clientid, @UserId=@userId", idParam1, idParam2, idParam3);
                 rc = true;
             }
             catch
@@ -304,7 +371,7 @@ namespace FluffyCRM.DAL
             clID rc = _dc.Database.SqlQuery<clID>("Select top 1 u.Id as UserId, u.ClientId as ClientId, cu.ContactId from AspNetUsers u  left outer join ClientUsers cu on cu.UserId = u.Id where u.Id = @uid", idParam).SingleOrDefault();
             if (rc != null)
             {
-                return rc.ClientID;
+                return rc.ClientID ?? 0;
             }
             else return -1;
         }
@@ -337,7 +404,7 @@ namespace FluffyCRM.DAL
                 Value = kw.Length > 0 ? kw : SqlString.Null
 
             };
-            IEnumerable<DevNotes> lst = _dc.Database.SqlQuery<DevNotes>("exec webuser.TaskNotesList  @TaskId=@TaskId, @assignedTo=@assignedTo,@kw=@kw", idParam1, idParam2, idParam3).ToList();
+            IEnumerable<DevNotes> lst = _dc.Database.SqlQuery<DevNotes>("exec TaskNotesList  @TaskId=@TaskId, @assignedTo=@assignedTo,@kw=@kw", idParam1, idParam2, idParam3).ToList();
 
 
             return lst;
@@ -369,8 +436,26 @@ namespace FluffyCRM.DAL
                 Value = kw.Length > 0 ? kw : SqlString.Null
 
             };
-            IEnumerable<TaskNoteList> lst = _dc.Database.SqlQuery<TaskNoteList>("exec webuser.TaskNotesListing  @taskId=@taskId, @assignedTo=@assignedTo, @CreatedBy=@CreatedBy, @kw=@kw", idParam1, idParam2, idParam3, idParam4).ToList();
-
+            IEnumerable<TaskNoteList> lst = _dc.Database.SqlQuery<TaskNoteList>("exec TaskNotesListing  @taskId=@taskId, @assignedTo=@assignedTo, @CreatedBy=@CreatedBy, @kw=@kw", idParam1, idParam2, idParam3, idParam4).ToList();
+            /*
+             NoteType, 	
+CategoryId, 
+Subject, 	
+Comment, 
+JobTask_Id, 
+TaskName, 
+CreatedBy, 
+CreateDate, 
+Status, 
+AddedByName, 
+AssignedName, 
+ClientName, 
+ClientId, 
+StartDate, 
+CompletedDate, 
+DueDate, 
+LocalTime
+             */
 
             return lst;
         }
@@ -397,7 +482,7 @@ namespace FluffyCRM.DAL
                 Value = kw.Length > 0 ? kw : SqlString.Null
 
             };
-            IEnumerable<TicketCommentList> lst = _dc.Database.SqlQuery<TicketCommentList>("exec webuser.TicketCommentList  @TicketId=@TicketId, @CreatedBy=@CreatedBy, @kw=@kw", idParam1, idParam2, idParam3).ToList();
+            IEnumerable<TicketCommentList> lst = _dc.Database.SqlQuery<TicketCommentList>("exec TicketCommentList  @TicketId=@TicketId, @CreatedBy=@CreatedBy, @kw=@kw", idParam1, idParam2, idParam3).ToList();
 
 
             return lst;
@@ -405,8 +490,17 @@ namespace FluffyCRM.DAL
 
 
 
+        public Picture GetImage(int imageID)
+        {
+            Picture image = (from i in _dc.Pictures
+                             where i.Id == imageID
+                             select i).FirstOrDefault();
+
+            return image;
+        }
 
 
 
     }
+
 }

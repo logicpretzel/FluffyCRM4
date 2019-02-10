@@ -67,9 +67,8 @@ namespace FluffyCRM.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? DueDate { get; set; }
 
-        public DateTime? LocalTime { get; set; }
-
-       public ICollection<TaskNote> TaskNotes { get; set; }
+       
+       
 
     }
 }

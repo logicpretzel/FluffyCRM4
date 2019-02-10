@@ -12,11 +12,15 @@ using Microsoft.AspNet.Identity;
 
 namespace FluffyCRM.Controllers
 {
+    [Authorize]
     public class TicketCommentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         private DataRepository _repos = new DataRepository();
+
+
         // GET: TicketComments
+        [Authorize(Roles = "Admin,Staff,Client")]
         public ActionResult Index(int? id)
         {
             int ID = id == null ? 0 : (int)id;
@@ -25,6 +29,7 @@ namespace FluffyCRM.Controllers
         }
 
         // GET: TicketComments/Details/5
+        [Authorize(Roles = "Admin,Staff,Client")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -40,6 +45,7 @@ namespace FluffyCRM.Controllers
         }
 
         // GET: TicketComments/Create
+        [Authorize(Roles = "Admin,Staff,Client")]
         public ActionResult Create(int? id)
         {
 
@@ -69,6 +75,7 @@ namespace FluffyCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Staff,Client")]
         public ActionResult Create([Bind(Include = "Id,TicketId,Subject,Description")] TicketComment ticketComment)
         {
             DateTime dt = new DateTime();
@@ -91,6 +98,7 @@ namespace FluffyCRM.Controllers
         }
 
         // GET: TicketComments/Create
+        [Authorize(Roles = "Admin,Staff,Client")]
         public ActionResult NewComment(int? id)
         {
             int  _id = id == null ? 0 : (int)id;
@@ -119,6 +127,7 @@ namespace FluffyCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Staff,Client")]
         public ActionResult NewComment([Bind(Include = "Id,TicketId,Subject,Description")] TicketComment ticketComment)
         {
             DateTime dt = new DateTime();
@@ -148,6 +157,7 @@ namespace FluffyCRM.Controllers
            
         }
         // GET: TicketComments/Edit/5
+        [Authorize(Roles = "Admin,Staff,Client")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -176,6 +186,7 @@ namespace FluffyCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Staff,Client")]
         public ActionResult Edit([Bind(Include = "Id,Subject,Description,Status,TicketId")] TicketComment ticketComment)
         {
 
@@ -191,6 +202,7 @@ namespace FluffyCRM.Controllers
         }
 
         // GET: TicketComments/Delete/5
+        [Authorize(Roles = "Admin,Staff,Client")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -208,6 +220,7 @@ namespace FluffyCRM.Controllers
         // POST: TicketComments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Staff,Client")]
         public ActionResult DeleteConfirmed(int id)
         {
             TicketComment ticketComment = db.TicketComments.Find(id);

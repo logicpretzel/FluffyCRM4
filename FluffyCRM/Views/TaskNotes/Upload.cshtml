@@ -1,0 +1,31 @@
+﻿@model FluffyCRM.ViewModels.PictureAddView
+
+@{
+    ViewBag.Title = "Upload";
+}
+
+<h2>Upload</h2>
+
+@using (Html.BeginForm("Upload", "Recipes", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+<input type="hidden" name="SourceID" value="@ViewBag.TaskID" />
+<table>
+    <tr>
+        <td>Select File : </td>
+        <td>
+            @Html.TextBoxFor(Model => Model.File, new { type = "file" })
+            @Html.ValidationMessage("CustomError")
+        </td>
+
+        <td>
+            <input type="submit" value="Upload" />
+        </td>
+    </tr>
+</table>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

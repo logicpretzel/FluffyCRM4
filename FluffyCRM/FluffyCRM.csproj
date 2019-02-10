@@ -24,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -171,6 +172,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CardsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\ContactsController.cs" />
@@ -185,6 +187,7 @@
     <Compile Include="Controllers\TicketsController.cs" />
     <Compile Include="Controllers\WorkProjectsController.cs" />
     <Compile Include="Controllers\ZipCodesController.cs" />
+    <Compile Include="DAL\CardsDAL.cs" />
     <Compile Include="DAL\ClientAndTicketsRepos.cs" />
     <Compile Include="DAL\UsersAndRolesRepository.cs" />
     <Compile Include="Global.asax.cs">
@@ -350,13 +353,48 @@
     <Compile Include="Migrations\201704152324570_q.Designer.cs">
       <DependentUpon>201704152324570_q.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901100137008_Cards.cs" />
+    <Compile Include="Migrations\201901100137008_Cards.Designer.cs">
+      <DependentUpon>201901100137008_Cards.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901100159042_Cards2.cs" />
+    <Compile Include="Migrations\201901100159042_Cards2.Designer.cs">
+      <DependentUpon>201901100159042_Cards2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901131638220_note-tweaks.cs" />
+    <Compile Include="Migrations\201901131638220_note-tweaks.Designer.cs">
+      <DependentUpon>201901131638220_note-tweaks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901302343206_picture.cs" />
+    <Compile Include="Migrations\201901302343206_picture.Designer.cs">
+      <DependentUpon>201901302343206_picture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901302345208_pictures.cs" />
+    <Compile Include="Migrations\201901302345208_pictures.Designer.cs">
+      <DependentUpon>201901302345208_pictures.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901310105204_pictures2.cs" />
+    <Compile Include="Migrations\201901310105204_pictures2.Designer.cs">
+      <DependentUpon>201901310105204_pictures2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901310224354_note3.cs" />
+    <Compile Include="Migrations\201901310224354_note3.Designer.cs">
+      <DependentUpon>201901310224354_note3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902101625001_remove-card-bkg.cs" />
+    <Compile Include="Migrations\201902101625001_remove-card-bkg.Designer.cs">
+      <DependentUpon>201902101625001_remove-card-bkg.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Attachment.cs" />
     <Compile Include="Models\AttachmentXREF.cs" />
     <Compile Include="Models\AuthCode.cs" />
+    <Compile Include="Models\Card.cs" />
     <Compile Include="Models\category.cs" />
     <Compile Include="Models\ClientUser.cs" />
+    <Compile Include="Models\PicLinkXref.cs" />
+    <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\JobTask.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\TaskNote.cs" />
@@ -388,6 +426,7 @@
     <Compile Include="utils\StaticImageResizer.cs" />
     <Compile Include="ViewModels\ClientViewModels.cs" />
     <Compile Include="ViewModels\HiddenFieldAttribute.cs" />
+    <Compile Include="ViewModels\PictureViewModels.cs" />
     <Compile Include="ViewModels\ProjectTasksViewModels.cs" />
     <Compile Include="ViewModels\RolesViewModels.cs" />
   </ItemGroup>
@@ -548,6 +587,15 @@
     <Content Include="Views\JobTasks\Assignment.cshtml" />
     <Content Include="Views\JobTasks\CreateNote.cshtml" />
     <Content Include="Views\Account\DashBoard.cshtml" />
+    <Content Include="Views\Cards\AddCard.cshtml" />
+    <Content Include="Views\Cards\Delete.cshtml" />
+    <Content Include="Views\Cards\Details.cshtml" />
+    <Content Include="Views\Cards\Edit.cshtml" />
+    <Content Include="Views\Cards\Index.cshtml" />
+    <Content Include="Views\JobTasks\_Notes.cshtml" />
+    <Content Include="Views\JobTasks\EditNote.cshtml" />
+    <Content Include="Views\TaskNotes\Upload.cshtml" />
+    <Content Include="Views\JobTasks\Upload.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -681,6 +729,30 @@
     <EmbeddedResource Include="Migrations\201704152324570_q.resx">
       <DependentUpon>201704152324570_q.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901100137008_Cards.resx">
+      <DependentUpon>201901100137008_Cards.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901100159042_Cards2.resx">
+      <DependentUpon>201901100159042_Cards2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901131638220_note-tweaks.resx">
+      <DependentUpon>201901131638220_note-tweaks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901302343206_picture.resx">
+      <DependentUpon>201901302343206_picture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901302345208_pictures.resx">
+      <DependentUpon>201901302345208_pictures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901310105204_pictures2.resx">
+      <DependentUpon>201901310105204_pictures2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901310224354_note3.resx">
+      <DependentUpon>201901310224354_note3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902101625001_remove-card-bkg.resx">
+      <DependentUpon>201902101625001_remove-card-bkg.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -700,7 +772,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49729</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:49729/</IISUrl>
+          <IISUrl>http://localhost:49790/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

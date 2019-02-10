@@ -10,11 +10,13 @@ using FluffyCRM.Models;
 
 namespace FluffyCRM.Controllers
 {
+    [Authorize]
     public class CategoriesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Categories
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Index()
         {
             ViewBag.Title = "Categories";
@@ -22,6 +24,7 @@ namespace FluffyCRM.Controllers
         }
 
         // GET: Categories/Details/5
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Details(int? id)
         {
             ViewBag.Title = "Categories";
@@ -38,6 +41,7 @@ namespace FluffyCRM.Controllers
         }
 
         // GET: Categories/Create
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Create()
         {
             ViewBag.Title = "Add Categories";
@@ -49,6 +53,7 @@ namespace FluffyCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Create([Bind(Include = "id,Name,Type,Description")] Category category)
         {
             ViewBag.Title = "Categories";
@@ -68,6 +73,7 @@ namespace FluffyCRM.Controllers
         }
 
         // GET: Categories/Edit/5
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Edit(int? id)
         {
             ViewBag.Title = "Edit - Categories";
@@ -88,6 +94,7 @@ namespace FluffyCRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Edit([Bind(Include = "id,Name,Type,delete_ind,Description,CreateDate")] Category category)
         {
             ViewBag.Title = "Categories";
@@ -101,6 +108,7 @@ namespace FluffyCRM.Controllers
         }
 
         // GET: Categories/Delete/5
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult Delete(int? id)
         {
             ViewBag.Title = "Delete -Categories";
@@ -119,6 +127,7 @@ namespace FluffyCRM.Controllers
         // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Staff")]
         public ActionResult DeleteConfirmed(int id)
         {
             ViewBag.Title = "Categories";

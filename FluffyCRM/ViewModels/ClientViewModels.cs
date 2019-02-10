@@ -188,9 +188,26 @@ namespace FluffyCRM.ViewModels
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? DueDate { get; set; }
 
-        [HiddenField]
-        public DateTime? LocalTime { get; set; }
-
+       
+        /*
+NoteType, 	
+CategoryId, 
+Subject, 	
+Comment, 
+JobTask_Id, 
+TaskName, 
+CreatedBy, 
+CreateDate, 
+Status, 
+AddedByName, 
+AssignedName, 
+ClientName, 
+ClientId, 
+StartDate, 
+CompletedDate, 
+DueDate, 
+LocalTime
+         */
 
     }
 
